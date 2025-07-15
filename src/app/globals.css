@@ -19,7 +19,7 @@
     --popover-foreground: 0 0% 100%;
     --primary: 45 100% 51%; /* Vibrant Yellow */
     --primary-foreground: 224 76% 10%;
-    --secondary: 33 89% 95%; /* Light Yellow */
+    --secondary: 50 100% 91%; /* #FFF5CF */
     --secondary-foreground: 224 76% 10%;
     --muted: 224 76% 58%;
     --muted-foreground: 224 76% 90%;
@@ -42,7 +42,7 @@
     --popover-foreground: 0 0% 100%;
     --primary: 45 100% 51%; /* Vibrant Yellow */
     --primary-foreground: 224 76% 10%;
-    --secondary: 33 89% 95%; /* Light Yellow */
+    --secondary: 50 100% 91%; /* #FFF5CF */
     --secondary-foreground: 224 76% 10%;
     --muted: 224 76% 58%;
     --muted-foreground: 224 76% 90%;
