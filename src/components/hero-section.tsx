@@ -19,7 +19,7 @@ export default function HeroSection() {
                         <div className="inline-flex items-center gap-2 border border-border rounded-lg px-3 py-1.5 text-sm text-white/90">
                            Drump - First Snack on <SolanaLogo /> <span className="font-bold">SOLANA</span>
                         </div>
-                        <h1 className="text-6xl md:text-8xl font-bold font-headline text-white leading-none tracking-tighter">
+                        <h1 className="text-6xl md:text-7xl font-bold font-headline text-white leading-none tracking-normal">
                             SNACK, SECURE, SWAP
                         </h1>
                         <p className="text-lg text-white/90 max-w-md">
