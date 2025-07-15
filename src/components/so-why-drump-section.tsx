@@ -13,7 +13,7 @@ export default function SoWhyDrump() {
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div className="relative w-full h-[500px] rounded-lg overflow-hidden group">
                         <Image
-                            src="https://placehold.co/600x600.png"
+                            src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752617158/neww_1_ehuxda.png"
                             alt="Two bags of Drump cheese puffs"
                             fill
                             objectFit="contain"
