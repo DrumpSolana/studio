@@ -16,20 +16,20 @@ export default function HeroSection() {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
                 <div className="grid md:grid-cols-2 gap-8 items-center pt-24">
                     <div className="space-y-6 text-left">
-                        <div className="inline-flex items-center gap-2 border border-border rounded-lg px-3 py-1.5 text-sm">
+                        <div className="inline-flex items-center gap-2 border border-border rounded-lg px-3 py-1.5 text-sm text-white/90">
                            Drump - First Snack on <SolanaLogo /> <span className="font-bold">SOLANA</span>
                         </div>
-                        <h1 className="text-6xl md:text-8xl font-bold font-headline text-accent leading-none tracking-tighter">
+                        <h1 className="text-6xl md:text-8xl font-bold font-headline text-white leading-none tracking-tighter">
                             SNACK, SECURE, SWAP
                         </h1>
-                        <p className="text-lg text-muted-foreground max-w-md">
+                        <p className="text-lg text-white/90 max-w-md">
                             Munch on Drump Cheese Puffs while earning loyalty points. Exchange Drump points for fun prizes.
                         </p>
                         <div className="flex flex-wrap gap-4">
-                            <Button size="lg" className="font-bold border-2 border-b-4 border-r-4 border-black hover:bg-primary/90">
+                            <Button size="lg" className="bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg">
                                ORDER NOW
                             </Button>
-                            <Button size="lg" variant="secondary" className="font-bold border-2 border-b-4 border-r-4 border-black hover:bg-secondary/90">
+                            <Button size="lg" variant="secondary" className="bg-yellow-400 text-black font-bold border-2 border-black hover:bg-yellow-500 px-8 py-3 rounded-lg">
                                WHAT'S WITH THE CHEESEBALL?
                             </Button>
                         </div>
