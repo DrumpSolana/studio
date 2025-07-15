@@ -8,7 +8,7 @@ export default function HeroSection() {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
                 <div className="grid md:grid-cols-2 gap-8 items-center pt-24">
                     <div className="space-y-8 text-left">
-                        <div className="font-poppins inline-flex items-center gap-2 border-2 border-border rounded-lg px-4 py-2 text-xl text-white">
+                        <div className="font-poppins inline-flex items-center gap-2 border-2 border-border rounded-lg px-4 py-2 text-2xl text-white">
                            Drump - First Snack on 
                            <Image src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752615308/Solana_lsczky.png" alt="Solana" width={120} height={24} />
                         </div>
