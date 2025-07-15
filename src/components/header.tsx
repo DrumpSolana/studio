@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 
 const DrumpLogo = () => (
-    <Link href="/" className="text-3xl font-bold font-headline bg-white text-black px-2 py-1 tracking-tighter">
+    <Link href="/" className="text-4xl font-bold font-headline text-white" style={{ textShadow: '3px 3px 0px black' }}>
         DRUMP
     </Link>
 );
@@ -21,17 +21,17 @@ export default function Header() {
     return (
         <header className="absolute top-0 left-0 right-0 z-50 bg-transparent">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-24 border-b border-border/20">
+                <div className="flex items-center justify-between h-24 border-b border-white/20">
                     <DrumpLogo />
                     <nav className="hidden md:flex items-center space-x-8">
                         {navLinks.map((link) => (
-                            <Link key={link.href} href={link.href} className="text-foreground hover:text-secondary transition-colors duration-300 font-medium">
+                            <Link key={link.href} href={link.href} className="text-white/90 hover:text-white transition-colors duration-300 font-medium text-sm">
                                 {link.label}
                             </Link>
                         ))}
                     </nav>
                     <div className="hidden md:block">
-                        <Button variant="outline" className="text-white border-white hover:bg-white hover:text-background">Order Now</Button>
+                        <Button variant="outline" className="text-white border-white hover:bg-white hover:text-blue-700">Order Now</Button>
                     </div>
                     <div className="md:hidden">
                         <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)}>
@@ -49,7 +49,7 @@ export default function Header() {
                                 {link.label}
                             </Link>
                         ))}
-                        <Button variant="outline" className="text-white border-white hover:bg-white hover:text-background">Order Now</Button>
+                        <Button variant="outline" className="text-white border-white hover:bg-white hover:text-blue-700">Order Now</Button>
                     </nav>
                 </div>
             )}

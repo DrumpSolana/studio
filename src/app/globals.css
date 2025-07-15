@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 240 68% 30%;
+    --background: 240 68% 50%;
     --foreground: 0 0% 100%;
     --card: 240 68% 30%;
     --card-foreground: 0 0% 100%;
@@ -39,7 +39,7 @@
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
   .dark {
-    --background: 240 68% 30%;
+    --background: 240 68% 50%;
     --foreground: 0 0% 100%;
     --card: 240 68% 30%;
     --card-foreground: 0 0% 100%;
@@ -55,7 +55,7 @@
     --accent-foreground: 240 68% 10%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 68% 40%;
+    --border: 240 50% 90%;
     --input: 240 68% 40%;
     --ring: 45 100% 51%;
     --chart-1: 220 70% 50%;
