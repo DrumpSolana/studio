@@ -11,7 +11,7 @@ export default function SoWhyDrump() {
         <section id="why-drump" className="py-20 bg-secondary">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
-                    <div className="relative w-full h-[500px] rounded-lg overflow-hidden group">
+                    <div className="relative w-full h-[600px] rounded-lg overflow-hidden group">
                         <Image
                             src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752617158/neww_1_ehuxda.png"
                             alt="Two bags of Drump cheese puffs"
