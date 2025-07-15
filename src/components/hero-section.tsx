@@ -40,18 +40,18 @@ export default function HeroSection() {
                             <div className="bg-primary text-primary-foreground rounded-lg p-2 font-bold shadow-lg mt-20">Crunchy</div>
                          </div>
                          <Image
-                            src="https://placehold.co/600x600.png"
+                            src="https://placehold.co/400x480.png"
                             alt="Drump product bag"
-                            width={400}
-                            height={400}
+                            width={350}
+                            height={420}
                             className="absolute drop-shadow-2xl translate-x-10 -rotate-[15deg] z-0"
                             data-ai-hint="snack bag"
                         />
                         <Image
-                            src="https://placehold.co/600x600.png"
+                            src="https://placehold.co/400x480.png"
                             alt="Drump product bag"
-                            width={400}
-                            height={400}
+                            width={350}
+                            height={420}
                             className="absolute drop-shadow-2xl -translate-x-10 rotate-[5deg] z-10"
                             data-ai-hint="snack bag"
                         />

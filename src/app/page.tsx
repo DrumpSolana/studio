@@ -11,13 +11,13 @@ export default function Home() {
     <div className="bg-background text-foreground overflow-x-hidden">
       <Header />
       <main>
-        {/* <HeroSection />
+        <HeroSection />
         <AboutSection />
         <IngredientsSection />
         <SnackStackSwapSection />
-        <TasteTheDrumpSection /> */}
+        <TasteTheDrumpSection />
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
