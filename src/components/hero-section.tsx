@@ -22,11 +22,11 @@ export default function HeroSection() {
                         <h1 className="text-6xl md:text-7xl font-bold font-headline text-white leading-none tracking-normal uppercase">
                             Snack, Secure, Swap
                         </h1>
-                        <p className="text-3xl text-white/90 max-w-lg">
+                        <p className="text-4xl text-white/90 max-w-lg">
                             Munch on Drump Cheese Puffs while earning loyalty points. Exchange Drump points for fun prizes.
                         </p>
                         <div className="flex flex-wrap gap-4">
-                            <Button size="lg" className="bg-yellow-400 text-black font-bold border-2 border-black hover:bg-yellow-500 px-8 py-3 rounded-lg text-lg">
+                            <Button size="lg" className="bg-red-600 text-white font-bold hover:bg-red-700 px-8 py-3 rounded-lg text-lg">
                                ORDER NOW
                             </Button>
                             <Button size="lg" variant="secondary" className="bg-transparent text-white font-bold border-2 border-white hover:bg-white hover:text-blue-700 px-8 py-3 rounded-lg text-lg">
