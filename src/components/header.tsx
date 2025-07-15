@@ -23,14 +23,14 @@ export default function Header() {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-24 border-b border-white/20">
                     <DrumpLogo />
-                    <nav className="hidden md:flex items-center space-x-8">
-                        {navLinks.map((link) => (
-                            <Link key={link.href} href={link.href} className="text-white/90 hover:text-white transition-colors duration-300 font-medium text-sm">
-                                {link.label}
-                            </Link>
-                        ))}
-                    </nav>
-                    <div className="hidden md:block">
+                    <div className="hidden md:flex items-center space-x-8">
+                        <nav className="flex items-center space-x-8">
+                            {navLinks.map((link) => (
+                                <Link key={link.href} href={link.href} className="text-white/90 hover:text-white transition-colors duration-300 font-medium text-sm">
+                                    {link.label}
+                                </Link>
+                            ))}
+                        </nav>
                         <Button variant="outline" className="text-white border-white hover:bg-white hover:text-blue-700">Order Now</Button>
                     </div>
                     <div className="md:hidden">
