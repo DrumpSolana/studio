@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 
 const DrumpLogo = () => (
-    <Link href="/" className="text-4xl font-bold font-headline text-white" style={{ textShadow: '3px 3px 0px black' }}>
+    <Link href="/" className="text-4xl font-bold font-headline text-white" style={{ textShadow: '5px 5px 0px black' }}>
         DRUMP
     </Link>
 );
