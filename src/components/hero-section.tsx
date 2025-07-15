@@ -33,7 +33,7 @@ export default function HeroSection() {
                             alt="Drump product graphic"
                             width={600}
                             height={600}
-                            className="drop-shadow-2xl"
+                            className="drop-shadow-2xl transition-transform duration-300 ease-in-out hover:scale-105"
                             data-ai-hint="snack bag"
                         />
                     </div>
