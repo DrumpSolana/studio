@@ -8,7 +8,7 @@ const features = [
 
 export default function SoWhyDrump() {
     return (
-        <section id="why-drump" className="py-20 bg-secondary">
+        <section id="why-drump" className="py-20 bg-secondary border-t-4 border-black">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div className="relative w-full h-[700px] rounded-lg overflow-hidden group">
