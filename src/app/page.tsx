@@ -1,5 +1,6 @@
 import Header from '@/components/header';
 import HeroSection from '@/components/hero-section';
+import SoWhyDrump from '@/components/so-why-drump-section';
 
 export default function Home() {
   return (
@@ -7,6 +8,7 @@ export default function Home() {
       <Header />
       <main>
         <HeroSection />
+        <SoWhyDrump />
       </main>
     </div>
   );
