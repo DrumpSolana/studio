@@ -4,17 +4,17 @@ import { Smile, Leaf, Zap } from 'lucide-react';
 
 const features = [
     {
-        icon: <Smile className="h-8 w-8 text-primary" />,
+        icon: <Smile className="h-8 w-8 text-secondary" />,
         title: 'Insanely Tasty',
         description: 'A flavor explosion that will make your taste buds do a happy dance.'
     },
     {
-        icon: <Leaf className="h-8 w-8 text-primary" />,
+        icon: <Leaf className="h-8 w-8 text-secondary" />,
         title: 'Real Ingredients',
         description: 'No funny business here. Just wholesome goodness in every bite.'
     },
     {
-        icon: <Zap className="h-8 w-8 text-primary" />,
+        icon: <Zap className="h-8 w-8 text-secondary" />,
         title: 'Energy Booster',
         description: 'The perfect pick-me-up to power through your day.'
     }
@@ -22,7 +22,7 @@ const features = [
 
 export default function AboutSection() {
     return (
-        <section id="about" className="py-20 bg-card">
+        <section id="about" className="py-20 bg-background/80">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div className="relative w-full h-96 rounded-lg overflow-hidden shadow-2xl group">
