@@ -34,12 +34,12 @@ export default function HeroSection() {
                             </Button>
                         </div>
                     </div>
-                    <div className="relative h-[500px] w-full flex items-center justify-center">
+                    <div className="relative h-[600px] w-full flex items-center justify-center">
                          <Image
                             src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752614149/Graphic_ry6hnt.png"
                             alt="Drump product graphic"
-                            width={500}
-                            height={500}
+                            width={600}
+                            height={600}
                             className="drop-shadow-2xl"
                             data-ai-hint="snack bag"
                         />
