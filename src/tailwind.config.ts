@@ -14,7 +14,7 @@ export default {
       },
       fontFamily: {
         body: ['Inter', 'sans-serif'],
-        headline: ['Anton', 'sans-serif'],
+        headline: ['FatFrank', 'Anton', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {
