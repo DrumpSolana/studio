@@ -16,7 +16,7 @@ export default function HeroSection() {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
                 <div className="grid md:grid-cols-2 gap-8 items-center pt-24">
                     <div className="space-y-8 text-left">
-                        <div className="inline-flex items-center gap-2 border border-border rounded-lg px-3 py-1.5 text-sm text-white/90">
+                        <div className="font-poppins inline-flex items-center gap-2 border border-border rounded-lg px-3 py-1.5 text-sm text-white">
                            Drump - First Snack on <SolanaLogo /> <span className="font-bold">SOLANA</span>
                         </div>
                         <h1 className="text-6xl md:text-7xl font-bold font-headline text-white leading-none tracking-normal uppercase">

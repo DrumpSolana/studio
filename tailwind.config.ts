@@ -15,6 +15,7 @@ export default {
       fontFamily: {
         body: ['Inter', 'sans-serif'],
         headline: ['FatFrank', 'Anton', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {
