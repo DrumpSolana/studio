@@ -35,33 +35,14 @@ export default function HeroSection() {
                         </div>
                     </div>
                     <div className="relative h-[500px] w-full flex items-center justify-center">
-                         <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center gap-4">
-                            <div className="bg-secondary text-secondary-foreground rounded-lg p-2 font-bold shadow-lg -mr-12 z-10">Tasty &</div>
-                            <div className="bg-primary text-primary-foreground rounded-lg p-2 font-bold shadow-lg mt-20">Crunchy</div>
-                         </div>
                          <Image
-                            src="https://placehold.co/400x480.png"
-                            alt="Drump product bag"
-                            width={350}
-                            height={420}
-                            className="absolute drop-shadow-2xl translate-x-10 -rotate-[15deg] z-0"
+                            src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752614149/Graphic_ry6hnt.png"
+                            alt="Drump product graphic"
+                            width={500}
+                            height={500}
+                            className="drop-shadow-2xl"
                             data-ai-hint="snack bag"
                         />
-                        <Image
-                            src="https://placehold.co/400x480.png"
-                            alt="Drump product bag"
-                            width={350}
-                            height={420}
-                            className="absolute drop-shadow-2xl -translate-x-10 rotate-[5deg] z-10"
-                            data-ai-hint="snack bag"
-                        />
-                        
-                        {/* Decorative elements */}
-                        <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-secondary rounded-full animate-pulse"></div>
-                        <div className="absolute bottom-1/4 right-1/4 w-3 h-3 bg-primary rounded-full animate-pulse delay-500"></div>
-                        <div className="absolute top-20 right-10 w-5 h-5 bg-secondary rounded-full animate-bounce"></div>
-                        <div className="absolute bottom-20 left-10 w-2 h-2 bg-primary rounded-full animate-ping"></div>
-
                     </div>
                 </div>
             </div>
