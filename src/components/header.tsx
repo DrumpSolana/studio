@@ -3,10 +3,17 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
 
 const DrumpLogo = () => (
-    <Link href="/" className="text-4xl font-black font-headline text-white" style={{ textShadow: '5px 5px 0px rgba(0,0,0,0.2)' }}>
-        DRUMP
+    <Link href="/">
+        <Image 
+            src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752616337/join_the_punch_1_i9twgu.png" 
+            alt="Drump Logo"
+            width={120}
+            height={40}
+            className="object-contain"
+        />
     </Link>
 );
 
