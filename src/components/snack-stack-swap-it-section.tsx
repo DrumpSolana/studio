@@ -11,7 +11,7 @@ export default function SnackStackSwapItSection() {
                     </div>
                 </div>
 
-                <div className="bg-secondary border-2 border-black rounded-lg p-8 md:p-0 md:pr-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                <div className="bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                     <div className="grid md:grid-cols-2 gap-8 items-center">
                         <div className="relative w-full h-96 md:h-[28rem]">
                             <Image
@@ -23,7 +23,7 @@ export default function SnackStackSwapItSection() {
                                 data-ai-hint="snack bags collage"
                             />
                         </div>
-                        <div className="space-y-6">
+                        <div className="space-y-6 p-8 md:p-0 md:pr-8">
                             <div className="text-5xl font-bold font-headline text-black">01</div>
                             <h3 className="text-4xl font-bold font-headline text-black leading-tight">
                                 Snack So Tasty, Even Crypto Can&apos;t Resist
