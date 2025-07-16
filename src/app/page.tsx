@@ -4,7 +4,7 @@ import IngredientsSection from '@/components/new-ingredients-section';
 import RewardsSection from '@/components/rewards-section';
 import SnackStackSwapItSection from '@/components/snack-stack-swap-it-section';
 import SoWhyDrump from '@/components/so-why-drump-section';
-import ContactUsSection from '@/components/contact-us-section';
+import TasteTheDrumpSection from '@/components/taste-the-drump-section';
 import Footer from '@/components/footer';
 
 export default function Home() {
@@ -17,7 +17,7 @@ export default function Home() {
         <IngredientsSection />
         <SnackStackSwapItSection />
         <RewardsSection />
-        <ContactUsSection />
+        <TasteTheDrumpSection />
       </main>
       <Footer />
     </div>
