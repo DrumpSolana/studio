@@ -46,7 +46,7 @@ export default function Header() {
                             {isAnimating ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
                             <span className="sr-only">{isAnimating ? 'Pause animation' : 'Play animation'}</span>
                         </Button>
-                        <Button variant="outline" className="text-white border-white hover:bg-white hover:text-blue-700">Order Now</Button>
+                        <Button variant="outline" className="text-white border-white hover:bg-white hover:text-blue-700">Pre order</Button>
                     </div>
                     <div className="md:hidden">
                         <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)}>
@@ -69,7 +69,7 @@ export default function Header() {
                                 {isAnimating ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
                                 <span className="sr-only">{isAnimating ? 'Pause animation' : 'Play animation'}</span>
                             </Button>
-                            <Button variant="outline" className="text-white border-white hover:bg-white hover:text-blue-700">Order Now</Button>
+                            <Button variant="outline" className="text-white border-white hover:bg-white hover:text-blue-700">Pre order</Button>
                         </div>
                     </nav>
                 </div>
