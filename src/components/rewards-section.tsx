@@ -5,14 +5,14 @@ const rewards = [
         number: '02',
         title: 'Snack Your Way to Rewards',
         description: 'Crunch & Collect. Earn your Drump loyalty points every time you snack',
-        image: 'https://placehold.co/500x400.png',
+        image: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752641223/Drump_Mockup_7_9_ogvpo6.png',
         dataAiHint: 'snack bags coins',
     },
     {
         number: '03',
         title: 'Redeem for Real Rewards',
         description: 'Use your points to unlock exclusive prizes.',
-        image: 'https://placehold.co/500x400.png',
+        image: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752641223/Drump_Mockup_3_4_wqcsdz.png',
         dataAiHint: 'snack bags gifts',
     }
 ]
