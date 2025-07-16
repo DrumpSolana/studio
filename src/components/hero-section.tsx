@@ -3,10 +3,10 @@ import { Button } from '@/components/ui/button';
 
 export default function HeroSection() {
     return (
-        <section className="relative min-h-screen flex items-center bg-transparent overflow-hidden">
+        <section className="relative pt-32 pb-24 bg-transparent overflow-hidden">
              <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
             <div className="container mx-auto px-4 sm:px-6 lg:px-32 z-10">
-                <div className="grid md:grid-cols-2 gap-8 items-center pt-24">
+                <div className="grid md:grid-cols-2 gap-8 items-center">
                     <div className="space-y-8 text-left">
                         <div className="font-poppins inline-flex items-center gap-2 border-2 border-border rounded-lg px-3 py-2 text-white">
                            <span className="text-sm sm:text-base md:text-lg lg:text-xl whitespace-nowrap">Drump - First Snack on</span>
