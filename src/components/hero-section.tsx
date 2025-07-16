@@ -9,7 +9,7 @@ export default function HeroSection() {
                 <div className="grid md:grid-cols-2 gap-8 items-center pt-24">
                     <div className="space-y-8 text-left">
                         <div className="font-poppins inline-flex items-center gap-2 border-2 border-border rounded-lg px-2 sm:px-4 py-2 text-sm sm:text-base md:text-xl lg:text-2xl text-white whitespace-nowrap">
-                           <span>Drump - First Snack on</span>
+                           <span className="shrink-0">Drump - First Snack on</span>
                            <Image src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752615308/Solana_lsczky.png" alt="Solana" width={120} height={24} className="h-5 sm:h-6 w-auto" />
                         </div>
                         <h1 className="text-6xl md:text-7xl font-bold font-headline text-white leading-none tracking-normal uppercase">
