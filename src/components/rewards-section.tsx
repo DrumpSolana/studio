@@ -39,7 +39,7 @@ export default function RewardsSection() {
                                     src={reward.image}
                                     alt={reward.title}
                                     layout="fill"
-                                    objectFit="cover"
+                                    objectFit="contain"
                                     className="w-full h-full"
                                     data-ai-hint={reward.dataAiHint}
                                 />
