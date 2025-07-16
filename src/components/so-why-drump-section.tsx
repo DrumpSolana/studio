@@ -32,8 +32,8 @@ export default function SoWhyDrump() {
                         </p>
                         <ul className="space-y-3">
                             {features.map((feature, index) => (
-                                <li key={index} className="flex items-center">
-                                    <div className="bg-primary border-2 border-black rounded-lg p-3 w-full">
+                                <li key={index} className="flex items-center group">
+                                    <div className="bg-primary border-2 border-black rounded-lg p-3 w-full transition-transform duration-300 group-hover:scale-105">
                                         <div className="flex items-center">
                                             <span className="bg-black text-white rounded-full h-6 w-6 flex items-center justify-center mr-3 font-bold">•</span>
                                             <span className="text-black font-semibold">{feature}</span>
