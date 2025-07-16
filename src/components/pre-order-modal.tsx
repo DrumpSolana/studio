@@ -17,7 +17,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import Image from 'next/image';
-import { toast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks/use-toast';
 
 const PreOrderSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email.' }),
@@ -49,6 +49,7 @@ export default function PreOrderModal() {
   } = useForm<PreOrderForm>({
     resolver: zodResolver(PreOrderSchema),
   });
+  const { toast } = useToast();
 
   const onSubmit: SubmitHandler<PreOrderForm> = (data) => {
     console.log('Pre-order email submitted:', data.email);
@@ -60,7 +61,7 @@ export default function PreOrderModal() {
     // In a real app, you would send the email to your backend here.
 
     setTimeout(() => {
-      window.location.href = 'https://t.me/drumpofficial';
+      window.open('https://t.me/drumpofficial', '_blank');
       setOpen(false);
     }, 1500);
   };
