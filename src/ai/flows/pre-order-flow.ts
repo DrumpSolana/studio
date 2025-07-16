@@ -9,6 +9,9 @@
 
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
+import { db } from '@/lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+
 
 const PreOrderSignUpInputSchema = z.object({
   email: z.string().email().describe('The email address of the user signing up for pre-order notifications.'),
@@ -33,15 +36,23 @@ const preOrderSignUpFlow = ai.defineFlow(
     outputSchema: PreOrderSignUpOutputSchema,
   },
   async (input) => {
-    console.log(`New pre-order signup: ${input.email}`);
-
-    // In a real application, you would save the email to a database here.
-    // For example, using Firestore:
-    // await db.collection('pre-orders').add({ email: input.email, timestamp: new Date() });
-
-    return {
-      success: true,
-      message: 'Thank you for signing up!',
-    };
+    try {
+      // Save the email to Firestore.
+      await addDoc(collection(db, 'pre-orders'), {
+        email: input.email,
+        timestamp: serverTimestamp(),
+      });
+      console.log(`New pre-order signup saved to Firestore: ${input.email}`);
+      return {
+        success: true,
+        message: 'Thank you for signing up!',
+      };
+    } catch (error) {
+      console.error("Error writing document to Firestore: ", error);
+      return {
+        success: false,
+        message: 'There was an error saving your email. Please try again.',
+      };
+    }
   }
 );
