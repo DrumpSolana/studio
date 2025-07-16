@@ -30,12 +30,12 @@ const socialLinks = [
   { 
     href: 'https://t.me/drumpofficial', 
     name: 'Telegram',
-    text: 'Join on Telegram'
+    text: 'Telegram'
   },
   { 
     href: 'https://x.com/DrumpSolana', 
     name: 'X',
-    text: 'Join on X'
+    text: 'X'
   },
 ];
 
@@ -124,7 +124,7 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
               id="email"
               placeholder="you@email.com"
               {...register('email')}
-              className="bg-white border-black border-2 focus:ring-primary text-black placeholder:text-black/50 h-12 rounded-lg"
+              className="bg-white border-black border-2 focus:ring-primary text-black placeholder:text-black/50 h-12 rounded-lg font-solway"
               disabled={isSubmitting}
             />
             {errors.email && (
@@ -133,7 +133,7 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
           </div>
           <Button
             type="submit"
-            className="w-full bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 h-12 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow disabled:opacity-75"
+            className="w-full bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 h-12 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow disabled:opacity-75 font-headline"
             disabled={isSubmitting}
           >
             {isSubmitting ? 'Submitting...' : 'Notify Me'}

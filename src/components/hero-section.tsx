@@ -29,12 +29,12 @@ export default function HeroSection() {
                             </PreOrderModal>
                              <Button size="lg" variant="secondary" className="bg-yellow-400 text-black font-bold border-2 border-black hover:bg-yellow-500 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow" asChild>
                                 <Link href="https://t.me/drumpofficial" target="_blank" rel="noopener noreferrer">
-                                   <Send /> Join on Telegram
+                                   <Send /> Telegram
                                 </Link>
                             </Button>
                             <Button size="lg" variant="secondary" className="bg-yellow-400 text-black font-bold border-2 border-black hover:bg-yellow-500 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow" asChild>
                                 <Link href="https://x.com/DrumpSolana" target="_blank" rel="noopener noreferrer">
-                                   <Twitter /> Join on X
+                                   <Twitter /> X
                                 </Link>
                             </Button>
                         </div>
