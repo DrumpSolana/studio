@@ -18,6 +18,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
+import { preOrderSignUp } from '@/ai/flows/pre-order-flow';
 
 const PreOrderSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email.' }),
@@ -40,28 +41,50 @@ const socialLinks = [
 
 export default function PreOrderModal() {
   const [open, setOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<PreOrderForm>({
     resolver: zodResolver(PreOrderSchema),
   });
   const { toast } = useToast();
 
-  const onSubmit: SubmitHandler<PreOrderForm> = (data) => {
-    console.log('Pre-order email submitted:', data.email);
-    toast({
-      title: "Thanks for your interest!",
-      description: "Redirecting you to our Telegram group...",
-    });
-    
-    // In a real app, you would send the email to your backend here.
+  const onSubmit: SubmitHandler<PreOrderForm> = async (data) => {
+    setIsSubmitting(true);
+    try {
+      const result = await preOrderSignUp({ email: data.email });
 
-    setTimeout(() => {
-      window.open('https://t.me/drumpofficial', '_blank');
-      setOpen(false);
-    }, 1500);
+      if (result.success) {
+        toast({
+          title: "Thanks for your interest!",
+          description: "Redirecting you to our Telegram group...",
+        });
+
+        setTimeout(() => {
+          window.open('https://t.me/drumpofficial', '_blank');
+          setOpen(false);
+          reset();
+        }, 1500);
+      } else {
+        toast({
+            variant: "destructive",
+            title: "Uh oh! Something went wrong.",
+            description: "There was a problem with your request. Please try again.",
+        });
+      }
+    } catch (error) {
+        toast({
+            variant: "destructive",
+            title: "Uh oh! Something went wrong.",
+            description: "Could not sign up for pre-order. Please try again later.",
+        });
+        console.error("Pre-order submission error:", error);
+    } finally {
+        setIsSubmitting(false);
+    }
   };
 
   return (
@@ -98,6 +121,7 @@ export default function PreOrderModal() {
               placeholder="you@email.com"
               {...register('email')}
               className="bg-white border-black border-2 focus:ring-primary text-black placeholder:text-black/50 h-12 rounded-lg"
+              disabled={isSubmitting}
             />
             {errors.email && (
               <p className="text-sm text-red-600 font-solway">{errors.email.message}</p>
@@ -105,14 +129,15 @@ export default function PreOrderModal() {
           </div>
           <Button
             type="submit"
-            className="w-full bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 h-12 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow"
+            className="w-full bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 h-12 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow disabled:opacity-75"
+            disabled={isSubmitting}
           >
-            Notify Me
+            {isSubmitting ? 'Submitting...' : 'Notify Me'}
           </Button>
         </form>
         <DialogFooter className="!flex-col !justify-center space-y-4 sm:!space-y-4 sm:!justify-center">
             <div className="text-center font-solway text-sm text-black/70">Or join our community</div>
-            <div className="flex justify-center gap-4">
+            <div className="flex flex-row justify-center gap-4">
                 {socialLinks.map((link) => (
                     <Button key={link.name} asChild variant="outline" className="font-solway bg-white border-2 border-black hover:bg-white/80 rounded-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,0.25)] hover:shadow-none transition-shadow h-12 px-6">
                         <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-black flex items-center justify-center">
