@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useAnimation } from '@/contexts/AnimationContext';
 import { cn } from '@/lib/utils';
 
-const CHEESEBALL_COUNT = 5;
+const CHEESEBALL_COUNT = 8;
 const CHEESEBALL_URL = 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752640504/Drump_Cheese_Ball_4_daedqc.png';
 
 interface CheeseBall {
