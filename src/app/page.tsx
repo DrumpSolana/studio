@@ -1,5 +1,6 @@
 import Header from '@/components/header';
 import HeroSection from '@/components/hero-section';
+import IngredientsSection from '@/components/new-ingredients-section';
 import SoWhyDrump from '@/components/so-why-drump-section';
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
       <main>
         <HeroSection />
         <SoWhyDrump />
+        <IngredientsSection />
       </main>
     </div>
   );
