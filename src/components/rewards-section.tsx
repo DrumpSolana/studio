@@ -26,15 +26,15 @@ export default function RewardsSection() {
                         <div key={reward.number} className="bg-secondary border-2 border-black rounded-lg p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col">
                             <div className="space-y-4">
                                 <div className="text-5xl font-bold font-headline text-black">{reward.number}</div>
-                                <h3 className="text-4xl font-bold font-headline text-black leading-tight">
+                                <h3 className="text-3xl font-bold font-headline text-black leading-tight">
                                     {reward.title}
                                 </h3>
                                 <hr className="border-t-2 border-black w-32" />
-                                <p className="text-lg text-black/80 font-solway h-24">
+                                <p className="text-lg text-black/80 font-solway h-16">
                                     {reward.description}
                                 </p>
                             </div>
-                            <div className="relative w-full flex-grow h-80 -mb-8">
+                            <div className="relative w-full flex-grow h-40 mt-4 -mb-8">
                                 <Image
                                     src={reward.image}
                                     alt={reward.title}

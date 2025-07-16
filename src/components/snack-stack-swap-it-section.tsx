@@ -23,9 +23,9 @@ export default function SnackStackSwapItSection() {
                                 data-ai-hint="snack bags collage"
                             />
                         </div>
-                        <div className="space-y-6 p-8 md:p-0 md:pr-8">
+                        <div className="space-y-4 p-8 md:p-0 md:pr-8">
                             <div className="text-5xl font-bold font-headline text-black">01</div>
-                            <h3 className="text-4xl font-bold font-headline text-black leading-tight">
+                            <h3 className="text-3xl font-bold font-headline text-black leading-tight">
                                 Snack So Tasty, Even Crypto Can&apos;t Resist
                             </h3>
                             <hr className="border-t-2 border-black w-32" />
