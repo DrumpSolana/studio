@@ -34,13 +34,13 @@ export default function RewardsSection() {
                                     {reward.description}
                                 </p>
                             </div>
-                            <div className="relative w-full h-auto flex-grow">
+                            <div className="relative w-full h-[250px] mt-auto">
                                 <Image
                                     src={reward.image}
                                     alt={reward.title}
-                                    width={500}
-                                    height={300}
-                                    className="w-full h-full object-cover"
+                                    layout="fill"
+                                    objectFit="cover"
+                                    className="w-full h-full"
                                     data-ai-hint={reward.dataAiHint}
                                 />
                             </div>
