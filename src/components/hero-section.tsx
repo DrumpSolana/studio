@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import PreOrderModal from './pre-order-modal';
+import Link from 'next/link';
+import { Send, Twitter } from 'lucide-react';
 
 export default function HeroSection() {
     return (
@@ -25,8 +27,15 @@ export default function HeroSection() {
                                    Pre Order Now
                                 </Button>
                             </PreOrderModal>
-                            <Button size="lg" variant="secondary" className="bg-yellow-400 text-black font-bold border-2 border-black hover:bg-yellow-500 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow">
-                               WHAT'S WITH THE CHEESEBALL?
+                             <Button size="lg" variant="secondary" className="bg-yellow-400 text-black font-bold border-2 border-black hover:bg-yellow-500 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow" asChild>
+                                <Link href="https://t.me/drumpofficial" target="_blank" rel="noopener noreferrer">
+                                   <Send /> Join on Telegram
+                                </Link>
+                            </Button>
+                            <Button size="lg" variant="secondary" className="bg-yellow-400 text-black font-bold border-2 border-black hover:bg-yellow-500 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow" asChild>
+                                <Link href="https://x.com/drumpofficial" target="_blank" rel="noopener noreferrer">
+                                   <Twitter /> Join on X
+                                </Link>
                             </Button>
                         </div>
                     </div>
