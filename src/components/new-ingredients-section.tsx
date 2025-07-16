@@ -46,7 +46,7 @@ export default function IngredientsSection() {
                                     />
                                 </div>
                             </div>
-                            <h3 className="text-lg font-bold text-black font-headline">{ingredient.name}</h3>
+                            <h3 className="text-lg font-bold text-black font-solway">{ingredient.name}</h3>
                         </div>
                     ))}
                 </div>

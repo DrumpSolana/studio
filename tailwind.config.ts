@@ -16,6 +16,7 @@ export default {
         body: ['Inter', 'sans-serif'],
         headline: ['FatFrank', 'Anton', 'sans-serif'],
         poppins: ['Poppins', 'sans-serif'],
+        solway: ['Solway', 'serif'],
         code: ['monospace'],
       },
       colors: {
