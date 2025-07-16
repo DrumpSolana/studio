@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 
 export default function SnackStackSwapItSection() {
     return (
-        <section id="snack-stack-swap-it" className="py-24 bg-primary">
+        <section id="snack-stack-swap-it" className="pt-24 pb-4 bg-primary">
             <div className="container mx-auto px-8 sm:px-12 lg:px-32">
                 <div className="text-center mb-12">
                     <div className="inline-block bg-secondary border-2 border-black rounded-lg px-8 py-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">

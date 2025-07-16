@@ -12,14 +12,14 @@ const rewards = [
         number: '03',
         title: 'Redeem for Real Rewards',
         description: 'Use your points to unlock exclusive prizes.',
-        image: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752712953/Drump_Mockup_3_4_wqcsdz_1_y72q94.png',
+        image: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752641223/Drump_Mockup_3_4_wqcsdz.png',
         dataAiHint: 'snack bags gifts',
     }
 ]
 
 export default function RewardsSection() {
     return (
-        <section id="rewards" className="py-24 bg-primary border-b-4 border-black">
+        <section id="rewards" className="pt-4 pb-24 bg-primary border-b-4 border-black">
             <div className="container mx-auto px-8 sm:px-12 lg:px-32">
                 <div className="grid md:grid-cols-2 gap-8 items-stretch">
                     {rewards.map((reward) => (
@@ -35,7 +35,7 @@ export default function RewardsSection() {
                                 </p>
                             </div>
                             <div className="relative w-full h-[300px] mt-auto">
-                                <Image
+                                 <Image
                                     src={reward.image}
                                     alt={reward.title}
                                     layout="fill"
