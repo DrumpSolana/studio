@@ -21,22 +21,24 @@ export default function HeroSection() {
                         <p className="text-2xl text-white/90 max-w-lg">
                             Munch on Drump Cheese Puffs while earning loyalty points. Exchange Drump points for fun prizes.
                         </p>
-                        <div className="flex flex-wrap gap-4">
+                        <div className="flex flex-col items-start gap-4">
+                            <div className="flex flex-wrap gap-4">
+                                 <Button size="lg" variant="secondary" className="bg-yellow-400 text-black font-bold border-2 border-black hover:bg-yellow-500 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow" asChild>
+                                    <Link href="https://t.me/drumpofficial" target="_blank" rel="noopener noreferrer">
+                                       <Send /> Telegram
+                                    </Link>
+                                </Button>
+                                <Button size="lg" variant="secondary" className="bg-yellow-400 text-black font-bold border-2 border-black hover:bg-yellow-500 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow" asChild>
+                                    <Link href="https://x.com/DrumpSolana" target="_blank" rel="noopener noreferrer">
+                                       <Twitter /> X
+                                    </Link>
+                                </Button>
+                            </div>
                             <PreOrderModal>
                                 <Button size="lg" className="bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow">
                                    Pre Order Now
                                 </Button>
                             </PreOrderModal>
-                             <Button size="lg" variant="secondary" className="bg-yellow-400 text-black font-bold border-2 border-black hover:bg-yellow-500 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow" asChild>
-                                <Link href="https://t.me/drumpofficial" target="_blank" rel="noopener noreferrer">
-                                   <Send /> Telegram
-                                </Link>
-                            </Button>
-                            <Button size="lg" variant="secondary" className="bg-yellow-400 text-black font-bold border-2 border-black hover:bg-yellow-500 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow" asChild>
-                                <Link href="https://x.com/DrumpSolana" target="_blank" rel="noopener noreferrer">
-                                   <Twitter /> X
-                                </Link>
-                            </Button>
                         </div>
                     </div>
                     <div className="relative h-[600px] w-full flex items-center justify-center">
