@@ -10,7 +10,7 @@ export default function HeroSection() {
                     <div className="space-y-8 text-left">
                         <div className="font-poppins inline-flex items-center gap-2 border-2 border-border rounded-lg px-3 py-2 text-white">
                            <span className="text-sm sm:text-base md:text-xl lg:text-2xl whitespace-nowrap">Drump - First Snack on</span>
-                           <Image src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752615308/Solana_lsczky.png" alt="Solana" width={120} height={24} className="h-5 sm:h-6 w-auto" />
+                           <Image src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752615308/Solana_lsczky.png" alt="Solana" width={120} height={24} className="h-5 sm:h-6 w-20 sm:w-24 md:w-28 lg:w-32" />
                         </div>
                         <h1 className="text-6xl md:text-7xl font-bold font-headline text-white leading-none tracking-normal uppercase">
                             Snack, Secure, Swap
