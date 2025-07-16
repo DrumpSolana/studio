@@ -27,7 +27,7 @@ const ingredients = [
 export default function IngredientsSection() {
     return (
         <section id="ingredients" className="py-20 bg-primary border-t-4 border-black">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="container mx-auto px-8 sm:px-12 lg:px-16">
                 <div className="text-center mb-12">
                     <div className="inline-block bg-secondary border-2 border-black rounded-lg px-8 py-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                         <h2 className="text-3xl md:text-4xl font-bold text-black font-headline">Ingredients? Yeah, We Got The Good Stuff</h2>

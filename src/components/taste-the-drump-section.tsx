@@ -5,7 +5,7 @@ import { Zap } from 'lucide-react';
 export default function TasteTheDrumpSection() {
     return (
         <section className="bg-background py-20 overflow-hidden">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="container mx-auto px-8 sm:px-12 lg:px-16">
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                     <div className="space-y-8">
                         <h2 className="text-5xl font-bold font-headline text-white leading-none tracking-normal uppercase">

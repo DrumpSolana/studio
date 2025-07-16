@@ -33,7 +33,7 @@ const ingredients = [
 export default function IngredientsSection() {
     return (
         <section id="ingredients" className="py-20 bg-background">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="container mx-auto px-8 sm:px-12 lg:px-16">
                 <div className="text-center space-y-4 mb-12">
                     <h2 className="text-4xl font-bold text-accent font-headline">What's Inside? Only the Good Stuff.</h2>
                     <p className="text-lg text-muted-foreground max-w-3xl mx-auto">

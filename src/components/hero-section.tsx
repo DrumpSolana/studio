@@ -5,7 +5,7 @@ export default function HeroSection() {
     return (
         <section className="relative min-h-screen flex items-center bg-background overflow-hidden">
              <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
+            <div className="container mx-auto px-8 sm:px-12 lg:px-16 z-10">
                 <div className="grid md:grid-cols-2 gap-8 items-center pt-24">
                     <div className="space-y-8 text-left">
                         <div className="font-poppins inline-flex items-center gap-2 border-2 border-border rounded-lg px-4 py-2 text-2xl text-white">

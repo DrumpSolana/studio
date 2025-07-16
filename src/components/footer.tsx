@@ -7,8 +7,8 @@ const DrumpLogo = () => (
         <Image 
             src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752616337/join_the_punch_1_i9twgu.png" 
             alt="Drump Logo"
-            width={360}
-            height={120}
+            width={720}
+            height={240}
             className="object-contain"
         />
     </Link>
@@ -35,7 +35,7 @@ const legalLinks = [
 export default function Footer() {
     return (
         <footer className="bg-secondary text-black font-solway border-t-4 border-b-4 border-black">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+            <div className="container mx-auto px-8 sm:px-12 lg:px-16 py-16 text-center">
                 <div className="flex flex-col items-center gap-6">
                     <DrumpLogo />
                     <nav className="flex items-center gap-8">

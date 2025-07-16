@@ -23,7 +23,7 @@ const features = [
 export default function AboutSection() {
     return (
         <section id="about" className="py-20 bg-background/80">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="container mx-auto px-8 sm:px-12 lg:px-16">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div className="relative w-full h-96 rounded-lg overflow-hidden shadow-2xl group">
                         <Image

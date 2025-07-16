@@ -27,7 +27,7 @@ const steps = [
 export default function SnackStackSwapSection() {
     return (
         <section id="how-to" className="py-20 bg-card">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="container mx-auto px-8 sm:px-12 lg:px-16">
                 <div className="text-center space-y-4 mb-12">
                     <h2 className="text-4xl font-bold text-accent font-headline">Snack. Stack. Swap.</h2>
                     <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
