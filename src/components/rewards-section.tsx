@@ -32,7 +32,7 @@ export default function RewardsSection() {
                             <p className="text-lg text-black/80 font-solway flex-grow">
                                 {reward.description}
                             </p>
-                            <div className="relative w-full h-96 -mb-4">
+                            <div className="relative w-full h-full -mb-4">
                                 <Image
                                     src={reward.image}
                                     alt={reward.title}
