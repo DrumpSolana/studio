@@ -36,8 +36,17 @@ export default function IngredientsSection() {
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {ingredients.map((ingredient) => (
                         <div key={ingredient.name} className="text-center flex flex-col items-center">
-                             <div className="bg-secondary p-4 rounded-lg border-2 border-black w-48 h-48 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] mb-4">
-                                <div className="relative w-32 h-32">
+                             <div className="bg-secondary p-4 rounded-lg border-2 border-black w-48 h-48 flex items-center justify-center mb-4 relative">
+                                <div className="absolute inset-x-0 bottom-4">
+                                     <Image 
+                                        src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752640822/Ellipse_3_j9f9bm.png"
+                                        alt="shadow"
+                                        width={100}
+                                        height={20}
+                                        className="mx-auto"
+                                    />
+                                </div>
+                                <div className="relative w-32 h-32 z-10">
                                      <Image
                                         src={ingredient.image}
                                         alt={ingredient.name}
@@ -46,7 +55,7 @@ export default function IngredientsSection() {
                                         data-ai-hint={ingredient.dataAiHint}
                                     />
                                     {ingredient.badge && (
-                                        <div className="absolute bottom-[-1rem] right-[-1rem] w-24 h-24">
+                                        <div className="absolute bottom-[-1.5rem] right-[-1.5rem] w-24 h-24">
                                             <Image 
                                                 src={ingredient.badge}
                                                 alt="Certified Badge"
