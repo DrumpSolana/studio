@@ -11,14 +11,15 @@ export default function SnackStackSwapItSection() {
                     </div>
                 </div>
 
-                <div className="bg-secondary border-2 border-black rounded-lg p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                <div className="bg-secondary border-2 border-black rounded-lg p-8 md:p-0 md:pr-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                     <div className="grid md:grid-cols-2 gap-8 items-center">
-                        <div className="relative w-full h-96">
+                        <div className="relative w-full h-96 md:h-[28rem]">
                             <Image
                                 src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752641003/Drump_Mockup_6_1_o9mndw.png"
                                 alt="Drump snack bags collage"
                                 fill
-                                style={{ objectFit: 'contain' }}
+                                style={{ objectFit: 'cover' }}
+                                className="md:rounded-l-lg"
                                 data-ai-hint="snack bags collage"
                             />
                         </div>
