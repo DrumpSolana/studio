@@ -2,8 +2,9 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Play, Pause } from 'lucide-react';
 import Image from 'next/image';
+import { useAnimation } from '@/contexts/AnimationContext';
 
 const DrumpLogo = () => (
     <Link href="/">
@@ -19,6 +20,8 @@ const DrumpLogo = () => (
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
+    const { isAnimating, toggleAnimation } = useAnimation();
+
     const navLinks = [
         { href: '#about', label: 'About' },
         { href: '#products', label: 'Products' },
@@ -39,6 +42,10 @@ export default function Header() {
                                 </Link>
                             ))}
                         </nav>
+                         <Button variant="ghost" size="icon" onClick={toggleAnimation} className="text-white hover:bg-white/10 hover:text-white">
+                            {isAnimating ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
+                            <span className="sr-only">{isAnimating ? 'Pause animation' : 'Play animation'}</span>
+                        </Button>
                         <Button variant="outline" className="text-white border-white hover:bg-white hover:text-blue-700">Order Now</Button>
                     </div>
                     <div className="md:hidden">
@@ -57,7 +64,13 @@ export default function Header() {
                                 {link.label}
                             </Link>
                         ))}
-                        <Button variant="outline" className="text-white border-white hover:bg-white hover:text-blue-700">Order Now</Button>
+                        <div className="flex items-center gap-4">
+                            <Button variant="ghost" size="icon" onClick={toggleAnimation} className="text-white hover:bg-white/10 hover:text-white">
+                                {isAnimating ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
+                                <span className="sr-only">{isAnimating ? 'Pause animation' : 'Play animation'}</span>
+                            </Button>
+                            <Button variant="outline" className="text-white border-white hover:bg-white hover:text-blue-700">Order Now</Button>
+                        </div>
                     </nav>
                 </div>
             )}
