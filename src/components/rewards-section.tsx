@@ -12,7 +12,7 @@ const rewards = [
         number: '03',
         title: 'Redeem for Real Rewards',
         description: 'Use your points to unlock exclusive prizes.',
-        image: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752641223/Drump_Mockup_3_4_wqcsdz.png',
+        image: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752712953/Drump_Mockup_3_4_wqcsdz_1_y72q94.png',
         dataAiHint: 'snack bags gifts',
     }
 ]
@@ -34,7 +34,7 @@ export default function RewardsSection() {
                                     {reward.description}
                                 </p>
                             </div>
-                            <div className="relative w-full h-[250px] mt-auto">
+                            <div className="relative w-full h-[300px] mt-auto">
                                 <Image
                                     src={reward.image}
                                     alt={reward.title}
