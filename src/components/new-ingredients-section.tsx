@@ -8,17 +8,17 @@ const ingredients = [
     },
     {
         name: 'Natural Spices & Seasoning',
-        image: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752621124/spices_u4pqvj.png',
+        image: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752640504/Icon_nbfi91.png',
         dataAiHint: 'spice shakers',
     },
     {
         name: 'Made in Canada',
-        image: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752621123/made-in-canada_p40hge.png',
+        image: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752640504/Made-in-Canada-English-French-300x300_1_xcuw0n.png',
         dataAiHint: 'canada maple leaf',
     },
     {
         name: 'Crunch Certified',
-        image: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752621124/crunch-certified_k7n6pa.png',
+        image: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752640504/Drump_Cheese_Ball_4_daedqc.png',
         dataAiHint: 'cheese puff mascot',
     }
 ];
