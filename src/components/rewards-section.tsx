@@ -24,7 +24,7 @@ export default function RewardsSection() {
                 <div className="grid md:grid-cols-2 gap-8 items-stretch">
                     {rewards.map((reward) => (
                         <div key={reward.number} className="bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden">
-                            <div className="space-y-4 p-8 flex-shrink-0">
+                             <div className="space-y-4 p-8 flex-shrink-0">
                                 <div className="text-5xl font-bold font-headline text-black">{reward.number}</div>
                                 <h3 className="text-3xl font-bold font-headline text-black leading-tight">
                                     {reward.title}
@@ -34,7 +34,7 @@ export default function RewardsSection() {
                                     {reward.description}
                                 </p>
                             </div>
-                            <div className="relative w-full h-[300px] mt-auto">
+                            <div className="relative w-full h-[250px] mt-auto">
                                 <Image
                                     src={reward.image}
                                     alt={reward.title}
