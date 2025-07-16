@@ -23,7 +23,7 @@ export default function RewardsSection() {
             <div className="container mx-auto px-8 sm:px-12 lg:px-32">
                 <div className="grid md:grid-cols-2 gap-8">
                     {rewards.map((reward) => (
-                        <div key={reward.number} className="bg-secondary border-2 border-black rounded-lg p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] space-y-4 flex flex-col h-[28rem]">
+                        <div key={reward.number} className="bg-secondary border-2 border-black rounded-lg p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] space-y-4 flex flex-col h-[32rem]">
                             <div className="text-5xl font-bold font-headline text-black">{reward.number}</div>
                             <h3 className="text-4xl font-bold font-headline text-black leading-tight">
                                 {reward.title}
@@ -32,7 +32,7 @@ export default function RewardsSection() {
                             <p className="text-lg text-black/80 font-solway flex-grow">
                                 {reward.description}
                             </p>
-                            <div className="relative w-full h-[18rem] -mb-4">
+                            <div className="relative w-full h-96 -mb-4">
                                 <Image
                                     src={reward.image}
                                     alt={reward.title}
