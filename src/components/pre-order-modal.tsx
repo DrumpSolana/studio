@@ -70,8 +70,8 @@ export default function PreOrderModal() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
-          variant="outline"
-          className="text-white border-white hover:bg-white hover:text-background"
+          variant="secondary"
+          className="bg-yellow-400 text-black font-bold border-2 border-black hover:bg-yellow-500 px-6 py-3 rounded-lg text-base uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow"
         >
           Pre order
         </Button>
