@@ -35,7 +35,7 @@ const legalLinks = [
 export default function Footer() {
     return (
         <footer className="bg-secondary text-black font-solway border-t-4 border-b-4 border-black">
-            <div className="container mx-auto px-8 sm:px-12 lg:px-32 py-16 text-center">
+            <div className="container mx-auto px-8 sm:px-12 lg:px-32 py-12 text-center">
                 <div className="flex flex-col items-center gap-6">
                     <DrumpLogo />
                     <nav className="flex items-center gap-8">

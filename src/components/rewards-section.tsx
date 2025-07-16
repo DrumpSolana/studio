@@ -19,7 +19,7 @@ const rewards = [
 
 export default function RewardsSection() {
     return (
-        <section id="rewards" className="pt-4 pb-24 bg-primary border-b-4 border-black">
+        <section id="rewards" className="pt-4 pb-12 bg-primary border-b-4 border-black">
             <div className="container mx-auto px-8 sm:px-12 lg:px-32">
                 <div className="grid md:grid-cols-2 gap-8 items-stretch">
                     {rewards.map((reward) => (
@@ -35,7 +35,7 @@ export default function RewardsSection() {
                                 </p>
                             </div>
                             <div className="relative w-full h-[300px] mt-auto">
-                                 <Image
+                                <Image
                                     src={reward.image}
                                     alt={reward.title}
                                     layout="fill"
