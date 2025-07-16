@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className="bg-background text-foreground overflow-x-hidden">
       <Header />
-      <main>
+      <main className="pb-0">
         <HeroSection />
         <SoWhyDrump />
         <IngredientsSection />
