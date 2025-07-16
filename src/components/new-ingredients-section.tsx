@@ -3,7 +3,7 @@ import Image from 'next/image';
 const ingredients = [
     {
         name: '100% Real Cheese',
-        image: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752621124/cheese_hqpqbe.png',
+        image: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752630283/cheese-slice-cartoon-vector-icon-illustration-food-object-icon-isolated-flat-vector_1_gqhvvi.png',
         dataAiHint: 'cheese block',
     },
     {
