@@ -15,7 +15,7 @@ export default function HeroSection() {
                         <h1 className="text-6xl md:text-7xl font-bold font-headline text-white leading-none tracking-normal uppercase">
                             Snack, Secure, Swap
                         </h1>
-                        <p className="text-5xl text-white/90 max-w-lg">
+                        <p className="text-2xl text-white/90 max-w-lg">
                             Munch on Drump Cheese Puffs while earning loyalty points. Exchange Drump points for fun prizes.
                         </p>
                         <div className="flex flex-wrap gap-4">
