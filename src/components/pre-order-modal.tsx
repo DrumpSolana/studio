@@ -33,7 +33,7 @@ const socialLinks = [
     text: 'Join on Telegram'
   },
   { 
-    href: '#', 
+    href: 'https://x.com/DrumpSolana', 
     name: 'X',
     text: 'Join on X'
   },
@@ -91,7 +91,7 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
       <Button
           className="bg-yellow-400 text-black font-bold border-2 border-black hover:bg-yellow-500 px-6 py-3 rounded-lg text-base uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow"
       >
-        Pre order
+        Pre Order Now
       </Button>
   );
 
@@ -141,7 +141,7 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
         </form>
         <DialogFooter className="!flex-col !justify-center space-y-4 sm:!space-y-4 sm:!justify-center">
             <div className="text-center font-solway text-sm text-black/70">Or join our community</div>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <div className="flex flex-row justify-center gap-4">
                 {socialLinks.map((link) => (
                     <Button key={link.name} asChild variant="outline" className="font-solway bg-white border-2 border-black hover:bg-white/80 rounded-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,0.25)] hover:shadow-none transition-shadow h-12 px-6">
                         <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-black flex items-center justify-center">
