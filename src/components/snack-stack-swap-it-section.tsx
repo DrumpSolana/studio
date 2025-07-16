@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
+import PreOrderModal from './pre-order-modal';
 
 export default function SnackStackSwapItSection() {
     return (
@@ -32,12 +33,14 @@ export default function SnackStackSwapItSection() {
                             <p className="text-lg text-black/80 font-solway">
                                 Red or Blue? Doesn&apos;t matter. Both are mooning in flavor.
                             </p>
-                            <Button
-                                size="lg"
-                                className="bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow"
-                            >
-                                ORDER NOW
-                            </Button>
+                            <PreOrderModal>
+                                <Button
+                                    size="lg"
+                                    className="bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow"
+                                >
+                                    Pre Order Now
+                                </Button>
+                            </PreOrderModal>
                         </div>
                     </div>
                 </div>

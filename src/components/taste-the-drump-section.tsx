@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Zap } from 'lucide-react';
+import PreOrderModal from './pre-order-modal';
 
 export default function TasteTheDrumpSection() {
     return (
@@ -19,12 +20,14 @@ export default function TasteTheDrumpSection() {
                             <Zap className="h-6 w-6" />
                             <span>JOIN THE DRUMP SIDE.</span>
                         </div>
-                        <Button
-                            size="lg"
-                            className="bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow"
-                        >
-                            TRY DRUMP NOW
-                        </Button>
+                        <PreOrderModal>
+                            <Button
+                                size="lg"
+                                className="bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow"
+                            >
+                                Pre Order Now
+                            </Button>
+                        </PreOrderModal>
                     </div>
                     <div className="relative h-[500px] w-full flex items-center justify-center">
                         <Image
