@@ -64,3 +64,20 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  @keyframes fall {
+    0% {
+      transform: translateY(-100%) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
+
+  .animate-fall {
+    animation: fall linear infinite;
+  }
+}
