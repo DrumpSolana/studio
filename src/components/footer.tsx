@@ -7,8 +7,8 @@ const DrumpLogo = () => (
         <Image 
             src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752616337/join_the_punch_1_i9twgu.png" 
             alt="Drump Logo"
-            width={180}
-            height={60}
+            width={360}
+            height={120}
             className="object-contain"
         />
     </Link>
