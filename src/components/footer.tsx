@@ -15,9 +15,9 @@ const DrumpLogo = () => (
 );
 
 const socialLinks = [
-    { icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M14.5 19.5 9.5 19.5 2 12l7.5-7.5 5 0L22 12Z"></path><path d="M12.5 8.5v0"></path><path d="M16.5 13.5v0"></path><path d="M10.5 14.5v0"></path></svg>, href: '#', name: 'Discord' },
-    { icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="m5 12 7-7 7 7"></path><path d="m5 19 7-7 7 7"></path></svg>, href: '#', name: 'Telegram' },
-    { icon: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-6 w-6"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>, href: '#', name: 'X' },
+    { src: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752642243/Vector_i7hrow.png', href: '#', name: 'Discord' },
+    { src: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752642254/Group_wlvy8u.png', href: '#', name: 'Telegram' },
+    { src: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752642253/Group_1_ixqd33.png', href: '#', name: 'X' },
 ];
 
 const footerLinks = [
@@ -48,7 +48,9 @@ export default function Footer() {
                      <div className="flex items-center space-x-4">
                         {socialLinks.map((link) => (
                             <Link key={link.name} href={link.href} className="bg-black text-white p-2 rounded-md hover:bg-black/80 transition-colors" aria-label={link.name}>
-                                {link.icon}
+                                <div className="relative h-6 w-6">
+                                    <Image src={link.src} alt={link.name} fill objectFit="contain" />
+                                </div>
                             </Link>
                         ))}
                     </div>
