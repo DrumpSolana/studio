@@ -19,6 +19,7 @@ const ingredients = [
     {
         name: 'Crunch Certified',
         image: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752640504/Drump_Cheese_Ball_4_daedqc.png',
+        badge: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752640631/vector-award-ribbon-check-mark-with-stars_1_wyr4wf.png',
         dataAiHint: 'cheese puff mascot',
     }
 ];
@@ -44,6 +45,16 @@ export default function IngredientsSection() {
                                         objectFit="contain"
                                         data-ai-hint={ingredient.dataAiHint}
                                     />
+                                    {ingredient.badge && (
+                                        <div className="absolute bottom-0 right-0 w-10 h-10">
+                                            <Image 
+                                                src={ingredient.badge}
+                                                alt="Certified Badge"
+                                                fill
+                                                objectFit="contain"
+                                            />
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                             <h3 className="text-lg font-bold text-black font-solway">{ingredient.name}</h3>
