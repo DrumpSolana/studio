@@ -28,7 +28,7 @@ export default function TasteTheDrumpSection() {
                     </div>
                     <div className="relative h-[500px] w-full flex items-center justify-center">
                         <Image
-                            src="https://placehold.co/600x600.png"
+                            src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752641646/Drump_Mockup_7_9_pleh9h.png"
                             alt="Drump snack bags"
                             width={600}
                             height={600}
