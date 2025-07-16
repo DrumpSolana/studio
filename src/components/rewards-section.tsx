@@ -19,7 +19,7 @@ const rewards = [
 
 export default function RewardsSection() {
     return (
-        <section id="rewards" className="py-20 bg-primary">
+        <section id="rewards" className="pt-10 pb-20 bg-primary">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid md:grid-cols-2 gap-8">
                     {rewards.map((reward) => (
