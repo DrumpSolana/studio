@@ -47,7 +47,7 @@ export default function Footer() {
                     </nav>
                      <div className="flex items-center space-x-4">
                         {socialLinks.map((link) => (
-                            <Link key={link.name} href={link.href} className="bg-black text-white p-2 rounded-md hover:bg-black/80 transition-colors" aria-label={link.name}>
+                            <Link key={link.name} href={link.href} className="bg-[#2C2CB1] text-white p-2 rounded-md hover:bg-[#2C2CB1]/80 transition-colors" aria-label={link.name}>
                                 <div className="relative h-6 w-6">
                                     <Image src={link.src} alt={link.name} fill objectFit="contain" />
                                 </div>
