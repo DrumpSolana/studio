@@ -46,7 +46,7 @@ export default function IngredientsSection() {
                                         data-ai-hint={ingredient.dataAiHint}
                                     />
                                     {ingredient.badge && (
-                                        <div className="absolute bottom-0 right-0 w-14 h-14">
+                                        <div className="absolute bottom-[-1rem] right-[-1rem] w-24 h-24">
                                             <Image 
                                                 src={ingredient.badge}
                                                 alt="Certified Badge"
