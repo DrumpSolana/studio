@@ -6,6 +6,7 @@ import SnackStackSwapItSection from '@/components/snack-stack-swap-it-section';
 import SoWhyDrump from '@/components/so-why-drump-section';
 import TasteTheDrumpSection from '@/components/taste-the-drump-section';
 import Footer from '@/components/footer';
+import ScrollToTop from '@/components/scroll-to-top';
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <TasteTheDrumpSection />
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }
