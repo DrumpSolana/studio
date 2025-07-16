@@ -34,7 +34,7 @@ export default function FallingCheeseBalls() {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden z-0">
+    <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden z-0">
       {cheeseBalls.map((ball) => (
         <div key={ball.id} className="absolute top-0 animate-fall" style={ball.style}>
           <Image
