@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 
 export default function SnackStackSwapItSection() {
     return (
-        <section id="snack-stack-swap-it" className="py-20 bg-primary border-t-4 border-black">
+        <section id="snack-stack-swap-it" className="py-20 bg-primary">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12">
                     <div className="inline-block bg-secondary border-2 border-black rounded-lg px-8 py-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
@@ -15,7 +15,7 @@ export default function SnackStackSwapItSection() {
                     <div className="grid md:grid-cols-2 gap-8 items-center">
                         <div className="relative w-full h-96">
                             <Image
-                                src="https://placehold.co/600x400.png"
+                                src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752641003/Drump_Mockup_6_1_o9mndw.png"
                                 alt="Drump snack bags collage"
                                 fill
                                 style={{ objectFit: 'contain' }}
