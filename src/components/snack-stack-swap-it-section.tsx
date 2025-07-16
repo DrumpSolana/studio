@@ -3,8 +3,8 @@ import { Button } from '@/components/ui/button';
 
 export default function SnackStackSwapItSection() {
     return (
-        <section id="snack-stack-swap-it" className="py-20 bg-primary">
-            <div className="container mx-auto px-8 sm:px-12 lg:px-16">
+        <section id="snack-stack-swap-it" className="py-10 bg-primary">
+            <div className="container mx-auto px-8 sm:px-12 lg:px-32">
                 <div className="text-center mb-12">
                     <div className="inline-block bg-secondary border-2 border-black rounded-lg px-8 py-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
                         <h2 className="text-3xl md:text-4xl font-bold text-black font-headline">Snack It. Stack It. Swap It. All In One</h2>
@@ -23,7 +23,7 @@ export default function SnackStackSwapItSection() {
                                 data-ai-hint="snack bags collage"
                             />
                         </div>
-                        <div className="space-y-4 p-8 md:p-0 md:pr-8">
+                        <div className="space-y-4 p-8">
                             <div className="text-5xl font-bold font-headline text-black">01</div>
                             <h3 className="text-3xl font-bold font-headline text-black leading-tight">
                                 Snack So Tasty, Even Crypto Can&apos;t Resist
