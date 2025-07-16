@@ -1,6 +1,7 @@
 import Header from '@/components/header';
 import HeroSection from '@/components/hero-section';
 import IngredientsSection from '@/components/new-ingredients-section';
+import SnackStackSwapItSection from '@/components/snack-stack-swap-it-section';
 import SoWhyDrump from '@/components/so-why-drump-section';
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
         <HeroSection />
         <SoWhyDrump />
         <IngredientsSection />
+        <SnackStackSwapItSection />
       </main>
     </div>
   );
