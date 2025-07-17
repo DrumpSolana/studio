@@ -16,7 +16,7 @@ export default function HeroSection() {
                            <Image src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752615308/Solana_lsczky.png" alt="Solana" width={120} height={24} className="h-5 sm:h-6 w-auto max-w-[100px]" />
                         </div>
                         <h1 className="text-5xl md:text-6xl lg:text-7xl xl:whitespace-nowrap font-bold font-headline text-white leading-none tracking-normal uppercase">
-                            Snack, Secure, Swap
+                            The Ultimate Crypto Snack
                         </h1>
                         <p className="text-xl md:text-2xl text-white/90 max-w-lg mx-auto md:mx-0">
                             Munch on Drump Cheese Puffs while earning loyalty points. Exchange Drump points for fun prizes.
