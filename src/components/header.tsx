@@ -49,7 +49,11 @@ export default function Header() {
                         </Button>
                         <PreOrderModal />
                     </div>
-                    <div className="md:hidden">
+                    <div className="md:hidden flex items-center gap-2">
+                        <Button variant="ghost" size="icon" onClick={toggleAnimation} className="text-white hover:bg-white/10 hover:text-white">
+                            {isAnimating ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6" />}
+                            <span className="sr-only">{isAnimating ? 'Pause animation' : 'Play animation'}</span>
+                        </Button>
                         <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)}>
                             {isOpen ? <X className="h-6 w-6 text-white" /> : <Menu className="h-6 w-6 text-white" />}
                             <span className="sr-only">Toggle menu</span>
@@ -66,10 +70,6 @@ export default function Header() {
                             </Link>
                         ))}
                         <div className="flex items-center gap-4">
-                            <Button variant="ghost" size="icon" onClick={toggleAnimation} className="text-white hover:bg-white/10 hover:text-white">
-                                {isAnimating ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
-                                <span className="sr-only">{isAnimating ? 'Pause animation' : 'Play animation'}</span>
-                            </Button>
                             <PreOrderModal />
                         </div>
                     </nav>
