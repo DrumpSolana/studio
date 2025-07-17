@@ -8,6 +8,9 @@ import { AnimationProvider } from '@/contexts/AnimationContext';
 export const metadata: Metadata = {
   title: 'Drump',
   description: 'Drump - The First Snack on Solana',
+  icons: {
+    icon: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752640504/Drump_Cheese_Ball_4_daedqc.png',
+  },
 };
 
 export default function RootLayout({
