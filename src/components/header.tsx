@@ -6,6 +6,7 @@ import { Menu, X, Play, Pause } from 'lucide-react';
 import Image from 'next/image';
 import { useAnimation } from '@/contexts/AnimationContext';
 import PreOrderModal from './pre-order-modal';
+import ContactModal from './contact-modal';
 
 const DrumpLogo = () => (
     <Link href="/">
@@ -24,9 +25,8 @@ export default function Header() {
     const { isAnimating, toggleAnimation } = useAnimation();
 
     const navLinks = [
-        { href: '#about', label: 'About' },
-        { href: '#products', label: 'Products' },
-        { href: '#contact-us', label: 'Contact Us' },
+        { href: '#snack-stack-swap-it', label: 'About' },
+        { href: '#ingredients', label: 'Ingredients' },
     ];
 
     return (
@@ -42,6 +42,7 @@ export default function Header() {
                                     <span className="block max-w-0 group-hover:max-w-full transition-all duration-300 h-0.5 bg-primary"></span>
                                 </Link>
                             ))}
+                            <ContactModal />
                         </nav>
                          <Button variant="ghost" size="icon" onClick={toggleAnimation} className="text-white hover:bg-white/10 hover:text-white">
                             {isAnimating ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
@@ -69,6 +70,7 @@ export default function Header() {
                                 {link.label}
                             </Link>
                         ))}
+                         <ContactModal />
                         <div className="flex items-center gap-4">
                             <PreOrderModal />
                         </div>
