@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
   @font-face {
     font-family: 'FatFrank';
     src: url('/fonts/FatFrank.woff2') format('woff2');
