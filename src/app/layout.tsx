@@ -4,12 +4,37 @@ import { Toaster } from "@/components/ui/toaster";
 import FallingCheeseBalls from '@/components/falling-cheese-balls';
 import { AnimationProvider } from '@/contexts/AnimationContext';
 
+const siteUrl = 'https://drump.com';
+const imageUrl = 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752640504/Drump_Cheese_Ball_4_daedqc.png';
+const siteDescription = 'First Snack on Solana';
 
 export const metadata: Metadata = {
   title: 'Drump',
-  description: 'Drump - The First Snack on Solana',
+  description: siteDescription,
   icons: {
-    icon: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752640504/Drump_Cheese_Ball_4_daedqc.png',
+    icon: imageUrl,
+  },
+  openGraph: {
+    title: 'Drump',
+    description: siteDescription,
+    url: siteUrl,
+    siteName: 'Drump',
+    images: [
+      {
+        url: imageUrl,
+        width: 512,
+        height: 512,
+        alt: 'Drump Cheeseball',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Drump',
+    description: siteDescription,
+    images: [imageUrl],
   },
 };
 
