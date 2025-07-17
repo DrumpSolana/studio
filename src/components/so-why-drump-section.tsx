@@ -8,10 +8,10 @@ const features = [
 
 export default function SoWhyDrump() {
     return (
-        <section id="why-drump" className="py-12 bg-secondary border-t-4 border-black">
+        <section id="why-drump" className="py-16 md:py-12 bg-secondary border-t-4 border-black">
             <div className="container mx-auto px-8 sm:px-12 lg:px-16">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
-                    <div className="relative w-full h-[700px] rounded-lg overflow-hidden group">
+                    <div className="relative w-full h-[400px] md:h-[700px] rounded-lg overflow-hidden group">
                         <Image
                             src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752617158/neww_1_ehuxda.png"
                             alt="Two bags of Drump cheese puffs"
@@ -22,7 +22,7 @@ export default function SoWhyDrump() {
                         />
                     </div>
                     <div className="space-y-6">
-                        <h2 className="text-5xl font-bold text-black font-headline">So, Why Drump?</h2>
+                        <h2 className="text-4xl md:text-5xl font-bold text-black font-headline">So, Why Drump?</h2>
                         <hr className="border-t-2 border-black w-24" />
                         <p className="text-lg text-black/80">
                             We dumped snacks that don&apos;t crunch and then we launched Drump, the first-ever snack brand born on Solana.
