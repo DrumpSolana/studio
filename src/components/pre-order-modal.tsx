@@ -18,7 +18,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import Image from 'next/image';
 import { useToast } from '@/hooks/use-toast';
-import { preOrderSignUp } from '@/ai/flows/pre-order-flow';
+import { handlePreOrderSignUp } from '@/app/actions/pre-order';
 
 const PreOrderSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email.' }),
@@ -55,7 +55,7 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
   const onSubmit: SubmitHandler<PreOrderForm> = async (data) => {
     setIsSubmitting(true);
     try {
-      const result = await preOrderSignUp({ email: data.email });
+      const result = await handlePreOrderSignUp(data);
 
       if (result.success) {
         toast({
@@ -72,7 +72,7 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
         toast({
             variant: "destructive",
             title: "Uh oh! Something went wrong.",
-            description: "There was a problem with your request. Please try again.",
+            description: result.message || "There was a problem with your request. Please try again.",
         });
       }
     } catch (error) {
