@@ -11,7 +11,17 @@ export default function SoWhyDrump() {
         <section id="why-drump" className="py-16 md:py-12 bg-secondary border-t-4 border-black">
             <div className="container mx-auto px-8 sm:px-12 lg:px-16">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
-                    <div className="space-y-6 order-1 md:order-1">
+                    <div className="relative w-full h-[400px] md:h-[700px] rounded-lg overflow-hidden group order-1 md:order-1">
+                        <Image
+                            src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752617158/neww_1_ehuxda.png"
+                            alt="Two bags of Drump cheese puffs"
+                            fill
+                            objectFit="contain"
+                            className="transition-transform duration-500 group-hover:scale-105"
+                            data-ai-hint="snack bags"
+                        />
+                    </div>
+                    <div className="space-y-6 order-2 md:order-2">
                         <h2 className="text-4xl md:text-5xl font-bold text-black font-headline">So, Why Drump?</h2>
                         <hr className="border-t-2 border-black w-24" />
                         <p className="text-lg text-black/80">
@@ -32,16 +42,6 @@ export default function SoWhyDrump() {
                                 </li>
                             ))}
                         </ul>
-                    </div>
-                    <div className="relative w-full h-[400px] md:h-[700px] rounded-lg overflow-hidden group order-2 md:order-2">
-                        <Image
-                            src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752617158/neww_1_ehuxda.png"
-                            alt="Two bags of Drump cheese puffs"
-                            fill
-                            objectFit="contain"
-                            className="transition-transform duration-500 group-hover:scale-105"
-                            data-ai-hint="snack bags"
-                        />
                     </div>
                 </div>
             </div>

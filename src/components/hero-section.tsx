@@ -41,7 +41,7 @@ export default function HeroSection() {
                             </PreOrderModal>
                         </div>
                     </div>
-                    <div className="relative h-[300px] sm:h-[400px] md:h-[600px] w-full flex items-center justify-center mt-8 md:mt-0">
+                    <div className="relative h-[300px] sm:h-[400px] md:h-[600px] w-full flex items-center justify-center mt-20 md:mt-0">
                          <Image
                             src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752614149/Graphic_ry6hnt.png"
                             alt="Drump product graphic"
