@@ -6,11 +6,11 @@ import { Send, Twitter } from 'lucide-react';
 
 export default function HeroSection() {
     return (
-        <section className="relative flex items-center pt-32 md:pt-32 pb-16 md:pb-24 md:min-h-screen bg-transparent overflow-hidden">
+        <section className="relative flex items-center pt-32 pb-16 md:pt-40 md:pb-24 md:min-h-screen bg-transparent overflow-hidden">
              <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
             <div className="container mx-auto px-4 sm:px-6 lg:px-32 z-10">
                 <div className="grid md:grid-cols-2 gap-8 items-center">
-                    <div className="space-y-8 text-center md:text-left">
+                    <div className="space-y-8 text-center md:text-left md:order-1">
                         <div className="font-poppins inline-flex items-center gap-2 border-2 border-border rounded-lg px-3 py-2 text-white">
                            <span className="text-sm sm:text-base md:text-lg lg:text-xl whitespace-nowrap">Drump - First Snack on</span>
                            <Image src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752615308/Solana_lsczky.png" alt="Solana" width={120} height={24} className="h-5 sm:h-6 w-auto max-w-[100px]" />
@@ -22,7 +22,7 @@ export default function HeroSection() {
                             Munch on Drump Cheese Puffs while earning loyalty points. Exchange Drump points for fun prizes.
                         </p>
                         <div className="flex flex-col items-center md:items-start gap-4">
-                            <div className="flex flex-wrap gap-4 justify-center">
+                            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                                  <Button size="lg" variant="secondary" className="bg-yellow-400 text-black font-bold border-2 border-black hover:bg-yellow-500 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow" asChild>
                                     <Link href="https://t.me/drumpofficial" target="_blank" rel="noopener noreferrer">
                                        <Send /> Telegram
@@ -41,7 +41,7 @@ export default function HeroSection() {
                             </PreOrderModal>
                         </div>
                     </div>
-                    <div className="relative h-[300px] md:h-[600px] w-full flex items-center justify-center">
+                    <div className="relative h-[300px] sm:h-[400px] md:h-[600px] w-full flex items-center justify-center mt-8 md:mt-0 md:order-2">
                          <Image
                             src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752614149/Graphic_ry6hnt.png"
                             alt="Drump product graphic"
