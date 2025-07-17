@@ -15,9 +15,8 @@ const DrumpLogo = () => (
 );
 
 const socialLinks = [
-    { src: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752642243/Vector_i7hrow.png', href: '#', name: 'Discord' },
-    { src: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752642254/Group_wlvy8u.png', href: '#', name: 'Telegram' },
-    { src: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752642253/Group_1_ixqd33.png', href: '#', name: 'X' },
+    { src: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752642254/Group_wlvy8u.png', href: 'https://t.me/drumpofficial', name: 'Telegram' },
+    { src: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752642253/Group_1_ixqd33.png', href: 'https://x.com/DrumpSolana', name: 'X' },
 ];
 
 const footerLinks = [
@@ -47,7 +46,7 @@ export default function Footer() {
                     </nav>
                      <div className="flex items-center space-x-4">
                         {socialLinks.map((link) => (
-                            <Link key={link.name} href={link.href} className="bg-[#2C2CB1] text-white p-2 rounded-md hover:bg-[#2C2CB1]/80 transition-colors" aria-label={link.name}>
+                            <Link key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className="bg-[#2C2CB1] text-white p-2 rounded-md hover:bg-[#2C2CB1]/80 transition-colors" aria-label={link.name}>
                                 <div className="relative h-6 w-6">
                                     <Image src={link.src} alt={link.name} fill objectFit="contain" />
                                 </div>
