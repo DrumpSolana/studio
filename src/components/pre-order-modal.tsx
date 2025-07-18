@@ -1,6 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import {
   Dialog,
   DialogContent,
@@ -10,25 +13,48 @@ import {
   DialogFooter,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import Image from 'next/image';
-import Link from 'next/link';
+import { Loader2 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
-const socialLinks = [
-  { 
-    href: 'https://t.me/drumpofficial', 
-    name: 'Telegram',
-    text: 'Telegram'
-  },
-  { 
-    href: 'https://x.com/DrumpSolana', 
-    name: 'X',
-    text: 'X'
-  },
-];
+const PreOrderSchema = z.object({
+  email: z.string().email({ message: 'Please enter a valid email address.' }),
+});
+
+type PreOrderFormValues = z.infer<typeof PreOrderSchema>;
 
 export default function PreOrderModal({ children }: { children?: React.ReactNode }) {
   const [open, setOpen] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+
+  const form = useForm<PreOrderFormValues>({
+    resolver: zodResolver(PreOrderSchema),
+    defaultValues: {
+      email: '',
+    },
+  });
+
+  const onSubmit: SubmitHandler<PreOrderFormValues> = async (data) => {
+    setIsLoading(true);
+    // Simulate a network request
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    console.log('Form submitted with:', data.email);
+    setIsLoading(false);
+    setIsSubmitted(true);
+    form.reset(); 
+  };
   
   const trigger = children ?? (
       <Button
@@ -38,8 +64,19 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
       </Button>
   );
 
+  const handleOpenChange = (isOpen: boolean) => {
+    setOpen(isOpen);
+    // Reset form state when dialog closes
+    if (!isOpen) {
+      setTimeout(() => {
+        setIsSubmitted(false);
+        form.reset();
+      }, 300);
+    }
+  };
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         {trigger}
       </DialogTrigger>
@@ -52,23 +89,59 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
                 height={80}
             />
           <DialogTitle className="font-headline text-3xl text-black">
-            Join The Community!
+            {isSubmitted ? 'Thanks!' : 'Join The Pre-Order List!'}
           </DialogTitle>
           <DialogDescription className="font-solway text-black/80">
-            Be the first to know about pre-orders and get the latest news by joining our community.
+            {isSubmitted
+              ? "You're on the list! We'll notify you when pre-orders are live."
+              : 'Be the first to know when Drump is available. Drop your email below.'}
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter className="!flex-col !justify-center space-y-4 sm:!space-y-4 sm:!justify-center pt-4">
-            <div className="flex flex-row justify-center gap-4">
-                {socialLinks.map((link) => (
-                    <Button key={link.name} asChild variant="outline" className="font-solway bg-white border-2 border-black hover:bg-white/80 rounded-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,0.25)] hover:shadow-none transition-shadow h-12 px-6">
-                        <Link href={link.href} target="_blank" rel="noopener noreferrer" className="text-black flex items-center justify-center">
-                            {link.text}
-                        </Link>
-                    </Button>
-                ))}
-            </div>
-        </DialogFooter>
+        
+        {!isSubmitted && (
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="sr-only">Email</FormLabel>
+                    <FormControl>
+                      <Input 
+                        placeholder="your.email@example.com" 
+                        {...field} 
+                        className="bg-white border-black border-2 text-black placeholder:text-black/50 focus:ring-black focus:ring-offset-2"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <DialogFooter>
+                <Button 
+                  type="submit" 
+                  disabled={isLoading}
+                  className="w-full bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow"
+                >
+                  {isLoading ? <Loader2 className="animate-spin" /> : 'Join Waitlist'}
+                </Button>
+              </DialogFooter>
+            </form>
+          </Form>
+        )}
+        
+        {isSubmitted && (
+            <DialogFooter>
+                <Button 
+                  onClick={() => setOpen(false)}
+                  className="w-full bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow"
+                >
+                  Close
+                </Button>
+            </DialogFooter>
+        )}
+
       </DialogContent>
     </Dialog>
   );
