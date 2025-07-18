@@ -5,7 +5,7 @@ import FallingCheeseBalls from '@/components/falling-cheese-balls';
 import { AnimationProvider } from '@/contexts/AnimationContext';
 
 const siteUrl = 'https://drump.app';
-const imageUrl = 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752640504/Drump_Cheese_Ball_4_daedqc.png';
+const imageUrl = 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752804102/2_14_h30mkm.png';
 const siteDescription = 'First Snack on Solana';
 
 export const metadata: Metadata = {
@@ -22,9 +22,9 @@ export const metadata: Metadata = {
     images: [
       {
         url: imageUrl,
-        width: 512,
-        height: 512,
-        alt: 'Drump Cheeseball',
+        width: 1200,
+        height: 630,
+        alt: 'Drump - First Snack on Solana',
       },
     ],
     locale: 'en_US',
