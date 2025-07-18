@@ -28,7 +28,7 @@ const cards = [
 
 export default function SnackStackSwapItSection() {
     return (
-        <section id="snack-stack-swap-it" className="pt-12 pb-4 bg-primary border-b-4 border-black">
+        <section id="snack-stack-swap-it" className="py-12 md:py-16 bg-primary border-b-4 border-black">
             <div className="container mx-auto px-8 sm:px-12 lg:px-32">
                 <div className="text-center mb-12">
                     <div className="inline-block bg-secondary border-2 border-black rounded-lg px-8 py-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
@@ -36,9 +36,9 @@ export default function SnackStackSwapItSection() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {/* Card 1 - Spans full width */}
-                    <div className="lg:col-span-2 bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row overflow-hidden">
+                    <div className="md:col-span-2 bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row overflow-hidden">
                         <div className="relative w-full md:w-1/2 h-80 md:h-auto flex-shrink-0">
                             <Image
                                 src={cards[0].image}

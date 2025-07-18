@@ -5,7 +5,7 @@ import PreOrderModal from './pre-order-modal';
 
 export default function TasteTheDrumpSection() {
     return (
-        <section className="bg-background pt-24 pb-12 overflow-hidden">
+        <section className="bg-background pt-16 md:pt-24 pb-12 overflow-hidden">
             <div className="container mx-auto px-8 sm:px-12 lg:px-32">
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                     <div className="space-y-8">
