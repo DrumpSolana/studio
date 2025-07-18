@@ -6,7 +6,7 @@ import { Send, Twitter } from 'lucide-react';
 
 export default function HeroSection() {
     return (
-        <section className="relative flex items-center pt-32 pb-16 md:pt-40 md:pb-24 min-h-[80vh] md:min-h-screen bg-transparent overflow-hidden">
+        <section className="relative flex items-center pt-24 pb-16 md:pt-32 md:pb-24 min-h-[80vh] md:min-h-screen bg-transparent overflow-hidden">
              <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
             <div className="container mx-auto px-4 sm:px-6 lg:px-16 z-10">
                 <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -43,11 +43,11 @@ export default function HeroSection() {
                     </div>
                     <div className="relative w-full flex items-center justify-center mt-8 md:mt-0">
                          <Image
-                            src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752804102/2_14_h30mkm.png"
+                            src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752614149/Graphic_ry6hnt.png"
                             alt="Drump product graphic"
                             width={1200}
                             height={1200}
-                            className="drop-shadow-2xl object-contain w-full h-auto"
+                            className="drop-shadow-2xl object-contain w-full h-auto md:scale-125 lg:scale-150 lg:translate-x-16"
                             data-ai-hint="snack bag"
                         />
                     </div>
