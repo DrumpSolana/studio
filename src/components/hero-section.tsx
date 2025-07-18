@@ -41,13 +41,13 @@ export default function HeroSection() {
                             </PreOrderModal>
                         </div>
                     </div>
-                    <div className="relative md:w-1/2 w-full flex items-center justify-center mt-8 md:mt-0 md:h-[600px]">
+                    <div className="relative md:w-1/2 w-full flex items-center justify-center mt-8 md:mt-0">
                          <Image
                             src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752614149/Graphic_ry6hnt.png"
                             alt="Drump product graphic"
                             width={1200}
                             height={1200}
-                            className="drop-shadow-2xl object-contain w-full h-auto max-w-none md:absolute md:w-[1200px] md:max-w-[1200px] md:scale-[0.85] md:translate-x-1/4"
+                            className="drop-shadow-2xl object-contain w-full h-auto md:absolute md:scale-[0.8] md:translate-x-1/4"
                             data-ai-hint="snack bag"
                         />
                     </div>
