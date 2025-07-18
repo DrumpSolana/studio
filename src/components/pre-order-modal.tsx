@@ -94,7 +94,7 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
           <DialogDescription className="font-solway text-black/80">
             {isSubmitted
               ? "You're on the list! We'll notify you when pre-orders are live."
-              : 'Be the first to know when Drump is available. Drop your email below.'}
+              : 'Be the first to know when Drump Cheeseballs are available. Drop your email below.'}
           </DialogDescription>
         </DialogHeader>
         
