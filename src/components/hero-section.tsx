@@ -6,9 +6,9 @@ import { Send, Twitter } from 'lucide-react';
 
 export default function HeroSection() {
     return (
-        <section className="relative flex items-center pt-32 pb-16 md:pt-40 md:pb-24 md:min-h-screen bg-transparent overflow-x-clip">
+        <section className="relative flex items-center pt-24 pb-16 md:pt-32 md:pb-24 min-h-[80vh] md:min-h-screen bg-transparent overflow-x-clip">
              <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-            <div className="container mx-auto px-4 sm:px-6 lg:px-16 lg:pr-0 z-10">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-16 z-10">
                 <div className="flex flex-col md:flex-row gap-8 items-center justify-between">
                     <div className="space-y-8 text-center md:text-left md:w-1/2 flex-shrink-0">
                         <div className="font-poppins inline-flex items-center gap-2 border-2 border-border rounded-lg px-3 py-2 text-white">
@@ -41,13 +41,13 @@ export default function HeroSection() {
                             </PreOrderModal>
                         </div>
                     </div>
-                    <div className="relative md:w-1/2 w-full flex items-center justify-center mt-8 md:mt-0">
+                    <div className="relative md:w-1/2 w-full flex items-center justify-center mt-8 md:mt-0 md:h-[600px]">
                          <Image
                             src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752614149/Graphic_ry6hnt.png"
                             alt="Drump product graphic"
                             width={1200}
                             height={1200}
-                            className="drop-shadow-2xl object-contain w-full h-auto md:scale-125 lg:scale-125 lg:translate-x-0"
+                            className="drop-shadow-2xl object-contain w-full h-auto max-w-none md:absolute md:w-[1200px] md:max-w-[1200px] md:scale-[0.85] md:translate-x-1/4"
                             data-ai-hint="snack bag"
                         />
                     </div>
