@@ -43,12 +43,12 @@ export default function HeroSection() {
                     </div>
                     <div className="relative w-full flex items-center justify-center mt-8 md:mt-0">
                          <Image
-                            src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752614149/Graphic_ry6hnt.png"
+                            src="https://res.cloudinary.com/dwimflmjr/image/upload/c_crop,w_650,h_550/v1752617158/neww_1_ehuxda.png"
                             alt="Drump product graphic"
-                            width={1200}
-                            height={1200}
-                            className="drop-shadow-2xl object-contain w-full h-auto md:scale-125 lg:scale-150 lg:translate-x-16"
-                            data-ai-hint="snack bag"
+                            width={650}
+                            height={550}
+                            className="drop-shadow-2xl object-contain w-full h-auto"
+                            data-ai-hint="snack bags"
                         />
                     </div>
                 </div>
