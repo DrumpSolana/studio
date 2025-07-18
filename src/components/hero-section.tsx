@@ -6,11 +6,11 @@ import { Send, Twitter } from 'lucide-react';
 
 export default function HeroSection() {
     return (
-        <section className="relative flex items-center pt-24 pb-16 md:pt-32 md:pb-24 min-h-[80vh] md:min-h-screen bg-transparent overflow-x-clip">
+        <section className="relative flex items-center pt-32 pb-16 md:pt-40 md:pb-24 min-h-[80vh] md:min-h-screen bg-transparent overflow-hidden">
              <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
             <div className="container mx-auto px-4 sm:px-6 lg:px-16 z-10">
-                <div className="flex flex-col md:flex-row gap-8 items-center justify-between">
-                    <div className="space-y-8 text-center md:text-left md:w-1/2 flex-shrink-0">
+                <div className="grid md:grid-cols-2 gap-8 items-center">
+                    <div className="space-y-8 text-center md:text-left">
                         <div className="font-poppins inline-flex items-center gap-2 border-2 border-border rounded-lg px-3 py-2 text-white">
                            <span className="text-sm sm:text-base md:text-lg lg:text-xl whitespace-nowrap">Drump - First Snack on</span>
                            <Image src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752615308/Solana_lsczky.png" alt="Solana" width={120} height={24} className="h-5 sm:h-6 w-auto max-w-[100px]" />
@@ -41,13 +41,13 @@ export default function HeroSection() {
                             </PreOrderModal>
                         </div>
                     </div>
-                    <div className="relative md:w-1/2 w-full flex items-center justify-center mt-8 md:mt-0">
+                    <div className="relative w-full flex items-center justify-center mt-8 md:mt-0">
                          <Image
-                            src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752614149/Graphic_ry6hnt.png"
+                            src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752804102/2_14_h30mkm.png"
                             alt="Drump product graphic"
                             width={1200}
                             height={1200}
-                            className="drop-shadow-2xl object-contain w-full h-auto md:absolute md:scale-[1.5] lg:scale-[1.5] lg:translate-x-[15%]"
+                            className="drop-shadow-2xl object-contain w-full h-auto"
                             data-ai-hint="snack bag"
                         />
                     </div>
