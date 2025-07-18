@@ -10,7 +10,7 @@ export default function HeroSection() {
              <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
             <div className="container mx-auto px-4 sm:px-6 lg:px-32 z-10">
                 <div className="grid md:grid-cols-5 gap-8 items-center">
-                    <div className="space-y-8 text-center md:text-left md:col-span-2">
+                    <div className="space-y-8 text-center md:text-left md:col-span-3">
                         <div className="font-poppins inline-flex items-center gap-2 border-2 border-border rounded-lg px-3 py-2 text-white">
                            <span className="text-sm sm:text-base md:text-lg lg:text-xl whitespace-nowrap">Drump - First Snack on</span>
                            <Image src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752615308/Solana_lsczky.png" alt="Solana" width={120} height={24} className="h-5 sm:h-6 w-auto max-w-[100px]" />
@@ -41,7 +41,7 @@ export default function HeroSection() {
                             </PreOrderModal>
                         </div>
                     </div>
-                    <div className="relative h-[300px] sm:h-[400px] md:h-auto md:col-span-3 w-full flex items-center justify-center mt-20 md:mt-0">
+                    <div className="relative h-auto md:col-span-2 w-full flex items-center justify-center mt-20 md:mt-0">
                          <Image
                             src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752614149/Graphic_ry6hnt.png"
                             alt="Drump product graphic"
