@@ -9,7 +9,6 @@ const cards = [
         description: 'Red or Blue? Doesn’t matter. Both are mooning in flavor.',
         image: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752641003/Drump_Mockup_6_1_o9mndw.png',
         dataAiHint: 'snack bags collage',
-        isLarge: true,
     },
     {
         number: '02',
@@ -17,7 +16,6 @@ const cards = [
         description: 'Crunch & Collect. Earn your Drump loyalty points every time you snack',
         image: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752641223/Drump_Mockup_7_9_ogvpo6.png',
         dataAiHint: 'snack bags coins',
-        isLarge: false,
     },
     {
         number: '03',
@@ -25,10 +23,8 @@ const cards = [
         description: 'Use your points to unlock exclusive prizes.',
         image: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752641223/Drump_Mockup_3_4_wqcsdz.png',
         dataAiHint: 'snack bags gifts',
-        isLarge: false,
     }
 ];
-
 
 export default function SnackStackSwapItSection() {
     return (
@@ -40,46 +36,44 @@ export default function SnackStackSwapItSection() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-                    {/* First Card - Large */}
-                    <div className="lg:col-span-3">
-                        <div className="bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] h-full">
-                            <div className="grid md:grid-cols-2 gap-8 items-center h-full">
-                                <div className="relative w-full h-96 md:h-full">
-                                    <Image
-                                        src={cards[0].image}
-                                        alt={cards[0].title}
-                                        fill
-                                        style={{ objectFit: 'cover' }}
-                                        className="md:rounded-l-lg"
-                                        data-ai-hint={cards[0].dataAiHint}
-                                    />
-                                </div>
-                                <div className="space-y-4 p-8">
-                                    <div className="text-5xl font-bold font-headline text-black">{cards[0].number}</div>
-                                    <h3 className="text-3xl font-bold font-headline text-black leading-tight">
-                                        {cards[0].title}
-                                    </h3>
-                                    <hr className="border-t-2 border-black w-32" />
-                                    <p className="text-lg text-black/80 font-solway">
-                                        {cards[0].description}
-                                    </p>
-                                    <PreOrderModal>
-                                        <Button
-                                            size="lg"
-                                            className="bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow"
-                                        >
-                                            Pre Order Now
-                                        </Button>
-                                    </PreOrderModal>
-                                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+                    {/* First Card - Spans full width on mobile, then adjusts */}
+                    <div className="md:col-span-2 lg:col-span-1 bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden h-full">
+                        <div className="grid md:grid-cols-2 lg:grid-cols-1 gap-0 items-center h-full">
+                            <div className="relative w-full h-80 md:h-full">
+                                <Image
+                                    src={cards[0].image}
+                                    alt={cards[0].title}
+                                    fill
+                                    style={{ objectFit: 'cover' }}
+                                    className="md:rounded-l-lg lg:rounded-t-lg lg:rounded-bl-none"
+                                    data-ai-hint={cards[0].dataAiHint}
+                                />
+                            </div>
+                            <div className="space-y-4 p-8">
+                                <div className="text-5xl font-bold font-headline text-black">{cards[0].number}</div>
+                                <h3 className="text-3xl font-bold font-headline text-black leading-tight">
+                                    {cards[0].title}
+                                </h3>
+                                <hr className="border-t-2 border-black w-32" />
+                                <p className="text-lg text-black/80 font-solway">
+                                    {cards[0].description}
+                                </p>
+                                <PreOrderModal>
+                                    <Button
+                                        size="lg"
+                                        className="bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow"
+                                    >
+                                        Pre Order Now
+                                    </Button>
+                                </PreOrderModal>
                             </div>
                         </div>
                     </div>
 
                     {/* Second and Third Cards */}
                     {cards.slice(1).map((card) => (
-                        <div key={card.number} className="lg:col-span-1 bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden h-full">
+                        <div key={card.number} className="bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden h-full">
                              <div className="space-y-4 p-8 flex-shrink-0">
                                 <div className="text-5xl font-bold font-headline text-black">{card.number}</div>
                                 <h3 className="text-3xl font-bold font-headline text-black leading-tight">
