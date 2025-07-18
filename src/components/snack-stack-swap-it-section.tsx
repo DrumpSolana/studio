@@ -72,7 +72,7 @@ export default function SnackStackSwapItSection() {
                     </div>
 
                     {/* Card 2 */}
-                    <div className="col-span-1 bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden h-full">
+                    <div className="col-span-1 bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden">
                         <div className="space-y-4 p-8 flex-shrink-0">
                             <div className="text-5xl font-bold font-headline text-black">{cards[1].number}</div>
                             <h3 className="text-3xl font-bold font-headline text-black leading-tight">
@@ -96,7 +96,7 @@ export default function SnackStackSwapItSection() {
                     </div>
 
                     {/* Card 3 */}
-                    <div className="col-span-1 bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden h-full">
+                    <div className="col-span-1 bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden">
                         <div className="space-y-4 p-8 flex-shrink-0">
                             <div className="text-5xl font-bold font-headline text-black">{cards[2].number}</div>
                             <h3 className="text-3xl font-bold font-headline text-black leading-tight">
