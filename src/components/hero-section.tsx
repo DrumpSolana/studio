@@ -6,9 +6,9 @@ import { Send, Twitter } from 'lucide-react';
 
 export default function HeroSection() {
     return (
-        <section className="relative flex items-center pt-32 pb-16 md:pt-40 md:pb-24 md:min-h-screen bg-transparent overflow-hidden">
+        <section className="relative flex items-center pt-32 pb-16 md:pt-40 md:pb-24 md:min-h-screen bg-transparent overflow-x-clip">
              <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-            <div className="container mx-auto px-4 sm:px-6 lg:px-32 z-10">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-16 lg:pr-0 z-10">
                 <div className="flex flex-col md:flex-row gap-8 items-center justify-between">
                     <div className="space-y-8 text-center md:text-left md:w-1/2 flex-shrink-0">
                         <div className="font-poppins inline-flex items-center gap-2 border-2 border-border rounded-lg px-3 py-2 text-white">
@@ -47,7 +47,7 @@ export default function HeroSection() {
                             alt="Drump product graphic"
                             width={1200}
                             height={1200}
-                            className="drop-shadow-2xl transition-transform duration-300 ease-in-out hover:scale-105 object-contain w-auto h-auto max-w-none md:w-[200%]"
+                            className="drop-shadow-2xl object-contain w-full h-auto md:scale-150 lg:scale-[2] lg:translate-x-1/4"
                             data-ai-hint="snack bag"
                         />
                     </div>
