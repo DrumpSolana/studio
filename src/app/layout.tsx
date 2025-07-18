@@ -5,14 +5,15 @@ import FallingCheeseBalls from '@/components/falling-cheese-balls';
 import { AnimationProvider } from '@/contexts/AnimationContext';
 
 const siteUrl = 'https://drump.app';
-const imageUrl = 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752804102/2_14_h30mkm.png';
+const socialImageUrl = 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752804102/2_14_h30mkm.png';
+const faviconUrl = 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752640504/Drump_Cheese_Ball_4_daedqc.png';
 const siteDescription = 'First Snack on Solana';
 
 export const metadata: Metadata = {
   title: 'Drump',
   description: siteDescription,
   icons: {
-    icon: imageUrl,
+    icon: faviconUrl,
   },
   openGraph: {
     title: 'Drump',
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
     siteName: 'Drump',
     images: [
       {
-        url: imageUrl,
+        url: socialImageUrl,
         width: 1200,
         height: 630,
         alt: 'Drump - First Snack on Solana',
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Drump',
     description: siteDescription,
-    images: [imageUrl],
+    images: [socialImageUrl],
   },
 };
 
@@ -46,7 +47,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <link rel="icon" href={imageUrl} sizes="any" />
+        <link rel="icon" href={faviconUrl} sizes="any" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800;900&family=Solway:wght@400;700&display=swap" rel="stylesheet" />
