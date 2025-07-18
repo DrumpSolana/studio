@@ -24,6 +24,15 @@ const nextConfig: NextConfig = {
       }
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/favicon.ico',
+        destination: 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752640504/Drump_Cheese_Ball_4_daedqc.png',
+        permanent: true,
+      },
+    ]
+  },
 };
 
 export default nextConfig;
