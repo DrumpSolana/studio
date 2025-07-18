@@ -36,29 +36,29 @@ export default function SnackStackSwapItSection() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-2 lg:grid-cols-3 gap-8">
-                    {/* Card 1 */}
-                    <div className="col-span-2 lg:col-span-1 bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden h-full">
-                        <div className="grid md:grid-cols-2 lg:grid-cols-1 gap-0 items-center h-full">
-                            <div className="relative w-full h-80 md:h-full">
-                                <Image
-                                    src={cards[0].image}
-                                    alt={cards[0].title}
-                                    fill
-                                    style={{ objectFit: 'cover' }}
-                                    className="rounded-t-lg md:rounded-l-lg lg:rounded-t-lg lg:rounded-bl-none"
-                                    data-ai-hint={cards[0].dataAiHint}
-                                />
-                            </div>
-                            <div className="space-y-4 p-8">
-                                <div className="text-5xl font-bold font-headline text-black">{cards[0].number}</div>
-                                <h3 className="text-3xl font-bold font-headline text-black leading-tight">
-                                    {cards[0].title}
-                                </h3>
-                                <hr className="border-t-2 border-black w-32" />
-                                <p className="text-lg text-black/80 font-solway">
-                                    {cards[0].description}
-                                </p>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    {/* Card 1 - Spans full width */}
+                    <div className="lg:col-span-2 bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row overflow-hidden">
+                        <div className="relative w-full md:w-1/2 h-80 md:h-auto flex-shrink-0">
+                            <Image
+                                src={cards[0].image}
+                                alt={cards[0].title}
+                                fill
+                                style={{ objectFit: 'cover' }}
+                                className="rounded-t-lg md:rounded-l-lg md:rounded-tr-none"
+                                data-ai-hint={cards[0].dataAiHint}
+                            />
+                        </div>
+                        <div className="space-y-4 p-8 flex flex-col justify-center">
+                            <div className="text-5xl font-bold font-headline text-black">{cards[0].number}</div>
+                            <h3 className="text-3xl font-bold font-headline text-black leading-tight">
+                                {cards[0].title}
+                            </h3>
+                            <hr className="border-t-2 border-black w-32" />
+                            <p className="text-lg text-black/80 font-solway">
+                                {cards[0].description}
+                            </p>
+                            <div className="pt-2">
                                 <PreOrderModal>
                                     <Button
                                         size="lg"
@@ -72,7 +72,7 @@ export default function SnackStackSwapItSection() {
                     </div>
 
                     {/* Card 2 */}
-                    <div className="col-span-1 bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden">
+                    <div className="bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden">
                         <div className="space-y-4 p-8 flex-shrink-0">
                             <div className="text-5xl font-bold font-headline text-black">{cards[1].number}</div>
                             <h3 className="text-3xl font-bold font-headline text-black leading-tight">
@@ -96,7 +96,7 @@ export default function SnackStackSwapItSection() {
                     </div>
 
                     {/* Card 3 */}
-                    <div className="col-span-1 bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden">
+                    <div className="bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden">
                         <div className="space-y-4 p-8 flex-shrink-0">
                             <div className="text-5xl font-bold font-headline text-black">{cards[2].number}</div>
                             <h3 className="text-3xl font-bold font-headline text-black leading-tight">
