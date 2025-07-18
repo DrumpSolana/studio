@@ -9,8 +9,8 @@ export default function HeroSection() {
         <section className="relative flex items-center pt-32 pb-16 md:pt-40 md:pb-24 md:min-h-screen bg-transparent overflow-hidden">
              <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
             <div className="container mx-auto px-4 sm:px-6 lg:px-32 z-10">
-                <div className="flex flex-col md:flex-row gap-8 items-center">
-                    <div className="space-y-8 text-center md:text-left md:w-1/2">
+                <div className="flex flex-col md:flex-row gap-8 items-center justify-between">
+                    <div className="space-y-8 text-center md:text-left md:w-1/2 flex-shrink-0">
                         <div className="font-poppins inline-flex items-center gap-2 border-2 border-border rounded-lg px-3 py-2 text-white">
                            <span className="text-sm sm:text-base md:text-lg lg:text-xl whitespace-nowrap">Drump - First Snack on</span>
                            <Image src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752615308/Solana_lsczky.png" alt="Solana" width={120} height={24} className="h-5 sm:h-6 w-auto max-w-[100px]" />
@@ -47,7 +47,7 @@ export default function HeroSection() {
                             alt="Drump product graphic"
                             width={1200}
                             height={1200}
-                            className="drop-shadow-2xl transition-transform duration-300 ease-in-out hover:scale-105 object-contain w-[150%] h-auto max-w-none"
+                            className="drop-shadow-2xl transition-transform duration-300 ease-in-out hover:scale-105 object-contain w-auto h-auto max-w-none md:w-[200%]"
                             data-ai-hint="snack bag"
                         />
                     </div>
