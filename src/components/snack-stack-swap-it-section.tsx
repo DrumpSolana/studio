@@ -36,9 +36,9 @@ export default function SnackStackSwapItSection() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
-                    {/* First Card - Spans full width on mobile, then adjusts */}
-                    <div className="md:col-span-2 lg:col-span-1 bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden h-full">
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-8">
+                    {/* Card 1 */}
+                    <div className="col-span-2 lg:col-span-1 bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden h-full">
                         <div className="grid md:grid-cols-2 lg:grid-cols-1 gap-0 items-center h-full">
                             <div className="relative w-full h-80 md:h-full">
                                 <Image
@@ -46,7 +46,7 @@ export default function SnackStackSwapItSection() {
                                     alt={cards[0].title}
                                     fill
                                     style={{ objectFit: 'cover' }}
-                                    className="md:rounded-l-lg lg:rounded-t-lg lg:rounded-bl-none"
+                                    className="rounded-t-lg md:rounded-l-lg lg:rounded-t-lg lg:rounded-bl-none"
                                     data-ai-hint={cards[0].dataAiHint}
                                 />
                             </div>
@@ -71,31 +71,53 @@ export default function SnackStackSwapItSection() {
                         </div>
                     </div>
 
-                    {/* Second and Third Cards */}
-                    {cards.slice(1).map((card) => (
-                        <div key={card.number} className="bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden h-full">
-                             <div className="space-y-4 p-8 flex-shrink-0">
-                                <div className="text-5xl font-bold font-headline text-black">{card.number}</div>
-                                <h3 className="text-3xl font-bold font-headline text-black leading-tight">
-                                    {card.title}
-                                </h3>
-                                <hr className="border-t-2 border-black w-32" />
-                                <p className="text-lg text-black/80 font-solway h-16">
-                                    {card.description}
-                                </p>
-                            </div>
-                            <div className="relative w-full h-[300px] mt-auto">
-                                <Image
-                                    src={card.image}
-                                    alt={card.title}
-                                    layout="fill"
-                                    objectFit="contain"
-                                    className="w-full h-full"
-                                    data-ai-hint={card.dataAiHint}
-                                />
-                            </div>
+                    {/* Card 2 */}
+                    <div className="col-span-1 bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden h-full">
+                        <div className="space-y-4 p-8 flex-shrink-0">
+                            <div className="text-5xl font-bold font-headline text-black">{cards[1].number}</div>
+                            <h3 className="text-3xl font-bold font-headline text-black leading-tight">
+                                {cards[1].title}
+                            </h3>
+                            <hr className="border-t-2 border-black w-32" />
+                            <p className="text-lg text-black/80 font-solway h-16">
+                                {cards[1].description}
+                            </p>
                         </div>
-                    ))}
+                        <div className="relative w-full h-[300px] mt-auto">
+                            <Image
+                                src={cards[1].image}
+                                alt={cards[1].title}
+                                fill
+                                style={{ objectFit: 'contain' }}
+                                className="w-full h-full"
+                                data-ai-hint={cards[1].dataAiHint}
+                            />
+                        </div>
+                    </div>
+
+                    {/* Card 3 */}
+                    <div className="col-span-1 bg-secondary border-2 border-black rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col overflow-hidden h-full">
+                        <div className="space-y-4 p-8 flex-shrink-0">
+                            <div className="text-5xl font-bold font-headline text-black">{cards[2].number}</div>
+                            <h3 className="text-3xl font-bold font-headline text-black leading-tight">
+                                {cards[2].title}
+                            </h3>
+                            <hr className="border-t-2 border-black w-32" />
+                            <p className="text-lg text-black/80 font-solway h-16">
+                                {cards[2].description}
+                            </p>
+                        </div>
+                        <div className="relative w-full h-[300px] mt-auto">
+                            <Image
+                                src={cards[2].image}
+                                alt={cards[2].title}
+                                fill
+                                style={{ objectFit: 'contain' }}
+                                className="w-full h-full"
+                                data-ai-hint={cards[2].dataAiHint}
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
