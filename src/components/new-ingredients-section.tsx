@@ -33,10 +33,10 @@ export default function IngredientsSection() {
                         <h2 className="text-3xl md:text-4xl font-bold text-black font-headline">Ingredients? Yeah, We Got The Good Stuff</h2>
                     </div>
                 </div>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
                     {ingredients.map((ingredient) => (
                         <div key={ingredient.name} className="text-center flex flex-col items-center">
-                             <div className="bg-secondary p-4 rounded-lg border-2 border-black w-48 h-48 flex items-center justify-center mb-4 relative">
+                             <div className="bg-secondary p-4 rounded-lg border-2 border-black w-full max-w-48 h-48 flex items-center justify-center mb-4 relative">
                                 <div className="absolute inset-x-0 bottom-4">
                                      <Image 
                                         src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752640822/Ellipse_3_j9f9bm.png"
