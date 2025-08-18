@@ -14,23 +14,21 @@ const firebaseConfig = {
   "messagingSenderId": "256654255818"
 };
 
+// Initialize Firebase
 let app: FirebaseApp;
-if (typeof window !== 'undefined') {
-    if (!getApps().length) {
-        app = initializeApp(firebaseConfig);
-    } else {
-        app = getApp();
-    }
+if (!getApps().length) {
+    app = initializeApp(firebaseConfig);
 } else {
-    // Avoid server-side initialization
-    app = {} as FirebaseApp;
+    app = getApp();
 }
 
+const db = getFirestore(app);
+
+// Initialize Analytics only on the client side
 const analytics: Promise<Analytics | null> = typeof window !== 'undefined' 
   ? isSupported().then(yes => yes ? getAnalytics(app) : null) 
   : Promise.resolve(null);
 
-export const db = typeof window !== 'undefined' ? getFirestore(app) : null;
 
 export const logAnalyticsEvent = async (eventName: string, params?: { [key: string]: any }) => {
     const analyticsInstance = await analytics;
@@ -39,4 +37,4 @@ export const logAnalyticsEvent = async (eventName: string, params?: { [key: stri
     }
 };
 
-export { app, analytics };
+export { app, db, analytics };
