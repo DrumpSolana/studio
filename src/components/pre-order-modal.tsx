@@ -27,8 +27,9 @@ import { Input } from '@/components/ui/input';
 import Image from 'next/image';
 import { Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { logAnalyticsEvent, db } from '@/lib/firebase';
+import { logAnalyticsEvent } from '@/lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 const PreOrderSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),
@@ -67,20 +68,30 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
 
   const onSubmit: SubmitHandler<PreOrderFormValues> = async (data) => {
     setIsLoading(true);
-    const result = await savePreOrderEmail(data.email);
-    
-    if (result.success) {
-      logAnalyticsEvent('pre_order_submit', { email: data.email });
-      setIsSubmitted(true);
-    } else {
-      toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: result.error || "There was a problem saving your email. Please try again.",
-      });
-      form.reset();
+
+    try {
+        const result = await savePreOrderEmail(data.email);
+        
+        if (result.success) {
+            logAnalyticsEvent('pre_order_submit', { email: data.email });
+            setIsSubmitted(true);
+        } else {
+            toast({
+                variant: "destructive",
+                title: "Uh oh! Something went wrong.",
+                description: result.error || "There was a problem saving your email. Please try again.",
+            });
+        }
+    } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred.";
+        toast({
+            variant: "destructive",
+            title: "Uh oh! Something went wrong.",
+            description: errorMessage,
+        });
+    } finally {
+        setIsLoading(false);
     }
-    setIsLoading(false);
   };
   
   const trigger = children ?? (

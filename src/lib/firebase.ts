@@ -25,15 +25,16 @@ const analytics: Promise<Analytics | null> = typeof window !== 'undefined'
   ? isSupported().then(yes => yes ? getAnalytics(app) : null) 
   : Promise.resolve(null);
 
-export const logAnalyticsEvent = async (eventName: string, params?: { [key: string]: any }) => {
-    const analyticsInstance = await analytics;
-    if (analyticsInstance) {
-      try {
-        firebaseLogEvent(analyticsInstance, eventName, params);
-      } catch (error) {
-        console.error('Failed to log analytics event:', error);
-      }
-    }
+export const logAnalyticsEvent = (eventName: string, params?: { [key: string]: any }) => {
+    analytics.then(analyticsInstance => {
+        if (analyticsInstance) {
+            try {
+                firebaseLogEvent(analyticsInstance, eventName, params);
+            } catch (error) {
+                console.error('Failed to log analytics event:', error);
+            }
+        }
+    });
 };
 
 export { app, db, analytics };

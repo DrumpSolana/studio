@@ -3,7 +3,8 @@
 
 import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { logAnalyticsEvent, analytics } from '@/lib/firebase';
+import { logAnalyticsEvent } from '@/lib/firebase';
+import { analytics } from '@/lib/firebase';
 
 export default function FirebaseAnalytics() {
   const pathname = usePathname();
