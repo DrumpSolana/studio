@@ -3,6 +3,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import FallingCheeseBalls from '@/components/falling-cheese-balls';
 import { AnimationProvider } from '@/contexts/AnimationContext';
+import FirebaseAnalytics from '@/components/firebase-analytics';
 
 const siteUrl = 'https://drump.app';
 const socialImageUrl = 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752804102/2_14_h30mkm.png';
@@ -53,6 +54,7 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased relative">
         <AnimationProvider>
+          <FirebaseAnalytics />
           <FallingCheeseBalls />
           {children}
         </AnimationProvider>
