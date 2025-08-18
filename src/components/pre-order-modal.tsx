@@ -57,6 +57,7 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
 
         if (result.success) {
           logAnalyticsEvent('pre_order_submit', { email: data.email });
+          setIsLoading(false);
           setIsSubmitted(true);
         } else {
           toast({
@@ -64,6 +65,7 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
             title: "Uh oh! Something went wrong.",
             description: result.error || "There was a problem saving your email. Please try again.",
           });
+          setIsLoading(false);
           form.reset();
         }
     } catch (error) {
@@ -73,9 +75,8 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
             title: "Submission failed.",
             description: "An unexpected error occurred. Please try again.",
         });
-        form.reset();
-    } finally {
         setIsLoading(false);
+        form.reset();
     }
   };
   
