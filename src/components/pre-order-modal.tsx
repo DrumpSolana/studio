@@ -27,14 +27,29 @@ import { Input } from '@/components/ui/input';
 import Image from 'next/image';
 import { Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { logAnalyticsEvent } from '@/lib/firebase';
-import { savePreOrderEmail } from '@/app/actions';
+import { logAnalyticsEvent, db } from '@/lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 const PreOrderSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),
 });
 
 type PreOrderFormValues = z.infer<typeof PreOrderSchema>;
+
+async function savePreOrderEmail(email: string) {
+  try {
+    const docRef = await addDoc(collection(db, 'pre-orders'), {
+      email: email,
+      timestamp: serverTimestamp(),
+    });
+    console.log("Document written with ID: ", docRef.id);
+    return { success: true };
+  } catch (error) {
+    console.error('Error writing document to Firestore: ', error);
+    const errorMessage = error instanceof Error ? error.message : 'Failed to save email due to an unknown error.';
+    return { success: false, error: errorMessage };
+  }
+}
 
 export default function PreOrderModal({ children }: { children?: React.ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -51,30 +66,20 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
 
   const onSubmit: SubmitHandler<PreOrderFormValues> = async (data) => {
     setIsLoading(true);
-    try {
-      const result = await savePreOrderEmail(data.email);
-      if (result.success) {
-        logAnalyticsEvent('pre_order_submit', { email: data.email });
-        setIsSubmitted(true);
-      } else {
-        toast({
-          variant: "destructive",
-          title: "Uh oh! Something went wrong.",
-          description: result.error || "There was a problem saving your email. Please try again.",
-        });
-        form.reset();
-      }
-    } catch (error) {
-      console.error("Submission error:", error);
+    const result = await savePreOrderEmail(data.email);
+    
+    if (result.success) {
+      logAnalyticsEvent('pre_order_submit', { email: data.email });
+      setIsSubmitted(true);
+    } else {
       toast({
-          variant: "destructive",
-          title: "Submission failed.",
-          description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: result.error || "There was a problem saving your email. Please try again.",
       });
       form.reset();
-    } finally {
-        setIsLoading(false);
     }
+    setIsLoading(false);
   };
   
   const trigger = children ?? (
@@ -90,7 +95,6 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
         logAnalyticsEvent('open_modal', { modal_name: 'pre_order' });
     }
     setOpen(isOpen);
-    // Reset form state when dialog closes
     if (!isOpen) {
       setTimeout(() => {
         setIsSubmitted(false);

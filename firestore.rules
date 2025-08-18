@@ -1,0 +1,11 @@
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /pre-orders/{docId} {
+      allow read, update, delete: if false;
+      allow create: if true;
+    }
+  }
+}
