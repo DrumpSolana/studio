@@ -51,7 +51,6 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
 
   const onSubmit: SubmitHandler<PreOrderFormValues> = async (data) => {
     setIsLoading(true);
-    let success = false;
     
     try {
         const result = await savePreOrderEmail(data.email);
@@ -59,13 +58,13 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
         if (result.success) {
           logAnalyticsEvent('pre_order_submit', { email: data.email });
           setIsSubmitted(true);
-          success = true;
         } else {
           toast({
             variant: "destructive",
             title: "Uh oh! Something went wrong.",
             description: result.error || "There was a problem saving your email. Please try again.",
           });
+          form.reset();
         }
     } catch (error) {
         console.error("Submission error:", error);
@@ -74,11 +73,9 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
             title: "Submission failed.",
             description: "An unexpected error occurred. Please try again.",
         });
-    }
-    
-    setIsLoading(false);
-    if(!success) {
-        form.reset(); 
+        form.reset();
+    } finally {
+        setIsLoading(false);
     }
   };
   
