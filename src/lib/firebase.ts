@@ -1,7 +1,7 @@
 
 // src/lib/firebase.ts
 import { initializeApp, getApps, getApp, type FirebaseApp } from 'firebase/app';
-import { getAnalytics, isSupported, logEvent as firebaseLogEvent } from 'firebase/analytics';
+import { getAnalytics, isSupported, logEvent as firebaseLogEvent, type Analytics } from 'firebase/analytics';
 
 const firebaseConfig = {
   "projectId": "drump-landing-page",
@@ -20,15 +20,13 @@ if (!getApps().length) {
   app = getApp();
 }
 
-const analytics = isSupported().then(yes => yes ? getAnalytics(app) : null);
+const analytics: Promise<Analytics | null> = isSupported().then(yes => yes ? getAnalytics(app) : null);
 
-export const logAnalyticsEvent = (eventName: string, params?: { [key: string]: any }) => {
-    isSupported().then(yes => {
-      if (yes) {
-        const analyticsInstance = getAnalytics(app);
-        firebaseLogEvent(analyticsInstance, eventName, params);
-      }
-    });
+export const logAnalyticsEvent = async (eventName: string, params?: { [key: string]: any }) => {
+    const analyticsInstance = await analytics;
+    if (analyticsInstance) {
+      firebaseLogEvent(analyticsInstance, eventName, params);
+    }
   };
 
 export { app, analytics };
