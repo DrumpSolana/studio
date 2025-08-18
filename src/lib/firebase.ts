@@ -1,7 +1,8 @@
 
 // src/lib/firebase.ts
 import { initializeApp, getApps, getApp, type FirebaseApp } from 'firebase/app';
-import { getAnalytics, isSupported, logEvent as firebaseLogEvent, Analytics } from 'firebase/analytics';
+import { getAnalytics, isSupported, logEvent as firebaseLogEvent, type Analytics } from 'firebase/analytics';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   "projectId": "drump-landing-page",
@@ -14,20 +15,27 @@ const firebaseConfig = {
 };
 
 let app: FirebaseApp;
-if (typeof window !== 'undefined' && !getApps().length) {
-    app = initializeApp(firebaseConfig);
+if (typeof window !== 'undefined') {
+    if (!getApps().length) {
+        app = initializeApp(firebaseConfig);
+    } else {
+        app = getApp();
+    }
 } else {
-    app = getApps().length > 0 ? getApp() : ({} as FirebaseApp);
+    // Avoid server-side initialization
+    app = {} as FirebaseApp;
 }
 
-const analytics: Promise<Analytics | null> = typeof window !== 'undefined' ? isSupported().then(yes => yes ? getAnalytics(app) : null) : Promise.resolve(null);
+const analytics: Promise<Analytics | null> = typeof window !== 'undefined' 
+  ? isSupported().then(yes => yes ? getAnalytics(app) : null) 
+  : Promise.resolve(null);
+
+export const db = typeof window !== 'undefined' ? getFirestore(app) : null;
 
 export const logAnalyticsEvent = async (eventName: string, params?: { [key: string]: any }) => {
     const analyticsInstance = await analytics;
     if (analyticsInstance) {
       firebaseLogEvent(analyticsInstance, eventName, params);
-    } else {
-      console.log(`Analytics not supported or not initialized, event not logged: ${eventName}`);
     }
 };
 

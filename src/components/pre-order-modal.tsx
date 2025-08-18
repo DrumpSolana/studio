@@ -28,6 +28,7 @@ import Image from 'next/image';
 import { Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { logAnalyticsEvent } from '@/lib/firebase';
+import { savePreOrderEmail } from '@/app/actions';
 
 const PreOrderSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),
@@ -50,15 +51,21 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
 
   const onSubmit: SubmitHandler<PreOrderFormValues> = async (data) => {
     setIsLoading(true);
-    // Simulate a network request
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log('Form submitted with:', data.email);
     
-    // Log analytics event
-    logAnalyticsEvent('pre_order_submit', { email: data.email });
+    const result = await savePreOrderEmail(data.email);
 
+    if (result.success) {
+      logAnalyticsEvent('pre_order_submit', { email: data.email });
+      setIsSubmitted(true);
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem saving your email. Please try again.",
+      });
+    }
+    
     setIsLoading(false);
-    setIsSubmitted(true);
     form.reset(); 
   };
   
