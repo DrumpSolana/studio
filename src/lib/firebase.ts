@@ -14,14 +14,8 @@ const firebaseConfig = {
   "messagingSenderId": "256654255818"
 };
 
-// Initialize Firebase
-let app: FirebaseApp;
-if (!getApps().length) {
-    app = initializeApp(firebaseConfig);
-} else {
-    app = getApp();
-}
-
+// Initialize Firebase App
+const app: FirebaseApp = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const db = getFirestore(app);
 
 // Initialize Analytics only on the client side
@@ -29,11 +23,14 @@ const analytics: Promise<Analytics | null> = typeof window !== 'undefined'
   ? isSupported().then(yes => yes ? getAnalytics(app) : null) 
   : Promise.resolve(null);
 
-
 export const logAnalyticsEvent = async (eventName: string, params?: { [key: string]: any }) => {
     const analyticsInstance = await analytics;
     if (analyticsInstance) {
-      firebaseLogEvent(analyticsInstance, eventName, params);
+      try {
+        firebaseLogEvent(analyticsInstance, eventName, params);
+      } catch (error) {
+        console.error('Failed to log analytics event:', error);
+      }
     }
 };
 

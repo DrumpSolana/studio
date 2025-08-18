@@ -52,21 +52,32 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
   const onSubmit: SubmitHandler<PreOrderFormValues> = async (data) => {
     setIsLoading(true);
     
-    const result = await savePreOrderEmail(data.email);
+    try {
+        const result = await savePreOrderEmail(data.email);
 
-    if (result.success) {
-      logAnalyticsEvent('pre_order_submit', { email: data.email });
-      setIsSubmitted(true);
-    } else {
-      toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem saving your email. Please try again.",
-      });
+        if (result.success) {
+          logAnalyticsEvent('pre_order_submit', { email: data.email });
+          setIsSubmitted(true);
+        } else {
+          toast({
+            variant: "destructive",
+            title: "Uh oh! Something went wrong.",
+            description: result.error || "There was a problem saving your email. Please try again.",
+          });
+        }
+    } catch (error) {
+        console.error("Submission error:", error);
+        toast({
+            variant: "destructive",
+            title: "Submission failed.",
+            description: "An unexpected error occurred. Please try again.",
+        });
     }
     
     setIsLoading(false);
-    form.reset(); 
+    if(!isSubmitted) {
+        form.reset(); 
+    }
   };
   
   const trigger = children ?? (
