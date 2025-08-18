@@ -9,24 +9,34 @@ const firebaseConfig = {
   "storageBucket": "drump-landing-page.firebasestorage.app",
   "apiKey": "AIzaSyCeQ9lDlX91r6N9XOVYLwfO6wntmmBgyiQ",
   "authDomain": "drump-landing-page.firebaseapp.com",
-  "measurementId": "",
+  "measurementId": "G-BTB79XW4G9",
   "messagingSenderId": "256654255818"
 };
 
 let app: FirebaseApp;
-if (!getApps().length) {
-  app = initializeApp(firebaseConfig);
-} else {
-  app = getApp();
+let analytics: Analytics | null = null;
+
+if (typeof window !== 'undefined') {
+  if (!getApps().length) {
+    app = initializeApp(firebaseConfig);
+  } else {
+    app = getApp();
+  }
+  
+  isSupported().then(yes => {
+    if (yes) {
+      analytics = getAnalytics(app);
+    }
+  });
 }
 
-const analytics: Promise<Analytics | null> = isSupported().then(yes => yes ? getAnalytics(app) : null);
-
-export const logAnalyticsEvent = async (eventName: string, params?: { [key: string]: any }) => {
-    const analyticsInstance = await analytics;
-    if (analyticsInstance) {
-      firebaseLogEvent(analyticsInstance, eventName, params);
+export const logAnalyticsEvent = (eventName: string, params?: { [key: string]: any }) => {
+    if (analytics) {
+      firebaseLogEvent(analytics, eventName, params);
+    } else {
+      // This can happen if analytics is not supported or still initializing
+      console.log(`Analytics not ready, event not logged: ${eventName}`);
     }
   };
 
-export { app, analytics };
+export { app };
