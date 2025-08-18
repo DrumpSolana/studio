@@ -37,19 +37,20 @@ const PreOrderSchema = z.object({
 type PreOrderFormValues = z.infer<typeof PreOrderSchema>;
 
 async function savePreOrderEmail(email: string) {
-  try {
-    const docRef = await addDoc(collection(db, 'pre-orders'), {
-      email: email,
-      timestamp: serverTimestamp(),
-    });
-    console.log("Document written with ID: ", docRef.id);
-    return { success: true };
-  } catch (error) {
-    console.error('Error writing document to Firestore: ', error);
-    const errorMessage = error instanceof Error ? error.message : 'Failed to save email due to an unknown error.';
-    return { success: false, error: errorMessage };
-  }
+    try {
+        const docRef = await addDoc(collection(db, 'pre-orders'), {
+        email: email,
+        timestamp: serverTimestamp(),
+        });
+        console.log("Document written with ID: ", docRef.id);
+        return { success: true };
+    } catch (error) {
+        console.error('Error writing document to Firestore: ', error);
+        const errorMessage = error instanceof Error ? error.message : 'Failed to save email due to an unknown error.';
+        return { success: false, error: errorMessage };
+    }
 }
+
 
 export default function PreOrderModal({ children }: { children?: React.ReactNode }) {
   const [open, setOpen] = useState(false);
