@@ -6,12 +6,12 @@ import { Button } from '@/components/ui/button';
 import PreOrderModal from './pre-order-modal';
 import Link from 'next/link';
 import { Send, Twitter } from 'lucide-react';
-import { logAnalyticsEvent } from '@/lib/firebase';
+import { logGtagEvent } from '@/lib/gtag';
 
 export default function HeroSection() {
 
     const handleSocialClick = (socialName: string) => {
-        logAnalyticsEvent('social_click', {
+        logGtagEvent('social_click', {
             location: 'hero_section',
             social_platform: socialName,
         });

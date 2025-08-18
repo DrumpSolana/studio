@@ -27,7 +27,7 @@ import { Input } from '@/components/ui/input';
 import Image from 'next/image';
 import { Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { logAnalyticsEvent } from '@/lib/firebase';
+import { logGtagEvent } from '@/lib/gtag';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
@@ -73,7 +73,7 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
         const result = await savePreOrderEmail(data.email);
         
         if (result.success) {
-            logAnalyticsEvent('pre_order_submit', { email: data.email });
+            logGtagEvent('pre_order_submit', { email: data.email });
             setIsSubmitted(true);
         } else {
             toast({
@@ -104,7 +104,7 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
 
   const handleOpenChange = (isOpen: boolean) => {
     if (isOpen) {
-        logAnalyticsEvent('open_modal', { modal_name: 'pre_order' });
+        logGtagEvent('open_modal', { modal_name: 'pre_order' });
     }
     setOpen(isOpen);
     if (!isOpen) {

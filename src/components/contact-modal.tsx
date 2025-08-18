@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import { logAnalyticsEvent } from '@/lib/firebase';
+import { logGtagEvent } from '@/lib/gtag';
 
 const socialLinks = [
   { 
@@ -40,13 +40,13 @@ export default function ContactModal({ children }: { children?: React.ReactNode 
 
   const handleOpenChange = (isOpen: boolean) => {
     if(isOpen) {
-        logAnalyticsEvent('open_modal', { modal_name: 'contact_us' });
+        logGtagEvent('open_modal', { modal_name: 'contact_us' });
     }
     setOpen(isOpen);
   }
 
   const handleSocialClick = (socialName: string) => {
-    logAnalyticsEvent('social_click', {
+    logGtagEvent('social_click', {
         location: 'contact_modal',
         social_platform: socialName,
     });

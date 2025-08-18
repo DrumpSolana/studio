@@ -3,7 +3,6 @@
 
 // src/lib/firebase.ts
 import { initializeApp, getApps, getApp, type FirebaseApp } from 'firebase/app';
-import { getAnalytics, isSupported, logEvent as firebaseLogEvent, type Analytics } from 'firebase/analytics';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -12,7 +11,7 @@ const firebaseConfig = {
   "storageBucket": "drump-landing-page.firebasestorage.app",
   "apiKey": "AIzaSyCeQ9lDlX91r6N9XOVYLwfO6wntmmBgyiQ",
   "authDomain": "drump-landing-page.firebaseapp.com",
-  "measurementId": "G-BTB79XW4G9",
+  "measurementId": "G-MT3LG8V1N2",
   "messagingSenderId": "256654255818"
 };
 
@@ -20,21 +19,4 @@ const firebaseConfig = {
 const app: FirebaseApp = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const db = getFirestore(app);
 
-// Initialize Analytics only on the client side
-const analytics: Promise<Analytics | null> = typeof window !== 'undefined' 
-  ? isSupported().then(yes => yes ? getAnalytics(app) : null) 
-  : Promise.resolve(null);
-
-export const logAnalyticsEvent = (eventName: string, params?: { [key: string]: any }) => {
-    analytics.then(analyticsInstance => {
-        if (analyticsInstance) {
-            try {
-                firebaseLogEvent(analyticsInstance, eventName, params);
-            } catch (error) {
-                console.error('Failed to log analytics event:', error);
-            }
-        }
-    });
-};
-
-export { app, db, analytics };
+export { app, db };

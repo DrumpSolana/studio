@@ -1,14 +1,16 @@
 import type {Metadata} from 'next';
+import Script from 'next/script';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import FallingCheeseBalls from '@/components/falling-cheese-balls';
 import { AnimationProvider } from '@/contexts/AnimationContext';
-import FirebaseAnalytics from '@/components/firebase-analytics';
+import GtagProvider from '@/components/gtag-provider';
 
 const siteUrl = 'https://drump.app';
 const socialImageUrl = 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752804102/2_14_h30mkm.png';
 const faviconUrl = 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752640504/Drump_Cheese_Ball_4_daedqc.png';
 const siteDescription = 'First Snack on Solana';
+const GA_MEASUREMENT_ID = 'G-MT3LG8V1N2';
 
 export const metadata: Metadata = {
   title: 'Drump',
@@ -53,10 +55,23 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700;800;900&family=Solway:wght@400;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased relative">
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
         <AnimationProvider>
-          <FirebaseAnalytics />
-          <FallingCheeseBalls />
-          {children}
+          <GtagProvider>
+            <FallingCheeseBalls />
+            {children}
+          </GtagProvider>
         </AnimationProvider>
         <Toaster />
       </body>

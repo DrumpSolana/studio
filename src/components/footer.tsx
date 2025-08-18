@@ -4,7 +4,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { logAnalyticsEvent } from '@/lib/firebase';
+import { logGtagEvent } from '@/lib/gtag';
 
 const DrumpLogo = () => (
     <Link href="/">
@@ -37,7 +37,7 @@ const legalLinks = [
 
 export default function Footer() {
     const handleSocialClick = (socialName: string) => {
-        logAnalyticsEvent('social_click', {
+        logGtagEvent('social_click', {
             location: 'footer',
             social_platform: socialName,
         });
