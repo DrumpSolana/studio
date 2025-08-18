@@ -51,32 +51,29 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
 
   const onSubmit: SubmitHandler<PreOrderFormValues> = async (data) => {
     setIsLoading(true);
-    
     try {
-        const result = await savePreOrderEmail(data.email);
-
-        if (result.success) {
-          logAnalyticsEvent('pre_order_submit', { email: data.email });
-          setIsLoading(false);
-          setIsSubmitted(true);
-        } else {
-          toast({
-            variant: "destructive",
-            title: "Uh oh! Something went wrong.",
-            description: result.error || "There was a problem saving your email. Please try again.",
-          });
-          setIsLoading(false);
-          form.reset();
-        }
-    } catch (error) {
-        console.error("Submission error:", error);
+      const result = await savePreOrderEmail(data.email);
+      if (result.success) {
+        logAnalyticsEvent('pre_order_submit', { email: data.email });
+        setIsSubmitted(true);
+      } else {
         toast({
-            variant: "destructive",
-            title: "Submission failed.",
-            description: "An unexpected error occurred. Please try again.",
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: result.error || "There was a problem saving your email. Please try again.",
         });
-        setIsLoading(false);
         form.reset();
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      toast({
+          variant: "destructive",
+          title: "Submission failed.",
+          description: "An unexpected error occurred. Please try again.",
+      });
+      form.reset();
+    } finally {
+        setIsLoading(false);
     }
   };
   
@@ -98,6 +95,7 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
       setTimeout(() => {
         setIsSubmitted(false);
         form.reset();
+        setIsLoading(false);
       }, 300);
     }
   };
