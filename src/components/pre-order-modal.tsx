@@ -51,6 +51,7 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
 
   const onSubmit: SubmitHandler<PreOrderFormValues> = async (data) => {
     setIsLoading(true);
+    let success = false;
     
     try {
         const result = await savePreOrderEmail(data.email);
@@ -58,6 +59,7 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
         if (result.success) {
           logAnalyticsEvent('pre_order_submit', { email: data.email });
           setIsSubmitted(true);
+          success = true;
         } else {
           toast({
             variant: "destructive",
@@ -75,7 +77,7 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
     }
     
     setIsLoading(false);
-    if(!isSubmitted) {
+    if(!success) {
         form.reset(); 
     }
   };
