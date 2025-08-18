@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -26,6 +27,7 @@ import { Input } from '@/components/ui/input';
 import Image from 'next/image';
 import { Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { logAnalyticsEvent } from '@/lib/firebase';
 
 const PreOrderSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),
@@ -51,6 +53,10 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
     // Simulate a network request
     await new Promise(resolve => setTimeout(resolve, 1000));
     console.log('Form submitted with:', data.email);
+    
+    // Log analytics event
+    logAnalyticsEvent('pre_order_submit', { email: data.email });
+
     setIsLoading(false);
     setIsSubmitted(true);
     form.reset(); 
@@ -65,6 +71,9 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
   );
 
   const handleOpenChange = (isOpen: boolean) => {
+    if (isOpen) {
+        logAnalyticsEvent('open_modal', { modal_name: 'pre_order' });
+    }
     setOpen(isOpen);
     // Reset form state when dialog closes
     if (!isOpen) {

@@ -1,6 +1,10 @@
+
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { logAnalyticsEvent } from '@/lib/firebase';
 
 const DrumpLogo = () => (
     <Link href="/">
@@ -32,6 +36,13 @@ const legalLinks = [
 ]
 
 export default function Footer() {
+    const handleSocialClick = (socialName: string) => {
+        logAnalyticsEvent('social_click', {
+            location: 'footer',
+            social_platform: socialName,
+        });
+    };
+
     return (
         <footer className="bg-secondary text-black font-solway border-t-4 border-b-4 border-black">
             <div className="container mx-auto px-8 sm:px-12 lg:px-32 py-12 text-center">
@@ -46,7 +57,7 @@ export default function Footer() {
                     </nav>
                      <div className="flex items-center space-x-4">
                         {socialLinks.map((link) => (
-                            <Link key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className="bg-[#2C2CB1] text-white p-2 rounded-md hover:bg-[#2C2CB1]/80 transition-colors" aria-label={link.name}>
+                            <Link key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className="bg-[#2C2CB1] text-white p-2 rounded-md hover:bg-[#2C2CB1]/80 transition-colors" aria-label={link.name} onClick={() => handleSocialClick(link.name)}>
                                 <div className="relative h-6 w-6">
                                     <Image src={link.src} alt={link.name} fill objectFit="contain" />
                                 </div>

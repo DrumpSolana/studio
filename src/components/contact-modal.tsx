@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -12,6 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import { logAnalyticsEvent } from '@/lib/firebase';
 
 const socialLinks = [
   { 
@@ -36,8 +38,22 @@ export default function ContactModal({ children }: { children?: React.ReactNode 
     </button>
   );
 
+  const handleOpenChange = (isOpen: boolean) => {
+    if(isOpen) {
+        logAnalyticsEvent('open_modal', { modal_name: 'contact_us' });
+    }
+    setOpen(isOpen);
+  }
+
+  const handleSocialClick = (socialName: string) => {
+    logAnalyticsEvent('social_click', {
+        location: 'contact_modal',
+        social_platform: socialName,
+    });
+  };
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         {trigger}
       </DialogTrigger>
@@ -60,7 +76,7 @@ export default function ContactModal({ children }: { children?: React.ReactNode 
             <div className="flex flex-row justify-center gap-4">
                 {socialLinks.map((link) => (
                     <Button key={link.name} asChild variant="outline" className="font-solway bg-white border-2 border-black hover:bg-white/80 rounded-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,0.25)] hover:shadow-none transition-shadow h-12 px-6">
-                        <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-black flex items-center justify-center">
+                        <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-black flex items-center justify-center" onClick={() => handleSocialClick(link.name)}>
                             {link.text}
                         </a>
                     </Button>

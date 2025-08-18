@@ -1,10 +1,22 @@
+
+'use client';
+
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import PreOrderModal from './pre-order-modal';
 import Link from 'next/link';
 import { Send, Twitter } from 'lucide-react';
+import { logAnalyticsEvent } from '@/lib/firebase';
 
 export default function HeroSection() {
+
+    const handleSocialClick = (socialName: string) => {
+        logAnalyticsEvent('social_click', {
+            location: 'hero_section',
+            social_platform: socialName,
+        });
+    };
+
     return (
         <section className="relative flex items-center pt-24 pb-16 md:pt-32 md:pb-24 min-h-[80vh] md:min-h-screen bg-transparent overflow-hidden">
              <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
@@ -24,12 +36,12 @@ export default function HeroSection() {
                         <div className="flex flex-col items-center md:items-start gap-4">
                             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                                  <Button size="lg" variant="secondary" className="bg-yellow-400 text-black font-bold border-2 border-black hover:bg-yellow-500 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow" asChild>
-                                    <Link href="https://t.me/drumpofficial" target="_blank" rel="noopener noreferrer">
+                                    <Link href="https://t.me/drumpofficial" target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('Telegram')}>
                                        <Send /> Telegram
                                     </Link>
                                 </Button>
                                 <Button size="lg" variant="secondary" className="bg-yellow-400 text-black font-bold border-2 border-black hover:bg-yellow-500 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow" asChild>
-                                    <Link href="https://x.com/DrumpSolana" target="_blank" rel="noopener noreferrer">
+                                    <Link href="https://x.com/DrumpSolana" target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('X')}>
                                        <Twitter /> X
                                     </Link>
                                 </Button>
