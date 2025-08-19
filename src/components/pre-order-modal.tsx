@@ -53,7 +53,7 @@ async function savePreOrderEmail(email: string) {
 }
 
 
-export default function PreOrderModal({ children }: { children?: React.ReactNode }) {
+export default function PreOrderModal({ children, location }: { children?: React.ReactNode, location: string }) {
   const [open, setOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -73,7 +73,7 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
         const result = await savePreOrderEmail(data.email);
         
         if (result.success) {
-            logGtagEvent('pre_order_submit', { email: data.email });
+            logGtagEvent('pre_order_submit', { email: data.email, location });
             setIsSubmitted(true);
         } else {
             toast({
@@ -104,7 +104,7 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
 
   const handleOpenChange = (isOpen: boolean) => {
     if (isOpen) {
-        logGtagEvent('open_modal', { modal_name: 'pre_order' });
+        logGtagEvent('open_modal', { modal_name: 'pre_order', location });
     }
     setOpen(isOpen);
     if (!isOpen) {

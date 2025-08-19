@@ -5,6 +5,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { logGtagEvent } from '@/lib/gtag';
+import ContactModal from './contact-modal';
 
 const DrumpLogo = () => (
     <Link href="/">
@@ -24,9 +25,8 @@ const socialLinks = [
 ];
 
 const footerLinks = [
-    { href: '#', label: 'About' },
-    { href: '#', label: 'Product' },
-    { href: '#', label: 'Contact' },
+    { href: '#snack-stack-swap-it', label: 'About' },
+    { href: '#ingredients', label: 'Product' },
 ];
 
 const legalLinks = [
@@ -43,6 +43,13 @@ export default function Footer() {
         });
     };
 
+    const handleFooterLinkClick = (label: string) => {
+        logGtagEvent('nav_link_click', {
+            location: 'footer',
+            link_label: label,
+        });
+    };
+
     return (
         <footer className="bg-secondary text-black font-solway border-t-4 border-b-4 border-black">
             <div className="container mx-auto px-8 sm:px-12 lg:px-32 py-12 text-center">
@@ -50,10 +57,11 @@ export default function Footer() {
                     <DrumpLogo />
                     <nav className="flex items-center gap-8">
                         {footerLinks.map((link) => (
-                            <Link key={link.label} href={link.href} className="text-black hover:text-black/70 transition-colors font-bold">
+                            <Link key={link.label} href={link.href} className="text-black hover:text-black/70 transition-colors font-bold" onClick={() => handleFooterLinkClick(link.label)}>
                                 {link.label}
                             </Link>
                         ))}
+                        <ContactModal />
                     </nav>
                      <div className="flex items-center space-x-4">
                         {socialLinks.map((link) => (
@@ -67,7 +75,7 @@ export default function Footer() {
                     <div className="flex items-center gap-4 text-sm">
                         {legalLinks.map((link, index) => (
                            <React.Fragment key={link.label}>
-                                <Link href={link.href} className="text-black/70 hover:text-black transition-colors">
+                                <Link href={link.href} className="text-black/70 hover:text-black transition-colors" onClick={() => handleFooterLinkClick(link.label)}>
                                     {link.label}
                                 </Link>
                                 {index < legalLinks.length - 1 && <span>|</span>}

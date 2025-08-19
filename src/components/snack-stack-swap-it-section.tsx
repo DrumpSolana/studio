@@ -62,7 +62,7 @@ export default function SnackStackSwapItSection() {
                                 {cards[0].description}
                             </p>
                             <div className="pt-2">
-                                <PreOrderModal>
+                                <PreOrderModal location="snack_stack_swap_it_section">
                                     <Button
                                         size="lg"
                                         className="bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow"

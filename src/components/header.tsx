@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { useAnimation } from '@/contexts/AnimationContext';
 import PreOrderModal from './pre-order-modal';
 import ContactModal from './contact-modal';
+import { logGtagEvent } from '@/lib/gtag';
 
 const DrumpLogo = () => (
     <Link href="/">
@@ -30,6 +31,13 @@ export default function Header() {
         { href: '#ingredients', label: 'Ingredients' },
     ];
 
+    const handleNavLinkClick = (label: string) => {
+        logGtagEvent('nav_link_click', {
+            location: 'header',
+            link_label: label,
+        });
+    };
+
     return (
         <header className="absolute top-0 left-0 right-0 z-50 bg-transparent">
             <div className="container mx-auto px-8 sm:px-12 lg:px-16">
@@ -38,7 +46,7 @@ export default function Header() {
                     <div className="hidden md:flex items-center space-x-8">
                         <nav className="flex items-center space-x-8">
                             {navLinks.map((link) => (
-                                <Link key={link.href} href={link.href} className="text-white/90 hover:text-white transition-colors duration-300 font-medium text-sm group">
+                                <Link key={link.href} href={link.href} className="text-white/90 hover:text-white transition-colors duration-300 font-medium text-sm group" onClick={() => handleNavLinkClick(link.label)}>
                                     {link.label}
                                     <span className="block max-w-0 group-hover:max-w-full transition-all duration-300 h-0.5 bg-primary"></span>
                                 </Link>
@@ -49,7 +57,7 @@ export default function Header() {
                             {isAnimating ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
                             <span className="sr-only">{isAnimating ? 'Pause animation' : 'Play animation'}</span>
                         </Button>
-                        <PreOrderModal />
+                        <PreOrderModal location="header" />
                     </div>
                     <div className="md:hidden flex items-center gap-2">
                         <Button variant="ghost" size="icon" onClick={toggleAnimation} className="text-white hover:bg-white/10 hover:text-white">
@@ -67,13 +75,13 @@ export default function Header() {
                 <div className="md:hidden bg-background/90 backdrop-blur-sm pb-4">
                     <nav className="flex flex-col items-center space-y-4 pt-4">
                         {navLinks.map((link) => (
-                            <Link key={link.href} href={link.href} className="text-foreground hover:text-secondary transition-colors duration-300 font-medium" onClick={() => setIsOpen(false)}>
+                            <Link key={link.href} href={link.href} className="text-foreground hover:text-secondary transition-colors duration-300 font-medium" onClick={() => { setIsOpen(false); handleNavLinkClick(link.label); }}>
                                 {link.label}
                             </Link>
                         ))}
                          <ContactModal />
                         <div className="flex items-center gap-4">
-                            <PreOrderModal />
+                            <PreOrderModal location="header_mobile" />
                         </div>
                     </nav>
                 </div>
