@@ -50,6 +50,13 @@ export default function Footer() {
         });
     };
 
+    const handleContactClick = () => {
+         logGtagEvent('nav_link_click', {
+            location: 'footer',
+            link_label: 'Contact Us',
+        });
+    }
+
     return (
         <footer className="bg-secondary text-black font-solway border-t-4 border-b-4 border-black">
             <div className="container mx-auto px-8 sm:px-12 lg:px-32 py-12 text-center">
@@ -61,7 +68,13 @@ export default function Footer() {
                                 {link.label}
                             </Link>
                         ))}
-                        <ContactModal />
+                        <div onClick={handleContactClick}>
+                            <ContactModal>
+                               <button className="text-black hover:text-black/70 transition-colors font-bold">
+                                    Contact Us
+                                </button>
+                            </ContactModal>
+                        </div>
                     </nav>
                      <div className="flex items-center space-x-4">
                         {socialLinks.map((link) => (
