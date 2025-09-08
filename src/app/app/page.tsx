@@ -1,26 +1,91 @@
 
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+'use client';
+import { useState } from 'react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Menu, X, Play, Pause } from 'lucide-react';
+import Image from 'next/image';
+import { useAnimation } from '@/contexts/AnimationContext';
+import PreOrderModal from '@/components/pre-order-modal';
+import ContactModal from '@/components/contact-modal';
+import { logGtagEvent } from '@/lib/gtag';
 
-export default function CustomerAppPage() {
-  return (
-    <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
-      <div className="container mx-auto max-w-2xl text-center p-8">
-        <div className="bg-secondary/20 border-2 border-border p-12 rounded-lg shadow-lg">
-            <h1 className="text-4xl font-bold font-headline text-white mb-4">Customer Portal</h1>
-            <p className="text-white/80 mb-8">
-              This is the main dashboard for customers. After signing in, they will see their points balance, available rewards, and a button to scan QR codes.
-            </p>
-            <div className="bg-primary text-primary-foreground rounded-lg p-6 mb-8">
-                <p className="text-lg">Your Points Balance</p>
-                <p className="text-5xl font-bold">1,250</p>
+const DrumpLogo = () => (
+    <Link href="/">
+        <Image 
+            src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752616337/join_the_punch_1_i9twgu.png" 
+            alt="Drump Logo"
+            width={120}
+            height={40}
+            className="object-contain"
+        />
+    </Link>
+);
+
+export default function Header() {
+    const [isOpen, setIsOpen] = useState(false);
+    const { isAnimating, toggleAnimation } = useAnimation();
+
+    const navLinks = [
+        { href: '#snack-stack-swap-it', label: 'About' },
+        { href: '#ingredients', label: 'Ingredients' },
+    ];
+
+    const handleNavLinkClick = (label: string) => {
+        logGtagEvent('nav_link_click', {
+            location: 'header',
+            link_label: label,
+        });
+    };
+
+    return (
+        <header className="absolute top-0 left-0 right-0 z-50 bg-transparent">
+            <div className="container mx-auto px-8 sm:px-12 lg:px-16">
+                <div className="flex items-center justify-between h-24 border-b-2 border-white">
+                    <DrumpLogo />
+                    <div className="hidden md:flex items-center space-x-8">
+                        <nav className="flex items-center space-x-8">
+                            {navLinks.map((link) => (
+                                <Link key={link.href} href={link.href} className="text-white/90 hover:text-white transition-colors duration-300 font-medium text-sm group" onClick={() => handleNavLinkClick(link.label)}>
+                                    {link.label}
+                                    <span className="block max-w-0 group-hover:max-w-full transition-all duration-300 h-0.5 bg-primary"></span>
+                                 </Link>
+                            ))}
+                            <ContactModal />
+                        </nav>
+                         <Button variant="ghost" size="icon" onClick={toggleAnimation} className="text-white hover:bg-white/10 hover:text-white">
+                            {isAnimating ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
+                            <span className="sr-only">{isAnimating ? 'Pause animation' : 'Play animation'}</span>
+                        </Button>
+                        <PreOrderModal location="header" />
+                    </div>
+                    <div className="md:hidden flex items-center gap-2">
+                        <Button variant="ghost" size="icon" onClick={toggleAnimation} className="text-white hover:bg-white/10 hover:text-white">
+                            {isAnimating ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6" />}
+                            <span className="sr-only">{isAnimating ? 'Pause animation' : 'Play animation'}</span>
+                        </Button>
+                        <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)}>
+                            {isOpen ? <X className="h-6 w-6 text-white" /> : <Menu className="h-6 w-6 text-white" />}
+                            <span className="sr-only">Toggle menu</span>
+                        </Button>
+                    </div>
+                </div>
             </div>
-            <div className="flex gap-4 justify-center">
-                <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white">Scan QR Code</Button>
-                <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10 hover:text-white">View Rewards</Button>
-            </div>
-        </div>
-      </div>
-    </div>
-  );
+            {isOpen && (
+                <div className="md:hidden bg-background/90 backdrop-blur-sm pb-4">
+                    <nav className="flex flex-col items-center space-y-4 pt-4">
+                        {navLinks.map((link) => (
+                            <Link key={link.href} href={link.href} className="text-foreground hover:text-secondary transition-colors duration-300 font-medium" onClick={() => { setIsOpen(false); handleNavLinkClick(link.label); }}>
+                                {link.label}
+                            </Link>
+                        ))}
+                         <ContactModal />
+                        <div className="flex items-center gap-4">
+                           <PreOrderModal location="header_mobile" />
+                        </div>
+                    </nav>
+                </div>
+            )}
+        </header>
+    );
 }
