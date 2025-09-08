@@ -6,7 +6,8 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { getEmailsAsCsv } from './actions';
 import { Loader2, Download } from 'lucide-react';
-import { logAnalyticsEvent } from '@/lib/firebase';
+import { logGtagEvent } from '@/lib/gtag';
+
 
 export default function AdminPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +15,7 @@ export default function AdminPage() {
 
   const handleExport = async () => {
     setIsLoading(true);
-    logAnalyticsEvent('export_csv_start');
+    logGtagEvent('export_csv_start');
     try {
       const { csv, error } = await getEmailsAsCsv();
 
@@ -24,7 +25,7 @@ export default function AdminPage() {
 
       if (csv) {
         // Create a blob from the CSV string
-        const blob = new Blob([csv], { type: 'text/csv;charset=utf-s-8;' });
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
         
         // Create a link element
         const link = document.createElement('a');
@@ -47,7 +48,7 @@ export default function AdminPage() {
           title: 'Export successful!',
           description: 'Your CSV file has been downloaded.',
         });
-        logAnalyticsEvent('export_csv_success');
+        logGtagEvent('export_csv_success');
       } else {
          throw new Error('No data available to export.');
       }
@@ -59,7 +60,7 @@ export default function AdminPage() {
         title: 'Export Failed',
         description: errorMessage,
       });
-      logAnalyticsEvent('export_csv_error', { error_message: errorMessage });
+      logGtagEvent('export_csv_error', { error_message: errorMessage });
     } finally {
       setIsLoading(false);
     }
