@@ -13,7 +13,7 @@ const socialImageUrl = 'https://res.cloudinary.com/dwimflmjr/image/upload/v17528
 const faviconUrl = 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752640504/Drump_Cheese_Ball_4_daedqc.png';
 const siteDescription = 'First Snack on Solana';
 const GA_MEASUREMENT_ID = 'G-MT3LG8V1N2';
-const GTM_ID = 'GTM-XXXXXX'; // <-- IMPORTANT: Replace with your GTM ID
+const GTM_ID = 'GTM-P2MS4RNN';
 
 export const metadata: Metadata = {
   title: 'Drump',
