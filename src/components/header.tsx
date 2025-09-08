@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Menu, X, Play, Pause } from 'lucide-react';
+import { Menu, X, Play, Pause, LogIn } from 'lucide-react';
 import Image from 'next/image';
 import { useAnimation } from '@/contexts/AnimationContext';
 import PreOrderModal from './pre-order-modal';
@@ -57,7 +57,12 @@ export default function Header() {
                             {isAnimating ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
                             <span className="sr-only">{isAnimating ? 'Pause animation' : 'Play animation'}</span>
                         </Button>
-                        <PreOrderModal location="header" />
+                        <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+                           <Link href="/login">
+                             <LogIn className="mr-2 h-4 w-4" />
+                                Login
+                           </Link>
+                        </Button>
                     </div>
                     <div className="md:hidden flex items-center gap-2">
                         <Button variant="ghost" size="icon" onClick={toggleAnimation} className="text-white hover:bg-white/10 hover:text-white">
@@ -81,7 +86,12 @@ export default function Header() {
                         ))}
                          <ContactModal />
                         <div className="flex items-center gap-4">
-                            <PreOrderModal location="header_mobile" />
+                            <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+                               <Link href="/login">
+                                 <LogIn className="mr-2 h-4 w-4" />
+                                    Login
+                               </Link>
+                            </Button>
                         </div>
                     </nav>
                 </div>
