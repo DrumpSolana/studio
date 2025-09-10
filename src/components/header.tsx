@@ -29,7 +29,7 @@ export default function Header() {
     const navLinks = [
         { href: '#snack-stack-swap-it', label: 'About' },
         { href: '#ingredients', label: 'Ingredients' },
-        { href: '/business', label: 'Businesses' },
+        { href: '/business/signup', label: 'Businesses' },
     ];
 
     const handleNavLinkClick = (label: string) => {
