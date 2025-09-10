@@ -1,4 +1,5 @@
 
+'use client';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,7 +23,7 @@ export default function BusinessPage() {
                 </div>
                 <div className="bg-secondary/20 border-2 border-border p-8 rounded-lg shadow-lg">
                     <h1 className="text-3xl font-bold font-headline text-white mb-2 text-center">Business Portal</h1>
-                    <p className="text-white/80 mb-6 text-center">Sign up or log in to manage your loyalty program.</p>
+                    <p className="text-white/80 mb-6 text-center">Sign in to manage your loyalty program.</p>
                     
                     <div className="space-y-4">
                         <div>
@@ -34,7 +35,12 @@ export default function BusinessPage() {
                             <Input id="password" type="password" className="bg-background/50 border-border text-white placeholder:text-white/50" />
                         </div>
                         <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">Login</Button>
-                        <Button variant="outline" className="w-full text-white border-white hover:bg-white/10 hover:text-white">Create Account</Button>
+                        <div className="text-center text-sm text-white/70">
+                            Don't have an account?{' '}
+                            <Link href="/business/signup" className="font-bold text-primary hover:underline">
+                                Sign Up
+                            </Link>
+                        </div>
                     </div>
 
                      <div className="mt-6 text-center">
