@@ -37,7 +37,7 @@ export default function BusinessLoginPage() {
                         <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">Login</Button>
                         <div className="text-center text-sm text-white/70">
                             Don't have an account?{' '}
-                            <Link href="/business/signup" className="font-bold text-primary hover:underline">
+                            <Link href="/for-business/signup" className="font-bold text-primary hover:underline">
                                 Sign Up
                             </Link>
                         </div>

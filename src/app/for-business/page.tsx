@@ -33,10 +33,10 @@ export default function ForBusinessPage() {
                     </CardHeader>
                     <CardContent className="space-y-3">
                         <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-                            <Link href="/business/signup">Apply for an Account</Link>
+                            <Link href="/for-business/signup">Apply for an Account</Link>
                         </Button>
                         <Button asChild variant="outline" className="w-full text-white border-white/50 hover:bg-white/10 hover:text-white">
-                            <Link href="/business/login">Business Login</Link>
+                            <Link href="/for-business/login">Business Login</Link>
                         </Button>
                     </CardContent>
                 </Card>
