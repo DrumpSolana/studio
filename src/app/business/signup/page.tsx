@@ -36,36 +36,37 @@ export default function BusinessSignUpPage() {
                             <Input id="email" type="email" placeholder="you@yourbusiness.com" className="bg-background/50 border-border text-white placeholder:text-white/50" />
                         </div>
                          <div>
+                            <Label htmlFor="phone" className="text-white/90">Phone Number</Label>
+                            <Input id="phone" type="tel" placeholder="+1 (555) 555-5555" className="bg-background/50 border-border text-white placeholder:text-white/50" />
+                        </div>
+                         <div>
                             <Label htmlFor="password"  className="text-white/90">Password</Label>
                             <Input id="password" type="password" placeholder="••••••••" className="bg-background/50 border-border text-white placeholder:text-white/50" />
                         </div>
+                        <div>
+                            <Label htmlFor="confirmPassword"  className="text-white/90">Confirm Password</Label>
+                            <Input id="confirmPassword" type="password" placeholder="••••••••" className="bg-background/50 border-border text-white placeholder:text-white/50" />
+                        </div>
                         
-                        <div className="pt-2">
-                             <p className="text-white/80 mb-2 text-sm font-semibold">Optional Information</p>
-                             <div className="space-y-4">
-                                <div>
-                                    <Label htmlFor="phone" className="text-white/90">Phone Number</Label>
-                                    <Input id="phone" type="tel" placeholder="+1 (555) 555-5555" className="bg-background/50 border-border text-white placeholder:text-white/50" />
-                                </div>
-                                <div>
-                                    <Label htmlFor="address" className="text-white/90">Business Address</Label>
-                                    <Input id="address" type="text" placeholder="123 Main St, Anytown USA" className="bg-background/50 border-border text-white placeholder:text-white/50" />
-                                </div>
-                                <div>
-                                    <Label htmlFor="industry" className="text-white/90">Industry</Label>
-                                     <Select>
-                                        <SelectTrigger className="w-full bg-background/50 border-border text-white placeholder:text-white/50">
-                                            <SelectValue placeholder="Select an industry" />
-                                        </SelectTrigger>
-                                        <SelectContent>
-                                            <SelectItem value="food-and-bev">Food & Beverage</SelectItem>
-                                            <SelectItem value="retail">Retail</SelectItem>
-                                            <SelectItem value="services">Services</SelectItem>
-                                            <SelectItem value="other">Other</SelectItem>
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-                             </div>
+                        <div className="pt-2 space-y-4">
+                            <div>
+                                <Label htmlFor="address" className="text-white/90">Business Address (Optional)</Label>
+                                <Input id="address" type="text" placeholder="123 Main St, Anytown USA" className="bg-background/50 border-border text-white placeholder:text-white/50" />
+                            </div>
+                            <div>
+                                <Label htmlFor="industry" className="text-white/90">Industry (Optional)</Label>
+                                 <Select>
+                                    <SelectTrigger className="w-full bg-background/50 border-border text-white placeholder:text-white/50">
+                                        <SelectValue placeholder="Select an industry" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="food-and-bev">Food & Beverage</SelectItem>
+                                        <SelectItem value="retail">Retail</SelectItem>
+                                        <SelectItem value="services">Services</SelectItem>
+                                        <SelectItem value="other">Other</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
                         </div>
 
                         <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 mt-4">Create Account</Button>
