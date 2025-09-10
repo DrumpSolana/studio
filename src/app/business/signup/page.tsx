@@ -23,7 +23,7 @@ export default function BusinessSignUpPage() {
                     </Link>
                 </div>
                 <div className="bg-secondary/20 border-2 border-border p-8 rounded-lg shadow-lg">
-                    <h1 className="text-3xl font-bold font-headline text-white mb-2 text-center">Create a Business Account</h1>
+                    <h1 className="text-3xl font-bold font-headline text-white mb-2 text-center">Apply for a Business Account</h1>
                     <p className="text-white/80 mb-6 text-center">Join the Drump loyalty platform.</p>
                     
                     <div className="space-y-4">
