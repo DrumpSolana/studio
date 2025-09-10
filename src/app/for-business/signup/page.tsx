@@ -111,7 +111,7 @@ export default function BusinessSignUpPage() {
                             </div>
                         </div>
 
-                        <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 mt-4" disabled={!passwordsMatch || !passwordsNotEmpty}>Create Account</Button>
+                        <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 mt-4" disabled={!passwordsMatch || !passwordsNotEmpty}>Apply</Button>
                         <div className="text-center text-sm text-white/70">
                             Already have an account?{' '}
                             <Link href="/for-business/login" className="font-bold text-primary hover:underline">
