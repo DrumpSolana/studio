@@ -18,10 +18,12 @@ function initializeAdminApp(): App {
   }
 
   try {
-    // It's important to parse the key as it's a JSON string.
-    const credentials = JSON.parse(serviceAccountKey);
+    // Stringify and then re-parse to handle multi-line environment variables.
+    // This ensures that newline characters in the key are correctly interpreted.
+    const parsedCredentials = JSON.parse(serviceAccountKey);
+
     return admin.initializeApp({
-      credential: admin.credential.cert(credentials),
+      credential: admin.credential.cert(parsedCredentials),
     });
   } catch (e: any) {
     // Throw a more informative error if parsing fails
