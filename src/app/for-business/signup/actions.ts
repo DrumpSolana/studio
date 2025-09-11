@@ -71,22 +71,22 @@ export async function createBusinessAccount(
         // If user does not exist, continue.
     }
 
-
     const userRecord = await auth.createUser({
       email,
       password,
       displayName: businessName,
-      emailVerified: false, // You might want to implement an email verification flow
+      emailVerified: false,
+      disabled: false,
     });
 
     const businessData = {
-      uid: userRecord.uid,
+      ownerId: userRecord.uid,
       businessName,
       email,
       phone,
-      address: address || '',
-      industry: industry || '',
-      status: 'pending', // 'pending', 'approved', 'rejected'
+      address,
+      industry,
+      status: 'pending',
       role: 'owner',
       createdAt: new Date().toISOString(),
     };
@@ -95,18 +95,16 @@ export async function createBusinessAccount(
 
     return {
       success: true,
-      message: 'Thank you for registering! Your application is now under review. We will notify you by email within 1-2 business days.',
+      message: 'Account created successfully and is pending review.',
     };
   } catch (error: any) {
     console.error('Error creating business account:', error);
-    let errorMessage = 'An unexpected error occurred. Please try again.';
-    if (error.code === 'auth/email-already-exists') {
-        errorMessage = 'An account with this email already exists.';
-    } else if (error.message.includes('Firebase Admin app has not been initialized')) {
-        errorMessage = 'Server configuration error. Please contact support.';
-    } else if (error.message.includes('FIREBASE_SERVICE_ACCOUNT_KEY')) {
+    
+    let errorMessage = 'An unexpected error occurred.';
+    if(error.message.includes('Firebase Admin app has not been initialized')) {
         errorMessage = 'Server configuration error. Please contact support.';
     }
+
     return {
       success: false,
       message: errorMessage,
