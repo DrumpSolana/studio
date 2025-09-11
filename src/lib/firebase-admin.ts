@@ -1,7 +1,11 @@
 
+import * as dotenv from 'dotenv';
 import * as admin from 'firebase-admin';
 import type { App } from 'firebase-admin/app';
 import type { Firestore } from 'firebase-admin/firestore';
+
+// Load environment variables from .env file
+dotenv.config();
 
 let app: App | undefined;
 let db: Firestore | undefined;
@@ -14,8 +18,9 @@ function initializeAdminApp() {
   }
 
   const serviceAccountKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
-
+  
   if (!serviceAccountKey) {
+    // This warning will now correctly appear if the key is missing after dotenv has run.
     console.warn(
       'FIREBASE_SERVICE_ACCOUNT_KEY is not set. Firebase Admin SDK will not be initialized.'
     );
@@ -52,7 +57,3 @@ export function getDb(): Firestore {
   }
   return db;
 }
-
-// For convenience, you might still want to export the initialized instances,
-// but using the getters is safer.
-export { app as adminApp, db };
