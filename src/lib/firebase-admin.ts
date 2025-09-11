@@ -1,29 +1,31 @@
 
 import * as admin from 'firebase-admin';
 
-// This is the recommended way to initialize Firebase Admin in a Next.js server environment.
-// It ensures that the SDK is initialized only once.
-
 if (!admin.apps.length) {
-    const serviceAccountKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY_BASE64;
-    
-    if (!serviceAccountKey) {
-        throw new Error('The FIREBASE_SERVICE_ACCOUNT_KEY_BASE64 environment variable is not set.');
+  // For debugging: Log the beginning of the environment variable to check its content.
+  console.log("Private key sample:", process.env.FIREBASE_SERVICE_ACCOUNT_KEY?.slice(0, 100));
+
+  try {
+    const serviceAccountString = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
+    if (!serviceAccountString) {
+      throw new Error('The FIREBASE_SERVICE_ACCOUNT_KEY environment variable is not set.');
     }
 
-    try {
-        const decodedKey = Buffer.from(serviceAccountKey, 'base64').toString('utf-8');
-        const serviceAccount = JSON.parse(decodedKey);
+    const serviceAccount = JSON.parse(serviceAccountString);
 
-        admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount),
-        });
-    } catch (error: any) {
-         console.error('Firebase Admin SDK initialization failed:', error.message);
-         // Re-throw a more user-friendly error.
-         throw new Error(`Firebase Admin SDK failed to initialize. This is likely due to a malformed or improperly encoded service account key. Original error: ${error.message}`);
-    }
+    admin.initializeApp({
+      credential: admin.credential.cert({
+        projectId: serviceAccount.project_id,
+        clientEmail: serviceAccount.client_email,
+        // Important: replace escaped newlines with actual newlines
+        privateKey: serviceAccount.private_key.replace(/\\n/g, "\n"),
+      }),
+    });
+  } catch (error: any) {
+    console.error('Firebase Admin SDK initialization failed:', error.message);
+    throw new Error(`Firebase Admin SDK initialization failed. This is likely due to a malformed service account key. Original error: ${error.message}`);
+  }
 }
 
-// Export the initialized admin instance.
 export { admin };
+export const db = admin.firestore();
