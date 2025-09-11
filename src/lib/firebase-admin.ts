@@ -6,6 +6,7 @@ import type { Firestore } from 'firebase-admin/firestore';
 let app: App | undefined;
 
 function initializeAdminApp(): App {
+  // If an app is already initialized, return it to prevent re-initialization errors.
   if (admin.apps.length > 0 && admin.apps[0]) {
     return admin.apps[0];
   }
