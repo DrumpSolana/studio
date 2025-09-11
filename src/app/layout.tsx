@@ -95,10 +95,8 @@ export default function RootLayout({
         {/* End Google Tag Manager (noscript) */}
 
         <AnimationProvider>
-          <GtagProvider>
             <FallingCheeseBalls />
             {children}
-          </GtagProvider>
         </AnimationProvider>
         <Toaster />
       </body>
