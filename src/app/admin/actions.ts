@@ -1,8 +1,8 @@
 
 'use server';
 
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '@/lib/firebase'; // Assuming you have this configured
+import { getDb } from '@/lib/firebase-admin';
+import type { Timestamp } from 'firebase-admin/firestore';
 
 // A server-side utility to convert an array of objects to a CSV string.
 function convertToCsv(data: any[]): string {
@@ -14,11 +14,16 @@ function convertToCsv(data: any[]): string {
   const csvRows = [
     headers.join(','), // header row
     ...data.map(row => 
-      headers.map(fieldName => 
-        JSON.stringify(row[fieldName] || '', (key, value) => 
-          value === null ? '' : value
-        )
-      ).join(',')
+      headers.map(fieldName => {
+        // Stringify and handle commas and quotes within fields
+        const value = row[fieldName] ?? '';
+        const stringValue = typeof value === 'string' ? value : JSON.stringify(value);
+        // Escape double quotes by doubling them, and wrap in double quotes if it contains commas or newlines
+        if (stringValue.includes(',') || stringValue.includes('"') || stringValue.includes('\n')) {
+          return `"${stringValue.replace(/"/g, '""')}"`;
+        }
+        return stringValue;
+      }).join(',')
     )
   ];
   
@@ -28,8 +33,9 @@ function convertToCsv(data: any[]): string {
 
 export async function getEmailsAsCsv() {
   try {
-    const preOrdersCollection = collection(db, 'pre-orders');
-    const snapshot = await getDocs(preOrdersCollection);
+    const db = getDb();
+    const preOrdersCollection = db.collection('pre-orders');
+    const snapshot = await preOrdersCollection.get();
 
     if (snapshot.empty) {
       return { csv: null, error: 'No pre-order emails found.' };
@@ -37,10 +43,11 @@ export async function getEmailsAsCsv() {
 
     const emails = snapshot.docs.map(doc => {
         const data = doc.data();
+        const timestamp = data.timestamp as Timestamp | undefined;
         return {
             email: data.email,
             // Convert Firestore timestamp to a readable date, if it exists
-            timestamp: data.timestamp?.toDate()?.toISOString() || ''
+            timestamp: timestamp?.toDate()?.toISOString() || ''
         }
     });
 
