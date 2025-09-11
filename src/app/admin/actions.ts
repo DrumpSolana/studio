@@ -1,7 +1,7 @@
 
 'use server';
 
-import { getFirebaseAdmin } from '@/lib/firebase-admin';
+import { admin } from '@/lib/firebase-admin';
 import type { Timestamp } from 'firebase-admin/firestore';
 
 // A server-side utility to convert an array of objects to a CSV string.
@@ -33,7 +33,6 @@ function convertToCsv(data: any[]): string {
 
 export async function getEmailsAsCsv() {
   try {
-    const admin = await getFirebaseAdmin();
     const db = admin.firestore();
     const preOrdersCollection = db.collection('pre-orders');
     const snapshot = await preOrdersCollection.get();

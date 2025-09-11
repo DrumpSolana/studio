@@ -2,7 +2,7 @@
 'use server';
 
 import { z } from 'zod';
-import { getFirebaseAdmin } from '@/lib/firebase-admin';
+import { admin } from '@/lib/firebase-admin';
 
 const SignUpSchema = z.object({
   businessName: z.string().min(1, 'Business name is required.'),
@@ -51,25 +51,24 @@ export async function createBusinessAccount(
   const { email, password, businessName, phone, address, industry } = validatedFields.data;
   
   try {
-    const admin = await getFirebaseAdmin();
     const adminAuth = admin.auth();
     const db = admin.firestore();
 
-    // Explicitly check if the user exists first.
+    // Check if a user with this email already exists in Firebase Auth.
     try {
         await adminAuth.getUserByEmail(email);
-        // If the above line does not throw, a user with that email already exists.
+        // If the above line does not throw, the user exists.
         return {
             success: false,
             message: 'An account with this email already exists.',
             errors: { _form: ['An account with this email already exists.'] },
         };
     } catch (error: any) {
-        // We expect 'auth/user-not-found'. If it's any other error, we rethrow it.
+        // 'auth/user-not-found' is the expected error if the user doesn't exist.
+        // If it's any other error, we should rethrow it to the outer catch block.
         if (error.code !== 'auth/user-not-found') {
             throw error;
         }
-        // If user is not found, we can proceed.
     }
 
     // Create the new user in Firebase Auth
@@ -89,7 +88,7 @@ export async function createBusinessAccount(
       phone,
       address,
       industry,
-      status: 'pending_approval', // Explicit status
+      status: 'pending_approval',
       role: 'business_owner',
       createdAt: new Date().toISOString(),
     };
@@ -99,13 +98,13 @@ export async function createBusinessAccount(
 
     return {
       success: true,
-message: 'Account created successfully and is pending review.',
+      message: 'Account created successfully and is pending review.',
     };
   } catch (error: any) {
     console.error('Error creating business account:', error);
     
     let errorMessage = 'An unknown error occurred during account creation.';
-    // Add specific handling for the email-already-exists error during creation as a fallback.
+    // Handle specific Firebase errors for more user-friendly messages.
     if (error.code === 'auth/email-already-exists') {
         errorMessage = 'An account with this email already exists.';
     } else if (error.message) {
