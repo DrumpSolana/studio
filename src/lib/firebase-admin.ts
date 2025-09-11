@@ -9,25 +9,17 @@ if (!admin.apps.length) {
   const base64Key = process.env.FIREBASE_SERVICE_ACCOUNT_KEY_BASE64;
 
   if (!base64Key) {
+    // This error is thrown if the environment variable is missing entirely.
     throw new Error('The FIREBASE_SERVICE_ACCOUNT_KEY_BASE64 environment variable is not set. Please add it to your .env file.');
   }
 
-  let serviceAccountJson: string;
-  try {
-    serviceAccountJson = Buffer.from(base64Key, 'base64').toString('utf-8');
-  } catch (error: any) {
-    console.error('Failed to decode Base64 service account key:', error.message);
-    throw new Error('The FIREBASE_SERVICE_ACCOUNT_KEY_BASE64 is not a valid Base64 string. Please re-generate and paste the key.');
-  }
+  // Decode the base64 string to get the JSON service account key.
+  const serviceAccountJson = Buffer.from(base64Key, 'base64').toString('utf-8');
+  
+  // Parse the JSON string into an object.
+  const serviceAccount = JSON.parse(serviceAccountJson);
 
-  let serviceAccount;
-  try {
-    serviceAccount = JSON.parse(serviceAccountJson);
-  } catch (error: any) {
-    console.error('Failed to parse service account JSON:', error.message);
-    throw new Error('The decoded service account key is not valid JSON. Ensure the original key was copied correctly.');
-  }
-
+  // Initialize the Firebase Admin SDK.
   try {
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
