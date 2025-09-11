@@ -18,12 +18,14 @@ function initializeAdminApp(): App {
   }
 
   try {
+    // It's important to parse the key as it's a JSON string.
     const credentials = JSON.parse(serviceAccountKey);
     return admin.initializeApp({
       credential: admin.credential.cert(credentials),
     });
   } catch (e: any) {
-    throw new Error(`Firebase admin initialization error: ${e.message}`);
+    // Throw a more informative error if parsing fails
+    throw new Error(`Firebase admin initialization error: Failed to parse service account key. ${e.message}`);
   }
 }
 
@@ -35,7 +37,6 @@ export function getAdminApp(): App {
 }
 
 export function getDb(): Firestore {
-  // Ensure the app is initialized before getting the firestore instance.
   const initializedApp = getAdminApp();
   return admin.firestore(initializedApp);
 }

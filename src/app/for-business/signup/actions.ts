@@ -56,7 +56,6 @@ export async function createBusinessAccount(
     const auth = getAuth(adminApp);
     const db = getDb();
     
-    // Check if user already exists
     try {
         await auth.getUserByEmail(email);
         return {
@@ -66,9 +65,8 @@ export async function createBusinessAccount(
         };
     } catch (error: any) {
         if (error.code !== 'auth/user-not-found') {
-            throw error; // Re-throw unexpected errors
+            throw error;
         }
-        // If user does not exist, continue.
     }
 
     const userRecord = await auth.createUser({
@@ -100,7 +98,6 @@ export async function createBusinessAccount(
   } catch (error: any) {
     console.error('Error creating business account:', error);
     
-    // Return the actual error message for debugging
     const errorMessage = error.message || 'An unknown error occurred during account creation.';
 
     return {
