@@ -2,6 +2,8 @@
 import * as admin from 'firebase-admin';
 import type { App } from 'firebase-admin/app';
 import type { Firestore } from 'firebase-admin/firestore';
+import * as path from 'path';
+import * as fs from 'fs';
 
 let app: App | undefined;
 
@@ -10,21 +12,26 @@ function initializeAdminApp(): App {
     return admin.apps[0];
   }
 
-  const serviceAccountKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
-  if (!serviceAccountKey) {
-    throw new Error(
-      'FIREBASE_SERVICE_ACCOUNT_KEY is not set. Firebase Admin SDK cannot be initialized.'
-    );
+  // Path to the service account key file
+  const serviceAccountKeyPath = path.resolve(process.cwd(), 'src/lib/server/firebase-service-account-key.json');
+
+  if (!fs.existsSync(serviceAccountKeyPath)) {
+      throw new Error(`Firebase service account key file not found at: ${serviceAccountKeyPath}. Please ensure the file exists and contains your service account credentials.`);
   }
 
   try {
-    const parsedCredentials = JSON.parse(serviceAccountKey);
+    const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountKeyPath, 'utf8'));
+
+    // Check if the file has content
+    if (!serviceAccount || Object.keys(serviceAccount).length === 0 || serviceAccount.type !== 'service_account') {
+        throw new Error('Service account key file is empty, malformed, or not a valid service account key. Please paste the correct JSON content into firebase-service-account-key.json.');
+    }
 
     return admin.initializeApp({
-      credential: admin.credential.cert(parsedCredentials),
+      credential: admin.credential.cert(serviceAccount),
     });
   } catch (e: any) {
-    throw new Error(`Firebase admin initialization error: Failed to parse service account key. ${e.message}`);
+    throw new Error(`Firebase admin initialization error: Failed to parse service account key from file. ${e.message}`);
   }
 }
 
