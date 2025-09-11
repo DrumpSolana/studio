@@ -2,8 +2,7 @@
 'use server';
 
 import { getAuth } from 'firebase-admin/auth';
-import { adminApp } from '@/lib/firebase-admin';
-import { db } from '@/lib/firebase-admin';
+import { getAdminApp, getDb } from '@/lib/firebase-admin';
 import { z } from 'zod';
 
 const SignUpSchema = z.object({
@@ -51,9 +50,12 @@ export async function createBusinessAccount(
   }
 
   const { email, password, businessName, phone, address, industry } = validatedFields.data;
-  const auth = getAuth(adminApp);
-
+  
   try {
+    const adminApp = getAdminApp();
+    const db = getDb();
+    const auth = getAuth(adminApp);
+    
     // Check if user already exists
     try {
         await auth.getUserByEmail(email);
@@ -100,6 +102,8 @@ export async function createBusinessAccount(
     let errorMessage = 'An unexpected error occurred. Please try again.';
     if(error.code === 'auth/email-already-exists') {
         errorMessage = 'An account with this email already exists.';
+    } else if (error.message.includes('Firebase Admin app has not been initialized')) {
+        errorMessage = 'Server configuration error. Please contact support.';
     }
     return {
       success: false,
