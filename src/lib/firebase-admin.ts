@@ -1,59 +1,41 @@
 
-import * as dotenv from 'dotenv';
 import * as admin from 'firebase-admin';
 import type { App } from 'firebase-admin/app';
 import type { Firestore } from 'firebase-admin/firestore';
 
-// Load environment variables from .env file
-dotenv.config();
-
 let app: App | undefined;
-let db: Firestore | undefined;
 
-function initializeAdminApp() {
-  if (admin.apps.length > 0) {
-    app = admin.apps[0]!;
-    db = admin.firestore(app);
-    return;
+function initializeAdminApp(): App {
+  if (admin.apps.length > 0 && admin.apps[0]) {
+    return admin.apps[0];
   }
 
   const serviceAccountKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
-  
   if (!serviceAccountKey) {
-    // This warning will now correctly appear if the key is missing after dotenv has run.
-    console.warn(
-      'FIREBASE_SERVICE_ACCOUNT_KEY is not set. Firebase Admin SDK will not be initialized.'
+    throw new Error(
+      'FIREBASE_SERVICE_ACCOUNT_KEY is not set. Firebase Admin SDK cannot be initialized.'
     );
-    return;
   }
 
   try {
-    app = admin.initializeApp({
-      credential: admin.credential.cert(JSON.parse(serviceAccountKey)),
+    const credentials = JSON.parse(serviceAccountKey);
+    return admin.initializeApp({
+      credential: admin.credential.cert(credentials),
     });
-    db = admin.firestore(app);
-  } catch (e) {
-    console.error('Firebase admin initialization error', e);
+  } catch (e: any) {
+    throw new Error(`Firebase admin initialization error: ${e.message}`);
   }
 }
 
-// Initialize on module load
-initializeAdminApp();
-
 export function getAdminApp(): App {
   if (!app) {
-    throw new Error(
-      'Firebase Admin app has not been initialized. Check your FIREBASE_SERVICE_ACCOUNT_KEY environment variable.'
-    );
+    app = initializeAdminApp();
   }
   return app;
 }
 
 export function getDb(): Firestore {
-  if (!db) {
-    throw new Error(
-      'Firestore has not been initialized. Check your FIREBASE_SERVICE_ACCOUNT_KEY environment variable.'
-    );
-  }
-  return db;
+  // Ensure the app is initialized before getting the firestore instance.
+  const initializedApp = getAdminApp();
+  return admin.firestore(initializedApp);
 }

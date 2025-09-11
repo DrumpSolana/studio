@@ -104,6 +104,8 @@ export async function createBusinessAccount(
         errorMessage = 'An account with this email already exists.';
     } else if (error.message.includes('Firebase Admin app has not been initialized')) {
         errorMessage = 'Server configuration error. Please contact support.';
+    } else if (error.message.includes('FIREBASE_SERVICE_ACCOUNT_KEY')) {
+        errorMessage = 'Server configuration error. Please contact support.';
     }
     return {
       success: false,
