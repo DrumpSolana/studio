@@ -2,7 +2,7 @@
 'use server';
 
 import { z } from 'zod';
-import admin from '@/lib/firebase-admin';
+import { getFirebaseAdmin } from '@/lib/firebase-admin';
 
 const SignUpSchema = z.object({
   businessName: z.string().min(1, 'Business name is required.'),
@@ -52,6 +52,7 @@ export async function createBusinessAccount(
   const { email, password, businessName, phone, address, industry } = validatedFields.data;
   
   try {
+    const admin = await getFirebaseAdmin();
     const adminAuth = admin.auth();
     const db = admin.firestore();
 
