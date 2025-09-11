@@ -4,24 +4,19 @@ import * as admin from 'firebase-admin';
 // This is the recommended way to initialize Firebase Admin in a Next.js server environment.
 // It ensures that the SDK is initialized only once.
 
-// Check if the service account key environment variable exists before initializing.
-if (process.env.FIREBASE_SERVICE_ACCOUNT_KEY && !admin.apps.length) {
+// Check if the Base64 environment variable exists before initializing.
+if (process.env.FIREBASE_SERVICE_ACCOUNT_KEY_BASE64 && !admin.apps.length) {
   try {
-    // The service account key from an environment variable needs to be parsed from a string.
-    // The replace call is crucial for handling the newline characters in the private key.
-    const serviceAccount = JSON.parse(
-      process.env.FIREBASE_SERVICE_ACCOUNT_KEY.replace(/\\n/g, '\n')
-    );
+    const serviceAccountJson = Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_KEY_BASE64, 'base64').toString('utf8');
+    const serviceAccount = JSON.parse(serviceAccountJson);
     
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
     });
   } catch (error: any) {
-    // Provide a more helpful error message if JSON parsing fails.
+    // Provide a more helpful error message if decoding or parsing fails.
     console.error('Firebase Admin SDK initialization failed:', error.message);
-    // We throw this error only if the key exists but is malformed.
-    // This will cause a runtime error when a function needing firebase-admin is called.
-    throw new Error('The FIREBASE_SERVICE_ACCOUNT_KEY in your .env file is not a valid JSON string. Please check its formatting and ensure it is on a single line.');
+    throw new Error('The FIREBASE_SERVICE_ACCOUNT_KEY_BASE64 in your .env file could not be decoded or parsed. Ensure it is a valid Base64 string from a correctly formatted service account key.');
   }
 }
 
