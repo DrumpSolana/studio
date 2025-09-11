@@ -31,7 +31,6 @@ export async function createBusinessAccount(
   prevState: SignUpFormState,
   formData: FormData
 ): Promise<SignUpFormState> {
-
   const validatedFields = SignUpSchema.safeParse({
     businessName: formData.get('businessName'),
     email: formData.get('email'),
@@ -56,7 +55,7 @@ export async function createBusinessAccount(
     const adminAuth = admin.auth();
     const db = admin.firestore();
 
-    // Check if user already exists
+    // Explicitly check if the user exists first.
     try {
         await adminAuth.getUserByEmail(email);
         // If the above line does not throw, a user with that email already exists.
@@ -68,7 +67,7 @@ export async function createBusinessAccount(
     } catch (error: any) {
         // We expect 'auth/user-not-found'. If it's any other error, we rethrow it.
         if (error.code !== 'auth/user-not-found') {
-            throw error; // Rethrow unexpected errors
+            throw error;
         }
         // If user is not found, we can proceed.
     }
@@ -100,12 +99,13 @@ export async function createBusinessAccount(
 
     return {
       success: true,
-      message: 'Account created successfully and is pending review.',
+message: 'Account created successfully and is pending review.',
     };
   } catch (error: any) {
     console.error('Error creating business account:', error);
     
     let errorMessage = 'An unknown error occurred during account creation.';
+    // Add specific handling for the email-already-exists error during creation as a fallback.
     if (error.code === 'auth/email-already-exists') {
         errorMessage = 'An account with this email already exists.';
     } else if (error.message) {
