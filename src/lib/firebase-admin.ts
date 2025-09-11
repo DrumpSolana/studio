@@ -4,13 +4,8 @@ import * as admin from 'firebase-admin';
 // This is the recommended way to initialize Firebase Admin in a Next.js server environment.
 // It ensures that the SDK is initialized only once.
 
-// Ensure the service account key environment variable exists.
-if (!process.env.FIREBASE_SERVICE_ACCOUNT_KEY) {
-    throw new Error('FIREBASE_SERVICE_ACCOUNT_KEY is not set in the environment variables. Please add it to your .env file.');
-}
-
-// Initialize Firebase Admin only if it hasn't been initialized yet.
-if (!admin.apps.length) {
+// Check if the service account key environment variable exists before initializing.
+if (process.env.FIREBASE_SERVICE_ACCOUNT_KEY && !admin.apps.length) {
   try {
     // The service account key from an environment variable needs to be parsed from a string.
     // The replace call is crucial for handling the newline characters in the private key.
@@ -24,6 +19,8 @@ if (!admin.apps.length) {
   } catch (error: any) {
     // Provide a more helpful error message if JSON parsing fails.
     console.error('Firebase Admin SDK initialization failed:', error.message);
+    // We throw this error only if the key exists but is malformed.
+    // This will cause a runtime error when a function needing firebase-admin is called.
     throw new Error('The FIREBASE_SERVICE_ACCOUNT_KEY in your .env file is not a valid JSON string. Please check its formatting and ensure it is on a single line.');
   }
 }

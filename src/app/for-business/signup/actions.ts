@@ -31,6 +31,17 @@ export async function createBusinessAccount(
   prevState: SignUpFormState,
   formData: FormData
 ): Promise<SignUpFormState> {
+  // Check if admin is initialized. If not, it means the service key is missing.
+  if (!admin.apps.length) {
+    const errorMessage = 'Firebase Admin SDK is not initialized. Please ensure FIREBASE_SERVICE_ACCOUNT_KEY is set correctly in your environment variables.';
+    console.error(errorMessage);
+    return {
+      success: false,
+      message: errorMessage,
+      errors: { _form: [errorMessage] },
+    };
+  }
+
   const validatedFields = SignUpSchema.safeParse({
     businessName: formData.get('businessName'),
     email: formData.get('email'),

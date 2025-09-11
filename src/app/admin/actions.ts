@@ -33,6 +33,9 @@ function convertToCsv(data: any[]): string {
 
 export async function getEmailsAsCsv() {
   try {
+     if (!admin.apps.length) {
+        throw new Error('Firebase Admin SDK is not initialized. Please ensure FIREBASE_SERVICE_ACCOUNT_KEY is set correctly in your environment variables.');
+     }
     const db = admin.firestore();
     const preOrdersCollection = db.collection('pre-orders');
     const snapshot = await preOrdersCollection.get();
