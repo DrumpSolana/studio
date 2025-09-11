@@ -53,8 +53,8 @@ export async function createBusinessAccount(
   
   try {
     const adminApp = getAdminApp();
-    const db = getDb();
     const auth = getAuth(adminApp);
+    const db = getDb();
     
     // Check if user already exists
     try {
