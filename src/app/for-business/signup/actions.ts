@@ -100,7 +100,7 @@ export async function createBusinessAccount(
   } catch (error: any) {
     console.error('Error creating business account:', error);
     let errorMessage = 'An unexpected error occurred. Please try again.';
-    if(error.code === 'auth/email-already-exists') {
+    if (error.code === 'auth/email-already-exists') {
         errorMessage = 'An account with this email already exists.';
     } else if (error.message.includes('Firebase Admin app has not been initialized')) {
         errorMessage = 'Server configuration error. Please contact support.';

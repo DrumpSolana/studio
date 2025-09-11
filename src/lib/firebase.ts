@@ -12,12 +12,17 @@ const firebaseConfig = {
   "storageBucket": "drump-landing-page.firebasestorage.app",
   "apiKey": "AIzaSyCeQ9lDlX91r6N9XOVYLwfO6wntmmBgyiQ",
   "authDomain": "drump-landing-page.firebaseapp.com",
-  "measurementId": "G-MT3LG8V1N2",
+  "measurementId": "G-BTB79XW4G9",
   "messagingSenderId": "256654255818"
 };
 
 // Initialize Firebase App
 const app: FirebaseApp = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const db = getFirestore(app);
+
+// Initialize Analytics if supported
+if (typeof window !== 'undefined' && isSupported()) {
+  getAnalytics(app);
+}
 
 export { app, db };
