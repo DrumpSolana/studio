@@ -1,8 +1,7 @@
 
 'use server';
 
-import { getAuth } from 'firebase-admin/auth';
-import { getAdminApp, getDb } from '@/lib/firebase-admin';
+import { getAdminAuth, getDb } from '@/lib/firebase-admin';
 import { z } from 'zod';
 
 const SignUpSchema = z.object({
@@ -52,8 +51,7 @@ export async function createBusinessAccount(
   const { email, password, businessName, phone, address, industry } = validatedFields.data;
   
   try {
-    const adminApp = getAdminApp();
-    const auth = getAuth(adminApp);
+    const auth = getAdminAuth();
     const db = getDb();
     
     try {
