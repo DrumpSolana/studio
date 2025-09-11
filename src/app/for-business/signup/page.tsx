@@ -1,7 +1,7 @@
 
 'use client';
-import { useFormState, useFormStatus } from 'react-dom';
-import { useEffect, useRef, useState } from 'react';
+import { useActionState, useEffect, useRef, useState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -42,7 +42,7 @@ export default function BusinessSignUpPage() {
     errors: null,
   };
 
-  const [formState, formAction] = useFormState(createBusinessAccount, initialState);
+  const [formState, formAction] = useActionState(createBusinessAccount, initialState);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [password, setPassword] = useState('');
