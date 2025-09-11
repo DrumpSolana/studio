@@ -1,7 +1,7 @@
 
 'use server';
 
-import { getAdminAuth, getDb } from '@/lib/firebase-admin';
+import { adminAuth, db } from '@/lib/firebase-admin';
 import { z } from 'zod';
 
 const SignUpSchema = z.object({
@@ -31,6 +31,16 @@ export async function createBusinessAccount(
   prevState: SignUpFormState,
   formData: FormData
 ): Promise<SignUpFormState> {
+
+  if (!adminAuth || !db) {
+    const errorMessage = 'Firebase Admin is not initialized. Please check server logs.';
+     return {
+      success: false,
+      message: errorMessage,
+      errors: { _form: [errorMessage] },
+    };
+  }
+
   const validatedFields = SignUpSchema.safeParse({
     businessName: formData.get('businessName'),
     email: formData.get('email'),
@@ -51,12 +61,9 @@ export async function createBusinessAccount(
   const { email, password, businessName, phone, address, industry } = validatedFields.data;
   
   try {
-    const auth = getAdminAuth();
-    const db = getDb();
-    
     // Check if user already exists
     try {
-        await auth.getUserByEmail(email);
+        await adminAuth.getUserByEmail(email);
         // If the above line does not throw, a user with that email already exists.
         return {
             success: false,
@@ -72,7 +79,7 @@ export async function createBusinessAccount(
     }
 
     // Create the new user in Firebase Auth
-    const userRecord = await auth.createUser({
+    const userRecord = await adminAuth.createUser({
       email,
       password,
       displayName: businessName,
