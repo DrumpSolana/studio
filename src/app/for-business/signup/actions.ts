@@ -100,10 +100,8 @@ export async function createBusinessAccount(
   } catch (error: any) {
     console.error('Error creating business account:', error);
     
-    let errorMessage = 'An unexpected error occurred.';
-    if(error.message.includes('Firebase Admin app has not been initialized')) {
-        errorMessage = 'Server configuration error. Please contact support.';
-    }
+    // Return the actual error message for debugging
+    const errorMessage = error.message || 'An unknown error occurred during account creation.';
 
     return {
       success: false,
