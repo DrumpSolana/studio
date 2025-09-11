@@ -1,4 +1,6 @@
 
+'use server';
+
 import * as admin from 'firebase-admin';
 
 export async function getFirebaseAdmin() {
@@ -9,7 +11,11 @@ export async function getFirebaseAdmin() {
                 throw new Error('FIREBASE_SERVICE_ACCOUNT_KEY environment variable is not set or is empty.');
             }
             
-            const serviceAccount = JSON.parse(serviceAccountKey);
+            // The key is often stringified twice, and newlines are escaped.
+            // We need to parse it once to a string, then replace escaped newlines.
+            const keyAsString = JSON.parse(JSON.stringify(serviceAccountKey));
+            const correctedKey = keyAsString.replace(/\\n/g, '\n');
+            const serviceAccount = JSON.parse(correctedKey);
 
             admin.initializeApp({
                 credential: admin.credential.cert(serviceAccount),
