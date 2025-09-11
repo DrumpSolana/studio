@@ -5,7 +5,6 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import FallingCheeseBalls from '@/components/falling-cheese-balls';
 import { AnimationProvider } from '@/contexts/AnimationContext';
-import GtagProvider from '@/components/gtag-provider';
 import React from 'react';
 
 const siteUrl = 'https://drump.app';
