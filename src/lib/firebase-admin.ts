@@ -7,7 +7,7 @@ import * as admin from 'firebase-admin';
 // Check if the Base64 environment variable exists before initializing.
 if (process.env.FIREBASE_SERVICE_ACCOUNT_KEY_BASE64 && !admin.apps.length) {
   try {
-    const serviceAccountJson = Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_KEY_BASE64, 'base64').toString('utf8');
+    const serviceAccountJson = Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_KEY_BASE64, 'base64').toString('utf-8');
     const serviceAccount = JSON.parse(serviceAccountJson);
     
     admin.initializeApp({
