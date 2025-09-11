@@ -2,8 +2,6 @@
 import * as admin from 'firebase-admin';
 import type { App } from 'firebase-admin/app';
 import type { Firestore } from 'firebase-admin/firestore';
-import * as path from 'path';
-import * as fs from 'fs';
 
 let app: App | undefined;
 
@@ -12,26 +10,23 @@ function initializeAdminApp(): App {
     return admin.apps[0];
   }
 
-  // Path to the service account key file
-  const serviceAccountKeyPath = path.resolve(process.cwd(), 'src/lib/server/firebase-service-account-key.json');
-
-  if (!fs.existsSync(serviceAccountKeyPath)) {
-      throw new Error(`Firebase service account key file not found at: ${serviceAccountKeyPath}. Please ensure the file exists and contains your service account credentials.`);
+  if (!process.env.FIREBASE_SERVICE_ACCOUNT_KEY) {
+      throw new Error('FIREBASE_SERVICE_ACCOUNT_KEY environment variable is not set. The application cannot initialize Firebase Admin SDK.');
   }
 
   try {
-    const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountKeyPath, 'utf8'));
+    // Directly parse the environment variable.
+    const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
 
-    // Check if the file has content
-    if (!serviceAccount || Object.keys(serviceAccount).length === 0 || serviceAccount.type !== 'service_account') {
-        throw new Error('Service account key file is empty, malformed, or not a valid service account key. Please paste the correct JSON content into firebase-service-account-key.json.');
+    if (!serviceAccount.project_id) {
+        throw new Error('Service account key is not a valid JSON object. Please ensure it is correctly formatted in the .env file.');
     }
 
     return admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
     });
   } catch (e: any) {
-    throw new Error(`Firebase admin initialization error: Failed to parse service account key from file. ${e.message}`);
+    throw new Error(`Failed to parse service account key from environment variable. Please check the format. Error: ${e.message}`);
   }
 }
 
