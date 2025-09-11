@@ -54,27 +54,33 @@ export async function createBusinessAccount(
     const auth = getAdminAuth();
     const db = getDb();
     
+    // Check if user already exists
     try {
         await auth.getUserByEmail(email);
+        // If the above line does not throw, a user with that email already exists.
         return {
             success: false,
             message: 'An account with this email already exists.',
             errors: { _form: ['An account with this email already exists.'] },
         };
     } catch (error: any) {
+        // We expect 'auth/user-not-found'. If it's any other error, we rethrow it.
         if (error.code !== 'auth/user-not-found') {
-            throw error;
+            throw error; // Rethrow unexpected errors
         }
+        // If user is not found, we can proceed.
     }
 
+    // Create the new user in Firebase Auth
     const userRecord = await auth.createUser({
       email,
       password,
       displayName: businessName,
-      emailVerified: false,
-      disabled: false,
+      emailVerified: false, 
+      disabled: true, // The account is disabled until an admin approves it
     });
 
+    // Create a corresponding business document in Firestore
     const businessData = {
       ownerId: userRecord.uid,
       businessName,
@@ -82,11 +88,12 @@ export async function createBusinessAccount(
       phone,
       address,
       industry,
-      status: 'pending',
-      role: 'owner',
+      status: 'pending_approval', // Explicit status
+      role: 'business_owner',
       createdAt: new Date().toISOString(),
     };
 
+    // Use the user's UID as the document ID for easy lookup
     await db.collection('businesses').doc(userRecord.uid).set(businessData);
 
     return {
@@ -96,7 +103,12 @@ export async function createBusinessAccount(
   } catch (error: any) {
     console.error('Error creating business account:', error);
     
-    const errorMessage = error.message || 'An unknown error occurred during account creation.';
+    let errorMessage = 'An unknown error occurred during account creation.';
+    if (error.code === 'auth/email-already-exists') {
+        errorMessage = 'An account with this email already exists.';
+    } else if (error.message) {
+        errorMessage = error.message;
+    }
 
     return {
       success: false,

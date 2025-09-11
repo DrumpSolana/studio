@@ -44,32 +44,32 @@ export default function BusinessSignUpPage() {
 
   const [formState, formAction] = useActionState(createBusinessAccount, initialState);
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
   
-  const passwordsMatch = password === confirmPassword;
-  const passwordsNotEmpty = password !== '' && confirmPassword !== '';
-
+  const passwordsMatch = password === confirmPassword && password.length > 0;
 
   useEffect(() => {
-    if(formState.success) {
+    if (formState.success) {
         logGtagEvent('business_signup_success');
         setIsSubmitted(true);
         formRef.current?.reset();
         setPassword('');
         setConfirmPassword('');
     } else if (formState.message && formState.errors) {
-        const errorMessage = formState.errors?._form?.[0] || formState.message;
-        logGtagEvent('business_signup_error', { error_message: errorMessage });
-        toast({
-            variant: 'destructive',
-            title: 'Application Failed',
-            description: errorMessage
-        });
+        // Only show a toast if there's a general form error
+        const errorMessage = formState.errors?._form?.[0] || (formState.message !== 'Please check the form for errors.' ? formState.message : null);
+        if (errorMessage) {
+            logGtagEvent('business_signup_error', { error_message: errorMessage });
+            toast({
+                variant: 'destructive',
+                title: 'Application Failed',
+                description: errorMessage
+            });
+        }
     }
   }, [formState, toast]);
 
@@ -187,30 +187,18 @@ export default function BusinessSignUpPage() {
                   <Input
                     id="confirmPassword"
                     name="confirmPassword"
-                    type={showConfirmPassword ? 'text' : 'password'}
+                    type="password"
                     placeholder="••••••••"
-                    className="bg-background/50 border-border text-white placeholder:text-white/50 pr-10"
+                    className="bg-background/50 border-border text-white placeholder:text-white/50"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute inset-y-0 right-0 top-6 pr-3 flex items-center text-white/70 hover:text-white"
-                  >
-                    {showConfirmPassword ? (
-                      <EyeOff className="h-5 w-5" />
-                    ) : (
-                      <Eye className="h-5 w-5" />
-                    )}
-                  </button>
+                   {password.length > 0 && confirmPassword.length > 0 && !passwordsMatch && (
+                     <p className="text-sm text-red-500 mt-1">Passwords do not match.</p>
+                   )}
                 </div>
-
-                {passwordsNotEmpty && !passwordsMatch && (
-                  <p className="text-sm text-red-500">Passwords do not match.</p>
-                )}
-
+                
                 <div className="pt-2 space-y-4">
                   <div>
                     <Label htmlFor="address" className="text-white/90">
