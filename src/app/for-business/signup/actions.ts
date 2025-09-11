@@ -1,3 +1,4 @@
+
 'use server';
 
 import { getAuth } from 'firebase-admin/auth';
@@ -92,7 +93,7 @@ export async function createBusinessAccount(
 
     return {
       success: true,
-      message: 'Application submitted successfully! We will review your application and get back to you shortly.',
+      message: 'Thank you for registering! Your application is now under review. We will notify you by email within 1-2 business days.',
     };
   } catch (error: any) {
     console.error('Error creating business account:', error);
