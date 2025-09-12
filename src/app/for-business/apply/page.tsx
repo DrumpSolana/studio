@@ -32,7 +32,7 @@ import { countries } from '@/lib/countries';
 import { cn } from '@/lib/utils';
 import { auth, db } from '@/lib/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { useToast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
@@ -90,7 +90,7 @@ export default function SignUpFormPage() {
       uid = user.uid;
 
       // 2. Create business document in Firestore
-      // Explicitly create the data object to ensure no extra fields (like confirmPassword) are included
+      // Explicitly create the data object to ensure no extra fields are included
       // and handle optional fields correctly.
       const businessData = {
         ownerId: user.uid,
@@ -101,7 +101,7 @@ export default function SignUpFormPage() {
         businessAddress: values.businessAddress || '',
         industry: values.industry || '',
         status: 'pending',
-        createdAt: serverTimestamp(),
+        createdAt: new Date(),
       };
 
       await setDoc(doc(db, 'businesses', user.uid), businessData);
@@ -356,3 +356,5 @@ export default function SignUpFormPage() {
      </div>
   );
 }
+
+    
