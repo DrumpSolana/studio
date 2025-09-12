@@ -17,7 +17,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import Link from 'next/link';
-import { ArrowLeft, Eye, EyeOff, Check, ChevronsUpDown } from 'lucide-react';
+import { Eye, EyeOff, Check, ChevronsUpDown } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -79,7 +79,7 @@ export default function SignUpFormPage() {
   return (
      <div className="flex flex-col items-center justify-center min-h-screen bg-secondary p-4 py-12 relative z-10">
         <div className="absolute top-4 left-4">
-            <Button asChild>
+            <Button asChild variant="outline">
                 <Link href="/for-business">&larr; Back to Business Portal</Link>
             </Button>
         </div>
