@@ -1,7 +1,6 @@
 
 'use client';
 
-// src/lib/firebase.ts
 import { initializeApp, getApps, getApp, type FirebaseApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
@@ -18,22 +17,16 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase App
-let app: FirebaseApp;
-if (getApps().length === 0) {
-    app = initializeApp(firebaseConfig);
-} else {
-    app = getApp();
-}
+const app: FirebaseApp = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 const auth = getAuth(app);
 
 // Initialize Analytics if supported
-let analytics;
 if (typeof window !== 'undefined') {
     isSupported().then((supported) => {
         if (supported) {
-            analytics = getAnalytics(app);
+            getAnalytics(app);
         }
     });
 }
