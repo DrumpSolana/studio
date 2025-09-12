@@ -1,6 +1,8 @@
+
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+
     // --- Pre-orders rules ---
     // Allow anyone to create a document in the 'pre-orders' collection.
     // Disallow read, update, delete for all users to protect user privacy.
@@ -10,10 +12,18 @@ service cloud.firestore {
     }
 
     // --- Businesses rules (for sign-up profiles) ---
-    // Allow an authenticated user to create, read, update and delete their
-    // own business document. The document ID must match their user ID.
+    // A user can create a document in the 'businesses' collection if their
+    // auth uid matches the document ID. This secures the document to the user.
     match /businesses/{businessId} {
-      allow read, write: if request.auth != null && request.auth.uid == businessId;
+      allow create: if request.auth != null && request.auth.uid == businessId;
+      allow read, update, delete: if request.auth != null && request.auth.uid == businessId;
+    }
+
+     // --- Test entries rules ---
+    // Allow anyone to read and write to the 'test-entries' collection.
+    // This is useful for initial setup and testing.
+    match /test-entries/{document=**} {
+      allow read, write: if true;
     }
   }
 }
