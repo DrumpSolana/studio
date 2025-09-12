@@ -3,10 +3,10 @@ import * as admin from 'firebase-admin';
 
 if (!admin.apps.length) {
   try {
-    const serviceAccountKeyBase64 = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
+    const serviceAccountKeyBase64 = process.env.FIREBASE_SERVICE_ACCOUNT_KEY_BASE64;
 
     if (!serviceAccountKeyBase64) {
-      throw new Error('FIREBASE_SERVICE_ACCOUNT_KEY environment variable is not set or is empty.');
+      throw new Error('FIREBASE_SERVICE_ACCOUNT_KEY_BASE64 environment variable is not set or is empty.');
     }
 
     const decodedKey = Buffer.from(serviceAccountKeyBase64, 'base64').toString('utf-8');
