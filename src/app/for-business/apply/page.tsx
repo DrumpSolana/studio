@@ -81,17 +81,14 @@ export default function SignUpFormPage() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
-    let uid = '';
 
     try {
       // 1. Create user in Firebase Auth
       const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
       const user = userCredential.user;
-      uid = user.uid;
 
-      // 2. Create business document in Firestore
-      // Explicitly create the data object to ensure no extra fields are included
-      // and handle optional fields correctly.
+      // 2. Create business document in Firestore, explicitly picking fields.
+      // This prevents saving 'password' or 'confirmPassword' to the database.
       const businessData = {
         ownerId: user.uid,
         businessName: values.businessName,
@@ -101,7 +98,7 @@ export default function SignUpFormPage() {
         businessAddress: values.businessAddress || '',
         industry: values.industry || '',
         status: 'pending',
-        createdAt: new Date(),
+        createdAt: new Date(), // Use client-side timestamp
       };
 
       await setDoc(doc(db, 'businesses', user.uid), businessData);
@@ -110,29 +107,41 @@ export default function SignUpFormPage() {
 
     } catch (error: any) {
       console.error("Sign up error:", error);
-      let errorMessage = 'An unexpected error occurred during sign-up.';
 
-      if (uid) {
-        // This means user was created, but Firestore failed.
-        errorMessage = 'Could not save business information. Please contact support.';
-        console.error('Firestore doc creation failed for user:', uid);
-      } else {
-        // This means user creation in Auth failed.
-        if (error.code === 'auth/email-already-in-use') {
-          errorMessage = 'This email address is already in use by another account.';
-        } else if (error.code === 'auth/weak-password') {
-          errorMessage = 'The password is too weak. Please use a stronger password.';
-        } else if (error.code === 'auth/invalid-email') {
-          errorMessage = 'The email address is not valid.';
-        } else if (error.code === 'auth/configuration-not-found') {
-            errorMessage = 'Firebase authentication is not configured. Please enable Email/Password sign-in in the Firebase console.';
+      let title = 'Sign-up Failed';
+      let description = 'An unexpected error occurred. Please try again.';
+
+      // Provide more detailed feedback based on the error
+      if (error.code) {
+        switch (error.code) {
+          case 'auth/email-already-in-use':
+            title = 'Email In Use';
+            description = 'This email address is already registered. Please try logging in.';
+            break;
+          case 'auth/weak-password':
+            title = 'Weak Password';
+            description = 'Your password is too weak. It must be at least 8 characters long.';
+            break;
+
+          case 'auth/invalid-email':
+            title = 'Invalid Email';
+            description = 'The email address you entered is not valid.';
+            break;
+          case 'permission-denied':
+          case 'unauthenticated':
+            title = 'Permission Issue';
+            description = 'You do not have permission to perform this action. This might be a security rule issue.';
+            break;
+          default:
+            title = `Error: ${error.code}`;
+            description = error.message;
         }
       }
       
       toast({
         variant: 'destructive',
-        title: 'Sign-up Failed',
-        description: errorMessage,
+        title: title,
+        description: description,
       });
     } finally {
       setIsLoading(false);
@@ -356,5 +365,3 @@ export default function SignUpFormPage() {
      </div>
   );
 }
-
-    
