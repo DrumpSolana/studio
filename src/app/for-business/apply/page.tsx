@@ -106,6 +106,10 @@ export default function SignUpFormPage() {
       let errorMessage = 'An unexpected error occurred during sign-up.';
       if (error.code === 'auth/email-already-in-use') {
         errorMessage = 'This email address is already in use by another account.';
+      } else if (error.code === 'auth/weak-password') {
+        errorMessage = 'The password is too weak. Please use a stronger password.';
+      } else if (error.code === 'auth/invalid-email') {
+        errorMessage = 'The email address is not valid.';
       }
       toast({
         variant: 'destructive',
@@ -334,5 +338,3 @@ export default function SignUpFormPage() {
      </div>
   );
 }
-
-    

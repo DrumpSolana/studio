@@ -18,13 +18,24 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase App
-const app: FirebaseApp = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+let app: FirebaseApp;
+if (getApps().length === 0) {
+    app = initializeApp(firebaseConfig);
+} else {
+    app = getApp();
+}
+
 const db = getFirestore(app);
 const auth = getAuth(app);
 
 // Initialize Analytics if supported
-if (typeof window !== 'undefined' && isSupported()) {
-  getAnalytics(app);
+let analytics;
+if (typeof window !== 'undefined') {
+    isSupported().then((supported) => {
+        if (supported) {
+            analytics = getAnalytics(app);
+        }
+    });
 }
 
 export { app, db, auth };
