@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -65,6 +66,7 @@ export default function SignUpFormPage() {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: 'onChange',
     defaultValues: {
       businessName: '',
       email: '',
@@ -110,6 +112,8 @@ export default function SignUpFormPage() {
         errorMessage = 'The password is too weak. Please use a stronger password.';
       } else if (error.code === 'auth/invalid-email') {
         errorMessage = 'The email address is not valid.';
+      } else if (error.code === 'auth/configuration-not-found') {
+          errorMessage = 'Firebase authentication is not configured. Please enable Email/Password sign-in in the Firebase console.';
       }
       toast({
         variant: 'destructive',
@@ -338,3 +342,5 @@ export default function SignUpFormPage() {
      </div>
   );
 }
+
+    
