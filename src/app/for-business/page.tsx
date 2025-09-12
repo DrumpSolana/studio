@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Button } from '@/components/ui/button';
@@ -6,11 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import Link from 'next/link';
 
 export default function ForBusinessPage() {
-
-  const handleLoginClick = () => {
-    // We will navigate to the login page. We're using a simple anchor tag for now, but this will be a Next.js Link.
-    window.location.href = '/login';
-  };
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-secondary p-4">
@@ -30,8 +24,8 @@ export default function ForBusinessPage() {
                     <Button asChild className="w-full bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow">
                         <Link href="/for-business/apply">Apply for an Account</Link>
                     </Button>
-                    <Button onClick={handleLoginClick} variant="outline" className="w-full bg-white text-black font-bold border-2 border-black hover:bg-gray-100 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow">
-                        Login
+                    <Button asChild variant="outline" className="w-full bg-white text-black font-bold border-2 border-black hover:bg-gray-100 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow">
+                        <Link href="/for-business/login">Login</Link>
                     </Button>
                 </CardContent>
             </Card>
