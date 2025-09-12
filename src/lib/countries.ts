@@ -25,7 +25,7 @@ export const countries = [
   { value: "BW", label: "Botswana" },
   { value: "BR", label: "Brazil" },
   { value: "BN", label: "Brunei" },
-  { value_: "BG", label: "Bulgaria" },
+  { value: "BG", label: "Bulgaria" },
   { value: "BF", label: "Burkina Faso" },
   { value: "BI", label: "Burundi" },
   { value: "CV", label: "Cabo Verde" },
@@ -130,7 +130,7 @@ export const countries = [
   { value: "MK", label: "North Macedonia" },
   { value: "NO", label: "Norway" },
   { value: "OM", label: "Oman" },
-  { value: "PK", "label": "Pakistan" },
+  { value: "PK", label: "Pakistan" },
   { value: "PW", label: "Palau" },
   { value: "PA", label: "Panama" },
   { value: "PG", label: "Papua New Guinea" },
@@ -180,7 +180,7 @@ export const countries = [
   { value: "TN", label: "Tunisia" },
   { value: "TR", label: "Turkey" },
   { value: "TM", label: "Turkmenistan" },
-  { value "TV", label: "Tuvalu" },
+  { value: "TV", label: "Tuvalu" },
   { value: "UG", label: "Uganda" },
   { value: "UA", label: "Ukraine" },
   { value: "AE", label: "United Arab Emirates" },
@@ -195,3 +195,5 @@ export const countries = [
   { value: "ZM", label: "Zambia" },
   { value: "ZW", label: "Zimbabwe" },
 ];
+
+    
