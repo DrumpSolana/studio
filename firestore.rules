@@ -3,11 +3,15 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Allow anyone to create a pre-order entry.
-    // Disallow reading, updating, or deleting to protect user data.
-    match /pre-orders/{document=**} {
+    // Allow pre-order email submissions by anyone
+    match /pre-orders/{docId} {
       allow create: if true;
-      allow read, write: if false;
+    }
+
+    // Allow users to create a business document only for themselves
+    match /businesses/{userId} {
+      allow create: if request.auth != null && request.auth.uid == userId;
+      allow read, update, delete: if request.auth != null && request.auth.uid == userId;
     }
   }
 }
