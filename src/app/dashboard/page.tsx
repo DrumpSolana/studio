@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 export default function DashboardPage() {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-secondary p-4">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-secondary p-4 relative z-10">
              <div className="absolute top-4 left-4">
                 <Button asChild variant="ghost">
                     <Link href="/">&larr; Back to Home</Link>

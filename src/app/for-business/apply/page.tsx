@@ -77,7 +77,7 @@ export default function SignUpFormPage() {
   }
 
   return (
-     <div className="flex flex-col items-center justify-center min-h-screen bg-secondary p-4 py-12">
+     <div className="flex flex-col items-center justify-center min-h-screen bg-secondary p-4 py-12 relative z-10">
         <Card className="w-full max-w-md bg-white border-black border-4 rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] animate-in fade-in zoom-in-95">
           <CardHeader className="text-center">
             <CardTitle className="text-3xl font-headline text-black">Business Application</CardTitle>
