@@ -2,6 +2,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -17,7 +18,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import Link from 'next/link';
-import { Eye, EyeOff, Check, ChevronsUpDown } from 'lucide-react';
+import { Eye, EyeOff, Check, ChevronsUpDown, Loader2 } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -29,6 +30,10 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { countries } from '@/lib/countries';
 import { cn } from '@/lib/utils';
+import { auth, db } from '@/lib/firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import { useToast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
   businessName: z.string().min(2, {
@@ -55,6 +60,9 @@ const formSchema = z.object({
 export default function SignUpFormPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -70,10 +78,44 @@ export default function SignUpFormPage() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // TODO: Implement sign-up logic
-    console.log(values);
-    alert('Sign-up submitted! (See console for values)');
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
+    try {
+      // 1. Create user in Firebase Auth
+      const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
+      const user = userCredential.user;
+
+      // 2. Create business document in Firestore
+      const businessData = {
+        ownerId: user.uid,
+        businessName: values.businessName,
+        email: values.email,
+        country: values.country,
+        phoneNumber: values.phoneNumber || '',
+        businessAddress: values.businessAddress || '',
+        industry: values.industry || '',
+        status: 'pending',
+        createdAt: serverTimestamp(),
+      };
+
+      await setDoc(doc(db, 'businesses', user.uid), businessData);
+      
+      router.push('/for-business/apply/success');
+
+    } catch (error: any) {
+      console.error("Sign up error:", error);
+      let errorMessage = 'An unexpected error occurred during sign-up.';
+      if (error.code === 'auth/email-already-in-use') {
+        errorMessage = 'This email address is already in use by another account.';
+      }
+      toast({
+        variant: 'destructive',
+        title: 'Sign-up Failed',
+        description: errorMessage,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -278,7 +320,9 @@ export default function SignUpFormPage() {
                       </FormItem>
                     )}
                   />
-                <Button type="submit" className="w-full bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow">Apply</Button>
+                <Button type="submit" className="w-full bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow" disabled={isLoading}>
+                  {isLoading ? <Loader2 className="animate-spin" /> : 'Apply'}
+                </Button>
               </form>
             </Form>
              <div className="mt-4 text-center">
