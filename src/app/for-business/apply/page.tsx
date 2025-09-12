@@ -79,7 +79,7 @@ export default function SignUpFormPage() {
   return (
      <div className="flex flex-col items-center justify-center min-h-screen bg-secondary p-4 py-12 relative z-10">
         <div className="absolute top-4 left-4">
-            <Button asChild variant="ghost">
+            <Button asChild>
                 <Link href="/for-business">&larr; Back to Business Portal</Link>
             </Button>
         </div>
@@ -291,5 +291,3 @@ export default function SignUpFormPage() {
      </div>
   );
 }
-
-    
