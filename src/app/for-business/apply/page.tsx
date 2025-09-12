@@ -21,7 +21,7 @@ import Link from 'next/link';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { auth, db } from '@/lib/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 import { useToast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
@@ -66,7 +66,7 @@ export default function SignUpFormPage() {
       const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
       const user = userCredential.user;
 
-      // 2. Create a clean business document in Firestore.
+      // 2. Create a clean business document in Firestore using addDoc.
       // This explicitly picks only the fields we want to save and avoids saving passwords.
       const businessData = {
         ownerId: user.uid,
@@ -76,7 +76,7 @@ export default function SignUpFormPage() {
         createdAt: new Date(),
       };
 
-      await setDoc(doc(db, 'businesses', user.uid), businessData);
+      await addDoc(collection(db, 'businesses'), businessData);
       
       router.push('/for-business/apply/success');
 
@@ -99,10 +99,6 @@ export default function SignUpFormPage() {
           case 'auth/invalid-email':
             title = 'Invalid Email';
             description = 'The email address you entered is not valid.';
-            break;
-          case 'permission-denied':
-            title = 'Permission Issue';
-            description = 'You do not have permission to perform this action. This might be a security rule issue.';
             break;
           default:
             title = `Error: ${error.code}`;
