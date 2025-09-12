@@ -81,10 +81,13 @@ export default function SignUpFormPage() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
+    let uid = '';
+
     try {
       // 1. Create user in Firebase Auth
       const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
       const user = userCredential.user;
+      uid = user.uid;
 
       // 2. Create business document in Firestore
       const businessData = {
@@ -106,15 +109,24 @@ export default function SignUpFormPage() {
     } catch (error: any) {
       console.error("Sign up error:", error);
       let errorMessage = 'An unexpected error occurred during sign-up.';
-      if (error.code === 'auth/email-already-in-use') {
-        errorMessage = 'This email address is already in use by another account.';
-      } else if (error.code === 'auth/weak-password') {
-        errorMessage = 'The password is too weak. Please use a stronger password.';
-      } else if (error.code === 'auth/invalid-email') {
-        errorMessage = 'The email address is not valid.';
-      } else if (error.code === 'auth/configuration-not-found') {
-          errorMessage = 'Firebase authentication is not configured. Please enable Email/Password sign-in in the Firebase console.';
+
+      if (uid) {
+        // This means user was created, but Firestore failed.
+        errorMessage = 'Could not save business information. Please contact support.';
+        console.error('Firestore doc creation failed for user:', uid);
+      } else {
+        // This means user creation in Auth failed.
+        if (error.code === 'auth/email-already-in-use') {
+          errorMessage = 'This email address is already in use by another account.';
+        } else if (error.code === 'auth/weak-password') {
+          errorMessage = 'The password is too weak. Please use a stronger password.';
+        } else if (error.code === 'auth/invalid-email') {
+          errorMessage = 'The email address is not valid.';
+        } else if (error.code === 'auth/configuration-not-found') {
+            errorMessage = 'Firebase authentication is not configured. Please enable Email/Password sign-in in the Firebase console.';
+        }
       }
+      
       toast({
         variant: 'destructive',
         title: 'Sign-up Failed',
