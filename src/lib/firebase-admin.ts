@@ -3,17 +3,20 @@ import * as admin from 'firebase-admin';
 
 if (!admin.apps.length) {
   try {
-    const serviceAccountKeyBase64 = process.env.FIREBASE_SERVICE_ACCOUNT_KEY_BASE64;
+    const serviceAccountKeyString = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
 
-    if (!serviceAccountKeyBase64) {
-      throw new Error('FIREBASE_SERVICE_ACCOUNT_KEY_BASE64 environment variable is not set.');
+    if (!serviceAccountKeyString) {
+      throw new Error('FIREBASE_SERVICE_ACCOUNT_KEY environment variable is not set.');
     }
 
-    const serviceAccountJson = Buffer.from(serviceAccountKeyBase64, 'base64').toString('utf8');
-    const serviceAccount = JSON.parse(serviceAccountJson);
+    const serviceAccount = JSON.parse(serviceAccountKeyString);
 
     admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
+      credential: admin.credential.cert({
+        projectId: serviceAccount.project_id,
+        clientEmail: serviceAccount.client_email,
+        privateKey: serviceAccount.private_key.replace(/\\n/g, '\n'),
+      }),
     });
 
   } catch (error: any) {
