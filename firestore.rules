@@ -3,18 +3,14 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
     // Allow anyone to create a document in the 'pre-orders' collection.
-    // Disallow read, update, delete for all users to protect email privacy.
     match /pre-orders/{document=**} {
       allow create: if true;
-      allow read, update, delete: if false;
     }
-    
-    // Allow authenticated users to create a business document with their own user ID.
-    // Users can only create documents where the document ID matches their own UID.
-    // No one can read, update, or delete business data through client-side requests.
+
+    // Allow authenticated users to create a document in the 'businesses'
+    // collection, but only if the document ID matches their own user ID.
     match /businesses/{userId} {
       allow create: if request.auth != null && request.auth.uid == userId;
-      allow read, update, delete: if false;
     }
   }
 }
