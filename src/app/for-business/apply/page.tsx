@@ -18,6 +18,13 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import Link from 'next/link';
 import { ArrowLeft, Eye, EyeOff } from 'lucide-react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 
 const formSchema = z.object({
   businessName: z.string().min(2, {
@@ -35,7 +42,7 @@ const formSchema = z.object({
   industry: z.string().optional(),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords don't match",
-  path: ['confirmPassword'], // path of error
+  path: ['confirmPassword'],
 });
 
 export default function SignUpFormPage() {
@@ -179,9 +186,21 @@ export default function SignUpFormPage() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-black font-solway">Industry (Optional)</FormLabel>
-                        <FormControl>
-                          <Input className="bg-white border-black border-2 text-black" {...field} />
-                        </FormControl>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="bg-white border-black border-2 text-black">
+                              <SelectValue placeholder="Select an industry" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent className="bg-white text-black border-black">
+                            <SelectItem value="retail">Retail</SelectItem>
+                            <SelectItem value="food-service">Food Service</SelectItem>
+                            <SelectItem value="hospitality">Hospitality</SelectItem>
+                            <SelectItem value="e-commerce">E-commerce</SelectItem>
+                            <SelectItem value="entertainment">Entertainment</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -199,4 +218,3 @@ export default function SignUpFormPage() {
      </div>
   );
 }
-
