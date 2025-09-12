@@ -186,21 +186,21 @@ export default function SignUpFormPage() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-black font-solway">Industry (Optional)</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
                           <FormControl>
-                            <SelectTrigger className="bg-white border-black border-2 text-black">
-                              <SelectValue placeholder="Select an industry" />
-                            </SelectTrigger>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <SelectTrigger className="bg-white border-black border-2 text-black">
+                                <SelectValue placeholder="Select an industry" />
+                                </SelectTrigger>
+                                <SelectContent className="bg-white text-black border-black">
+                                    <SelectItem value="retail">Retail</SelectItem>
+                                    <SelectItem value="food-service">Food Service</SelectItem>
+                                    <SelectItem value="hospitality">Hospitality</SelectItem>
+                                    <SelectItem value="e-commerce">E-commerce</SelectItem>
+                                    <SelectItem value="entertainment">Entertainment</SelectItem>
+                                    <SelectItem value="other">Other</SelectItem>
+                                </SelectContent>
+                            </Select>
                           </FormControl>
-                          <SelectContent className="bg-white text-black border-black">
-                            <SelectItem value="retail">Retail</SelectItem>
-                            <SelectItem value="food-service">Food Service</SelectItem>
-                            <SelectItem value="hospitality">Hospitality</SelectItem>
-                            <SelectItem value="e-commerce">E-commerce</SelectItem>
-                            <SelectItem value="entertainment">Entertainment</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
-                          </SelectContent>
-                        </Select>
                         <FormMessage />
                       </FormItem>
                     )}
