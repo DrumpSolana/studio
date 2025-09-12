@@ -17,7 +17,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import Link from 'next/link';
-import { ArrowLeft, Eye, EyeOff } from 'lucide-react';
+import { ArrowLeft, Eye, EyeOff, Check, ChevronsUpDown } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -25,7 +25,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { countries } from '@/lib/countries';
+import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
   businessName: z.string().min(2, {
@@ -60,6 +63,7 @@ export default function SignUpFormPage() {
       email: '',
       password: '',
       confirmPassword: '',
+      country: '',
       phoneNumber: '',
       businessAddress: '',
       industry: '',
@@ -162,22 +166,58 @@ export default function SignUpFormPage() {
                   control={form.control}
                   name="country"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="flex flex-col">
                       <FormLabel className="text-black font-solway">Country</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger className="bg-white border-black border-2 text-black">
-                            <SelectValue placeholder="Select a country" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent className="bg-white text-black border-black max-h-[20rem]">
-                          {countries.map((country) => (
-                            <SelectItem key={country.value} value={country.value}>
-                              {country.label}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                           <FormControl>
+                            <Button
+                              variant="outline"
+                              role="combobox"
+                              className={cn(
+                                "w-full justify-between bg-white border-black border-2 text-black",
+                                !field.value && "text-black/60"
+                              )}
+                            >
+                              {field.value
+                                ? countries.find(
+                                    (country) => country.value === field.value
+                                  )?.label
+                                : "Select a country"}
+                              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                            </Button>
+                           </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-[--radix-popover-trigger-width] max-h-[--radix-popover-content-available-height] p-0">
+                           <Command>
+                            <CommandInput placeholder="Search country..." />
+                            <CommandList>
+                                <CommandEmpty>No country found.</CommandEmpty>
+                                <CommandGroup>
+                                {countries.map((country) => (
+                                    <CommandItem
+                                      value={country.label}
+                                      key={country.value}
+                                      onSelect={() => {
+                                          form.setValue("country", country.value)
+                                      }}
+                                    >
+                                    <Check
+                                        className={cn(
+                                        "mr-2 h-4 w-4",
+                                        country.value === field.value
+                                            ? "opacity-100"
+                                            : "opacity-0"
+                                        )}
+                                    />
+                                    {country.label}
+                                    </CommandItem>
+                                ))}
+                                </CommandGroup>
+                            </CommandList>
+                           </Command>
+                        </PopoverContent>
+                      </Popover>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -214,21 +254,22 @@ export default function SignUpFormPage() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-black font-solway">Industry (Optional)</FormLabel>
+                        <FormControl>
                           <Select onValueChange={field.onChange} defaultValue={field.value}>
-                            <FormControl>
                                 <SelectTrigger className="bg-white border-black border-2 text-black">
                                     <SelectValue placeholder="Select an industry" />
                                 </SelectTrigger>
-                            </FormControl>
                             <SelectContent className="bg-white text-black border-black">
                                 <SelectItem value="retail">Retail</SelectItem>
                                 <SelectItem value="food-service">Food Service</SelectItem>
+
                                 <SelectItem value="hospitality">Hospitality</SelectItem>
                                 <SelectItem value="e-commerce">E-commerce</SelectItem>
                                 <SelectItem value="entertainment">Entertainment</SelectItem>
                                 <SelectItem value="other">Other</SelectItem>
                             </SelectContent>
                         </Select>
+                        </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -246,3 +287,4 @@ export default function SignUpFormPage() {
      </div>
   );
 }
+

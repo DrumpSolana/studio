@@ -1,5 +1,7 @@
 
 export const countries = [
+  { value: "US", label: "United States" },
+  { value: "CA", label: "Canada" },
   { value: "AF", label: "Afghanistan" },
   { value: "AL", label: "Albania" },
   { value: "DZ", label: "Algeria" },
@@ -31,7 +33,6 @@ export const countries = [
   { value: "CV", label: "Cabo Verde" },
   { value: "KH", label: "Cambodia" },
   { value: "CM", label: "Cameroon" },
-  { value: "CA", label: "Canada" },
   { value: "CF", label: "Central African Republic" },
   { value: "TD", label: "Chad" },
   { value: "CL", label: "Chile" },
@@ -185,7 +186,6 @@ export const countries = [
   { value: "UA", label: "Ukraine" },
   { value: "AE", label: "United Arab Emirates" },
   { value: "GB", label: "United Kingdom" },
-  { value: "US", label: "United States" },
   { value: "UY", label: "Uruguay" },
   { value: "UZ", label: "Uzbekistan" },
   { value: "VU", label: "Vanuatu" },
