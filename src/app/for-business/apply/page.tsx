@@ -90,14 +90,16 @@ export default function SignUpFormPage() {
       uid = user.uid;
 
       // 2. Create business document in Firestore
+      // Explicitly create the data object to ensure no extra fields (like confirmPassword) are included
+      // and handle optional fields correctly.
       const businessData = {
         ownerId: user.uid,
         businessName: values.businessName,
         email: values.email,
         country: values.country,
-        phoneNumber: values.phoneNumber,
-        businessAddress: values.businessAddress,
-        industry: values.industry,
+        phoneNumber: values.phoneNumber || '',
+        businessAddress: values.businessAddress || '',
+        industry: values.industry || '',
         status: 'pending',
         createdAt: serverTimestamp(),
       };
