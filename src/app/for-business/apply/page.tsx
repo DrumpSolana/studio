@@ -49,9 +49,9 @@ const formSchema = z.object({
   country: z.string({
     required_error: 'Please select a country.',
   }),
-  phoneNumber: z.string().optional(),
-  businessAddress: z.string().optional(),
-  industry: z.string().optional(),
+  phoneNumber: z.string().optional().default(''),
+  businessAddress: z.string().optional().default(''),
+  industry: z.string().optional().default(''),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords don't match",
   path: ['confirmPassword'],
@@ -95,9 +95,9 @@ export default function SignUpFormPage() {
         businessName: values.businessName,
         email: values.email,
         country: values.country,
-        phoneNumber: values.phoneNumber || '',
-        businessAddress: values.businessAddress || '',
-        industry: values.industry || '',
+        phoneNumber: values.phoneNumber,
+        businessAddress: values.businessAddress,
+        industry: values.industry,
         status: 'pending',
         createdAt: serverTimestamp(),
       };
@@ -353,6 +353,5 @@ export default function SignUpFormPage() {
         </Card>
      </div>
   );
-}
 
     
