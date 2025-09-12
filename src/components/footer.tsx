@@ -80,7 +80,7 @@ export default function Footer() {
                         {socialLinks.map((link) => (
                             <Link key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className="bg-[#2C2CB1] text-white p-2 rounded-md hover:bg-[#2C2CB1]/80 transition-colors" aria-label={link.name} onClick={() => handleSocialClick(link.name)}>
                                 <div className="relative h-6 w-6">
-                                    <Image src={link.src} alt={link.name} fill objectFit="contain" />
+                                    <Image src={link.src} alt={link.name} fill style={{objectFit:"contain"}} />
                                 </div>
                             </Link>
                         ))}

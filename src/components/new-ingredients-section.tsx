@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 
 const ingredients = [
@@ -51,7 +52,7 @@ export default function IngredientsSection() {
                                         src={ingredient.image}
                                         alt={ingredient.name}
                                         fill
-                                        objectFit="contain"
+                                        style={{objectFit:"contain"}}
                                         data-ai-hint={ingredient.dataAiHint}
                                     />
                                     {ingredient.badge && (
@@ -60,7 +61,7 @@ export default function IngredientsSection() {
                                                 src={ingredient.badge}
                                                 alt="Certified Badge"
                                                 fill
-                                                objectFit="contain"
+                                                style={{objectFit:"contain"}}
                                             />
                                         </div>
                                     )}

@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 
 const features = [
@@ -16,7 +17,7 @@ export default function SoWhyDrump() {
                             src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752617158/neww_1_ehuxda.png"
                             alt="Two bags of Drump cheese puffs"
                             fill
-                            objectFit="contain"
+                            style={{objectFit:"contain"}}
                             className="transition-transform duration-500 group-hover:scale-105"
                             data-ai-hint="snack bags"
                         />
