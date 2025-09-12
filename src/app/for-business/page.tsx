@@ -10,7 +10,7 @@ export default function ForBusinessPage() {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-secondary p-4 relative z-10">
              <div className="absolute top-4 left-4">
-                <Button asChild variant="ghost">
+                <Button asChild variant="outline">
                     <Link href="/">&larr; Back to Home</Link>
                 </Button>
             </div>
