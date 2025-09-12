@@ -21,7 +21,7 @@ import Link from 'next/link';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { auth, db } from '@/lib/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { collection, addDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { useToast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
@@ -66,17 +66,16 @@ export default function SignUpFormPage() {
       const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
       const user = userCredential.user;
 
-      // 2. Create a clean business document in Firestore using addDoc.
-      // This explicitly picks only the fields we want to save and avoids saving passwords.
+      // 2. Create the business document in Firestore using the user's UID as the document ID.
       const businessData = {
-        ownerId: user.uid,
         businessName: values.businessName,
         email: values.email,
         status: 'pending',
         createdAt: new Date(),
       };
-
-      await addDoc(collection(db, 'businesses'), businessData);
+      
+      // The security rules require that the document ID matches the authenticated user's UID.
+      await setDoc(doc(db, 'businesses', user.uid), businessData);
       
       router.push('/for-business/apply/success');
 
