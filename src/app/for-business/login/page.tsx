@@ -90,7 +90,7 @@ export default function BusinessLoginPage() {
           </Form>
            <div className="mt-4 text-center">
               <Link href="/for-business/apply" className="text-sm text-black/70 hover:text-black font-solway">
-                Don't have an account? Apply now.
+                Don't have an account? <span className="text-red-600 font-bold hover:underline">Apply now.</span>
               </Link>
             </div>
         </CardContent>
