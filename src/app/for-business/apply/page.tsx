@@ -25,6 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { countries } from '@/lib/countries';
 
 const formSchema = z.object({
   businessName: z.string().min(2, {
@@ -37,6 +38,9 @@ const formSchema = z.object({
     message: 'Password must be at least 8 characters.',
   }),
   confirmPassword: z.string(),
+  country: z.string({
+    required_error: 'Please select a country.',
+  }),
   phoneNumber: z.string().optional(),
   businessAddress: z.string().optional(),
   industry: z.string().optional(),
@@ -69,7 +73,7 @@ export default function SignUpFormPage() {
   }
 
   return (
-     <div className="flex flex-col items-center justify-center min-h-screen bg-secondary p-4">
+     <div className="flex flex-col items-center justify-center min-h-screen bg-secondary p-4 py-12">
         <Card className="w-full max-w-md bg-white border-black border-4 rounded-lg shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] animate-in fade-in zoom-in-95">
           <CardHeader className="text-center">
             <CardTitle className="text-3xl font-headline text-black">Business Application</CardTitle>
@@ -155,6 +159,30 @@ export default function SignUpFormPage() {
                   )}
                 />
                  <FormField
+                  control={form.control}
+                  name="country"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-black font-solway">Country</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger className="bg-white border-black border-2 text-black">
+                            <SelectValue placeholder="Select a country" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className="bg-white text-black border-black max-h-[20rem]">
+                          {countries.map((country) => (
+                            <SelectItem key={country.value} value={country.value}>
+                              {country.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                 <FormField
                     control={form.control}
                     name="phoneNumber"
                     render={({ field }) => (
@@ -186,21 +214,21 @@ export default function SignUpFormPage() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-black font-solway">Industry (Optional)</FormLabel>
-                          <FormControl>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
                                 <SelectTrigger className="bg-white border-black border-2 text-black">
-                                <SelectValue placeholder="Select an industry" />
+                                    <SelectValue placeholder="Select an industry" />
                                 </SelectTrigger>
-                                <SelectContent className="bg-white text-black border-black">
-                                    <SelectItem value="retail">Retail</SelectItem>
-                                    <SelectItem value="food-service">Food Service</SelectItem>
-                                    <SelectItem value="hospitality">Hospitality</SelectItem>
-                                    <SelectItem value="e-commerce">E-commerce</SelectItem>
-                                    <SelectItem value="entertainment">Entertainment</SelectItem>
-                                    <SelectItem value="other">Other</SelectItem>
-                                </SelectContent>
-                            </Select>
-                          </FormControl>
+                            </FormControl>
+                            <SelectContent className="bg-white text-black border-black">
+                                <SelectItem value="retail">Retail</SelectItem>
+                                <SelectItem value="food-service">Food Service</SelectItem>
+                                <SelectItem value="hospitality">Hospitality</SelectItem>
+                                <SelectItem value="e-commerce">E-commerce</SelectItem>
+                                <SelectItem value="entertainment">Entertainment</SelectItem>
+                                <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                        </Select>
                         <FormMessage />
                       </FormItem>
                     )}
