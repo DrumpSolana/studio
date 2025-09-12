@@ -1,6 +1,7 @@
 
 'use client';
 
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -16,7 +17,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Eye, EyeOff } from 'lucide-react';
 
 const formSchema = z.object({
   businessName: z.string().min(2, {
@@ -28,18 +29,26 @@ const formSchema = z.object({
   password: z.string().min(8, {
     message: 'Password must be at least 8 characters.',
   }),
+  confirmPassword: z.string(),
   phoneNumber: z.string().optional(),
   businessAddress: z.string().optional(),
   industry: z.string().optional(),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ['confirmPassword'], // path of error
 });
 
 export default function SignUpFormPage() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       businessName: '',
       email: '',
       password: '',
+      confirmPassword: '',
       phoneNumber: '',
       businessAddress: '',
       industry: '',
@@ -97,7 +106,42 @@ export default function SignUpFormPage() {
                     <FormItem>
                       <FormLabel className="text-black font-solway">Password</FormLabel>
                       <FormControl>
-                        <Input className="bg-white border-black border-2 text-black" type="password" {...field} />
+                        <div className="relative">
+                          <Input className="bg-white border-black border-2 text-black pr-10" type={showPassword ? 'text' : 'password'} {...field} />
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            className="absolute inset-y-0 right-0 h-full px-3 text-black/70 hover:bg-transparent"
+                            onClick={() => setShowPassword(!showPassword)}
+                          >
+                            {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                          </Button>
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                 <FormField
+                  control={form.control}
+                  name="confirmPassword"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-black font-solway">Confirm Password</FormLabel>
+                      <FormControl>
+                        <div className="relative">
+                          <Input className="bg-white border-black border-2 text-black pr-10" type={showConfirmPassword ? 'text' : 'password'} {...field} />
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="icon"
+                            className="absolute inset-y-0 right-0 h-full px-3 text-black/70 hover:bg-transparent"
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                          >
+                            {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                          </Button>
+                        </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -155,3 +199,4 @@ export default function SignUpFormPage() {
      </div>
   );
 }
+
