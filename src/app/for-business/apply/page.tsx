@@ -254,37 +254,35 @@ export default function SignUpFormPage() {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-black font-solway">Industry (Optional)</FormLabel>
-                        <FormControl>
-                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                         <Select onValueChange={field.onChange} defaultValue={field.value}>
+                            <FormControl>
                                 <SelectTrigger className="bg-white border-black border-2 text-black">
                                     <SelectValue placeholder="Select an industry" />
                                 </SelectTrigger>
+                            </FormControl>
                             <SelectContent className="bg-white text-black border-black">
                                 <SelectItem value="retail">Retail</SelectItem>
                                 <SelectItem value="food-service">Food Service</SelectItem>
-
                                 <SelectItem value="hospitality">Hospitality</SelectItem>
                                 <SelectItem value="e-commerce">E-commerce</SelectItem>
                                 <SelectItem value="entertainment">Entertainment</SelectItem>
                                 <SelectItem value="other">Other</SelectItem>
                             </SelectContent>
                         </Select>
-                        </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
                 <Button type="submit" className="w-full bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow">Apply</Button>
-                <Button variant="ghost" asChild className="w-full text-black font-solway">
-                    <Link href="/for-business">
-                        <ArrowLeft className="mr-2 h-4 w-4" /> Back to options
-                    </Link>
-                </Button>
               </form>
             </Form>
+             <div className="mt-4 text-center">
+                <Link href="/for-business/login" className="text-sm text-black/70 hover:text-black font-solway">
+                    Already have an account? <span className="text-red-600 font-bold hover:underline">Login</span>
+                </Link>
+            </div>
           </CardContent>
         </Card>
      </div>
   );
 }
-
