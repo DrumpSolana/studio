@@ -1,3 +1,4 @@
+
 rules_version = '2';
 
 service cloud.firestore {
@@ -7,8 +8,7 @@ service cloud.firestore {
     // A user can create a document for themselves, and only they can
     // read, update, or delete their own document.
     match /businesses/{businessId} {
-      allow create: if request.auth != null && request.auth.uid == businessId;
-      allow read, update, delete: if request.auth != null && request.auth.uid == businessId;
+      allow create, read, update, delete: if request.auth != null && request.auth.uid == businessId;
     }
 
     // --- Pre-orders Rules ---
@@ -18,5 +18,14 @@ service cloud.firestore {
       allow create: if true;
       allow read, update, delete: if false;
     }
+
+     // --- Test Entries Rules ---
+    // Anyone can write to the test collection for debugging purposes.
+    match /test-entries/{docId} {
+      allow create, read: if true;
+      allow update, delete: if false;
+    }
   }
 }
+
+    

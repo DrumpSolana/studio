@@ -19,8 +19,9 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import Link from 'next/link';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
-import { auth } from '@/lib/firebase';
+import { auth, db } from '@/lib/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from "firebase/firestore";
 import { useToast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
@@ -62,12 +63,16 @@ export default function SignUpFormPage() {
 
     try {
       // 1. Create user in Firebase Auth
-      await createUserWithEmailAndPassword(auth, values.email, values.password);
-      
-      // NOTE: The Firestore database write has been removed.
-      // In a real application, you would deploy your `firestore.rules`
-      // and then perform the `setDoc` operation here.
+      const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
+      const user = userCredential.user;
 
+      // 2. Create the business document in Firestore using the user's UID
+      await setDoc(doc(db, "businesses", user.uid), {
+        businessName: values.businessName,
+        email: values.email,
+        createdAt: new Date(),
+      });
+      
       router.push('/for-business/apply/success');
 
     } catch (error: any) {
@@ -212,3 +217,5 @@ export default function SignUpFormPage() {
      </div>
   );
 }
+
+    
