@@ -225,5 +225,4 @@ export default function BusinessLoginPage() {
       </Card>
     </div>
   );
-
-    
+}
