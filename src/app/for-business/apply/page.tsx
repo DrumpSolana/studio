@@ -23,6 +23,7 @@ import { auth, db } from '@/lib/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from "firebase/firestore";
 import { useToast } from '@/hooks/use-toast';
+import { sendEmail } from '@/lib/email-service';
 
 const formSchema = z.object({
   businessName: z.string().min(2, {
@@ -66,11 +67,20 @@ export default function SignUpFormPage() {
       const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
       const user = userCredential.user;
 
-      // 2. Create the business document in Firestore using the user's UID
+      // 2. Create the business document in Firestore
       await setDoc(doc(db, "businesses", user.uid), {
         businessName: values.businessName,
         email: values.email,
         createdAt: new Date(),
+        status: 'pending', // Add status field
+        ownerId: user.uid,   // Add ownerId
+      });
+
+      // 3. Send "Application Received" email (simulated)
+      await sendEmail({
+        to: values.email,
+        subject: 'Your Drump Loyalty Platform Application has been Received!',
+        html: `<h1>Thank You, ${values.businessName}!</h1><p>We have received your application for the Drump Loyalty Platform. Our team will review it and you will receive another email once your account has been approved within 1-2 business days.</p><p>Thanks for joining!</p><p>The Drump Team</p>`,
       });
       
       router.push('/for-business/apply/success');
@@ -217,5 +227,3 @@ export default function SignUpFormPage() {
      </div>
   );
 }
-
-    
