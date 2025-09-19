@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { useForm, useForm as useResetForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
@@ -20,8 +20,18 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import Link from 'next/link';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { auth } from '@/lib/firebase';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 import { useToast } from '@/hooks/use-toast';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogTrigger,
+  DialogClose,
+} from '@/components/ui/dialog';
 
 const formSchema = z.object({
   email: z.string().email({
@@ -32,9 +42,17 @@ const formSchema = z.object({
   }),
 });
 
+const resetSchema = z.object({
+    resetEmail: z.string().email({
+        message: 'Please enter a valid email to send a reset link to.'
+    }),
+});
+
 export default function BusinessLoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isResetting, setIsResetting] = useState(false);
+  const [resetSuccess, setResetSuccess] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
 
@@ -46,21 +64,22 @@ export default function BusinessLoginPage() {
     },
   });
 
+  const resetForm = useResetForm<z.infer<typeof resetSchema>>({
+    resolver: zodResolver(resetSchema),
+    defaultValues: {
+        resetEmail: '',
+    }
+  });
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
-      const user = userCredential.user;
-      
-      // You could add a check here for email verification if needed
-      // if (!user.emailVerified) { ... }
-
       router.push('/dashboard');
 
     } catch (error: any) {
       console.error("Login error:", error);
-
       toast({
         variant: 'destructive',
         title: 'Login Failed',
@@ -69,6 +88,24 @@ export default function BusinessLoginPage() {
 
     } finally {
       setIsLoading(false);
+    }
+  }
+
+  async function onResetSubmit(values: z.infer<typeof resetSchema>) {
+    setIsResetting(true);
+    setResetSuccess(false);
+    try {
+        await sendPasswordResetEmail(auth, values.resetEmail);
+        setResetSuccess(true);
+    } catch(error: any) {
+        console.error("Password reset error: ", error);
+        toast({
+            variant: 'destructive',
+            title: 'Password Reset Failed',
+            description: error.code === 'auth/user-not-found' ? 'No account found with this email.' : 'An error occurred. Please try again.'
+        });
+    } finally {
+        setIsResetting(false);
     }
   }
 
@@ -107,7 +144,55 @@ export default function BusinessLoginPage() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-black font-solway">Password</FormLabel>
+                     <div className="flex justify-between items-center">
+                        <FormLabel className="text-black font-solway">Password</FormLabel>
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                 <button type="button" className="text-sm text-black/70 hover:text-black font-solway hover:underline">
+                                    Forgot Password?
+                                </button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-[425px] bg-secondary border-black border-4 rounded-lg p-8">
+                                <DialogHeader>
+                                    <DialogTitle className="font-headline text-3xl text-black">Reset Password</DialogTitle>
+                                    <DialogDescription className="font-solway text-black/80">
+                                         {resetSuccess ? 'Check your inbox for a password reset link.' : 'Enter your email address and we will send you a link to reset your password.'}
+                                    </DialogDescription>
+                                </DialogHeader>
+                                {!resetSuccess && (
+                                <Form {...resetForm}>
+                                    <form onSubmit={resetForm.handleSubmit(onResetSubmit)} className="space-y-4">
+                                        <FormField
+                                            control={resetForm.control}
+                                            name="resetEmail"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                    <FormLabel className="sr-only">Email</FormLabel>
+                                                    <FormControl>
+                                                        <Input className="bg-white border-black border-2 text-black" placeholder="your.email@example.com" {...field} />
+                                                    </FormControl>
+                                                    <FormMessage />
+                                                </FormItem>
+                                            )}
+                                        />
+                                         <DialogFooter>
+                                            <Button type="submit" className="w-full bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow" disabled={isResetting}>
+                                                {isResetting ? <Loader2 className="animate-spin" /> : 'Send Reset Link'}
+                                            </Button>
+                                        </DialogFooter>
+                                    </form>
+                                </Form>
+                                )}
+                                {resetSuccess && (
+                                     <DialogFooter>
+                                         <DialogClose asChild>
+                                             <Button type="button" className="w-full bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow">Close</Button>
+                                         </DialogClose>
+                                     </DialogFooter>
+                                )}
+                            </DialogContent>
+                        </Dialog>
+                    </div>
                     <FormControl>
                       <div className="relative">
                           <Input className="bg-white border-black border-2 text-black pr-10" type={showPassword ? 'text' : 'password'} {...field} />
@@ -140,4 +225,5 @@ export default function BusinessLoginPage() {
       </Card>
     </div>
   );
-}
+
+    
