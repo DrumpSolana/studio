@@ -1,3 +1,6 @@
+
+'use client';
+
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Zap } from 'lucide-react';
@@ -5,7 +8,7 @@ import PreOrderModal from './pre-order-modal';
 
 export default function TasteTheDrumpSection() {
     return (
-        <section className="bg-background pt-24 pb-12 overflow-hidden">
+        <section className="bg-background pt-16 md:pt-24 pb-12 overflow-hidden">
             <div className="container mx-auto px-8 sm:px-12 lg:px-32">
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                     <div className="space-y-8">
@@ -20,7 +23,7 @@ export default function TasteTheDrumpSection() {
                             <Zap className="h-6 w-6" />
                             <span>JOIN THE DRUMP SIDE.</span>
                         </div>
-                        <PreOrderModal>
+                        <PreOrderModal location="taste_the_drump_section">
                             <Button
                                 size="lg"
                                 className="bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow"

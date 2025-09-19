@@ -1,21 +1,34 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp, getApps, getApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+'use client';
+
+import { initializeApp, getApps, getApp, type FirebaseApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import { getAnalytics, isSupported } from 'firebase/analytics';
+
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
+  "projectId": "drump-landing-page",
+  "appId": "1:256654255818:web:96d5b955d2ff8506403633",
+  "storageBucket": "drump-landing-page.firebasestorage.app",
+  "apiKey": "AIzaSyCeQ9lDlX91r6N9XOVYLwfO6wntmmBgyiQ",
+  "authDomain": "drump-landing-page.firebaseapp.com",
+  "measurementId": "G-BTB79XW4G9",
+  "messagingSenderId": "256654255818"
 };
 
-// Initialize Firebase
-const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// Initialize Firebase App
+const app: FirebaseApp = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 
-export { db };
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+// Initialize Analytics if supported
+if (typeof window !== 'undefined') {
+    isSupported().then((supported) => {
+        if (supported) {
+            getAnalytics(app);
+        }
+    });
+}
+
+export { app, db, auth };

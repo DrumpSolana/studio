@@ -1,6 +1,10 @@
+
 'use client';
 
 import { useState } from 'react';
+import { useForm, type SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import {
   Dialog,
   DialogContent,
@@ -10,80 +14,83 @@ import {
   DialogFooter,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 import Image from 'next/image';
+import { Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { handlePreOrderSignUp } from '@/app/actions/pre-order';
+import { logGtagEvent } from '@/lib/gtag';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 const PreOrderSchema = z.object({
-  email: z.string().email({ message: 'Please enter a valid email.' }),
+  email: z.string().email({ message: 'Please enter a valid email address.' }),
 });
 
-type PreOrderForm = z.infer<typeof PreOrderSchema>;
+type PreOrderFormValues = z.infer<typeof PreOrderSchema>;
 
-const socialLinks = [
-  { 
-    href: 'https://t.me/drumpofficial', 
-    name: 'Telegram',
-    text: 'Telegram'
-  },
-  { 
-    href: 'https://x.com/DrumpSolana', 
-    name: 'X',
-    text: 'X'
-  },
-];
+async function savePreOrderEmail(email: string) {
+    try {
+        const docRef = await addDoc(collection(db, 'pre-orders'), {
+        email: email,
+        timestamp: serverTimestamp(),
+        });
+        console.log("Document written with ID: ", docRef.id);
+        return { success: true };
+    } catch (error) {
+        console.error('Error writing document to Firestore: ', error);
+        const errorMessage = error instanceof Error ? error.message : 'Failed to save email due to an unknown error.';
+        return { success: false, error: errorMessage };
+    }
+}
 
-export default function PreOrderModal({ children }: { children?: React.ReactNode }) {
+
+export default function PreOrderModal({ children, location }: { children?: React.ReactNode, location: string }) {
   const [open, setOpen] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<PreOrderForm>({
-    resolver: zodResolver(PreOrderSchema),
-  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const onSubmit: SubmitHandler<PreOrderForm> = async (data) => {
-    setIsSubmitting(true);
+  const form = useForm<PreOrderFormValues>({
+    resolver: zodResolver(PreOrderSchema),
+    defaultValues: {
+      email: '',
+    },
+  });
+
+  const onSubmit: SubmitHandler<PreOrderFormValues> = async (data) => {
+    setIsLoading(true);
+
     try {
-      const result = await handlePreOrderSignUp(data);
-
-      if (result.success) {
-        toast({
-          title: "Thanks for your interest!",
-          description: "Redirecting you to our Telegram group...",
-        });
-
-        setTimeout(() => {
-          window.open('https://t.me/drumpofficial', '_blank');
-          setOpen(false);
-          reset();
-        }, 1500);
-      } else {
-        toast({
-            variant: "destructive",
-            title: "Uh oh! Something went wrong.",
-            description: result.message || "There was a problem with your request. Please try again.",
-        });
-      }
+        const result = await savePreOrderEmail(data.email);
+        
+        if (result.success) {
+            logGtagEvent('pre_order_submit', { email: data.email, location });
+            setIsSubmitted(true);
+        } else {
+            toast({
+                variant: "destructive",
+                title: "Uh oh! Something went wrong.",
+                description: result.error || "There was a problem saving your email. Please try again.",
+            });
+        }
     } catch (error) {
+        const errorMessage = error instanceof Error ? error.message : "An unexpected error occurred.";
         toast({
             variant: "destructive",
             title: "Uh oh! Something went wrong.",
-            description: "Could not sign up for pre-order. Please try again later.",
+            description: errorMessage,
         });
-        console.error("Pre-order submission error:", error);
     } finally {
-        setIsSubmitting(false);
+        setIsLoading(false);
     }
   };
   
@@ -95,8 +102,22 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
       </Button>
   );
 
+  const handleOpenChange = (isOpen: boolean) => {
+    if (isOpen) {
+        logGtagEvent('open_modal', { modal_name: 'pre_order', location });
+    }
+    setOpen(isOpen);
+    if (!isOpen) {
+      setTimeout(() => {
+        setIsSubmitted(false);
+        form.reset();
+        setIsLoading(false);
+      }, 300);
+    }
+  };
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         {trigger}
       </DialogTrigger>
@@ -109,48 +130,59 @@ export default function PreOrderModal({ children }: { children?: React.ReactNode
                 height={80}
             />
           <DialogTitle className="font-headline text-3xl text-black">
-            Be the First to Know!
+            {isSubmitted ? 'Thanks!' : 'Join The Pre-Order List!'}
           </DialogTitle>
           <DialogDescription className="font-solway text-black/80">
-            Drop your email to get notified when pre-orders go live.
+            {isSubmitted
+              ? "You're on the list! We'll notify you when pre-orders are live."
+              : 'Be the first to know when Drump Cheeseballs are available. Drop your email below.'}
           </DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4 py-4">
-          <div className="grid gap-2">
-            <Label htmlFor="email" className="sr-only">
-              Email
-            </Label>
-            <Input
-              id="email"
-              placeholder="you@email.com"
-              {...register('email')}
-              className="bg-white border-black border-2 focus:ring-primary text-black placeholder:text-black/50 h-12 rounded-lg font-solway"
-              disabled={isSubmitting}
-            />
-            {errors.email && (
-              <p className="text-sm text-red-600 font-solway">{errors.email.message}</p>
-            )}
-          </div>
-          <Button
-            type="submit"
-            className="w-full bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 h-12 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow disabled:opacity-75 font-headline"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? 'Submitting...' : 'Notify Me'}
-          </Button>
-        </form>
-        <DialogFooter className="!flex-col !justify-center space-y-4 sm:!space-y-4 sm:!justify-center">
-            <div className="text-center font-solway text-sm text-black/70">Or join our community</div>
-            <div className="flex flex-row justify-center gap-4">
-                {socialLinks.map((link) => (
-                    <Button key={link.name} asChild variant="outline" className="font-solway bg-white border-2 border-black hover:bg-white/80 rounded-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,0.25)] hover:shadow-none transition-shadow h-12 px-6">
-                        <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-black flex items-center justify-center">
-                            {link.text}
-                        </a>
-                    </Button>
-                ))}
-            </div>
-        </DialogFooter>
+        
+        {!isSubmitted && (
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="sr-only">Email</FormLabel>
+                    <FormControl>
+                      <Input 
+                        placeholder="your.email@example.com" 
+                        {...field} 
+                        className="bg-white border-black border-2 text-black placeholder:text-black/50 focus:ring-black focus:ring-offset-2"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <DialogFooter>
+                <Button 
+                  type="submit" 
+                  disabled={isLoading}
+                  className="w-full bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow"
+                >
+                  {isLoading ? <Loader2 className="animate-spin" /> : 'Join Waitlist'}
+                </Button>
+              </DialogFooter>
+            </form>
+          </Form>
+        )}
+        
+        {isSubmitted && (
+            <DialogFooter>
+                <Button 
+                  onClick={() => setOpen(false)}
+                  className="w-full bg-red-600 text-white font-bold border-2 border-black hover:bg-red-700 px-8 py-3 rounded-lg text-lg uppercase shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none transition-shadow"
+                >
+                  Close
+                </Button>
+            </DialogFooter>
+        )}
+
       </DialogContent>
     </Dialog>
   );

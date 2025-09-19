@@ -7,13 +7,6 @@
     @apply scroll-smooth;
   }
 
-  @font-face {
-    font-family: 'FatFrank';
-    src: url('/fonts/FatFrank.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-  }
-
   :root {
     --background: 243 83% 45%; /* 2C2CB1 */
     --foreground: 0 0% 100%; /* White */

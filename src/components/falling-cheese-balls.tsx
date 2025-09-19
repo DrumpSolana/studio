@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -5,7 +6,7 @@ import Image from 'next/image';
 import { useAnimation } from '@/contexts/AnimationContext';
 import { cn } from '@/lib/utils';
 
-const CHEESEBALL_COUNT = 10;
+const CHEESEBALL_COUNT = 15;
 const CHEESEBALL_URL = 'https://res.cloudinary.com/dwimflmjr/image/upload/v1752640504/Drump_Cheese_Ball_4_daedqc.png';
 
 interface CheeseBall {
