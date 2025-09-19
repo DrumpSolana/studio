@@ -19,8 +19,8 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import Link from 'next/link';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
-import { auth } from '@/lib/firebase';
-import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import { auth, db } from '@/lib/firebase';
+import { signInWithEmailAndPassword, sendPasswordResetEmail, signOut } from 'firebase/auth';
 import { useToast } from '@/hooks/use-toast';
 import {
   Dialog,
@@ -32,6 +32,7 @@ import {
   DialogTrigger,
   DialogClose,
 } from '@/components/ui/dialog';
+import { doc, getDoc } from 'firebase/firestore';
 
 const formSchema = z.object({
   email: z.string().email({
@@ -75,15 +76,65 @@ export default function BusinessLoginPage() {
     setIsLoading(true);
 
     try {
+      // Step 1: Authenticate the user
       const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
-      router.push('/dashboard');
+      const user = userCredential.user;
+
+      // Step 2: Fetch the business document from Firestore
+      const businessDocRef = doc(db, 'businesses', user.uid);
+      const businessDocSnap = await getDoc(businessDocRef);
+
+      if (businessDocSnap.exists()) {
+        const businessData = businessDocSnap.data();
+        const status = businessData.status;
+
+        // Step 3: Check the account status
+        if (status === 'active') {
+          // Success: Redirect to dashboard
+          router.push('/dashboard');
+        } else {
+          // Handle non-active accounts
+          await signOut(auth); // Sign out the user
+          let description = 'Please contact support for assistance.';
+          if (status === 'pending') {
+            description = 'Your account is currently pending approval.';
+          } else if (status === 'rejected') {
+            description = 'Your application has been rejected. Please check your email for more details.';
+          }
+          toast({
+            variant: 'destructive',
+            title: 'Login Failed',
+            description: description,
+          });
+        }
+      } else {
+        // Business document not found, treat as an error
+        await signOut(auth);
+        toast({
+            variant: 'destructive',
+            title: 'Login Failed',
+            description: 'Could not find business information for this account.',
+        });
+      }
 
     } catch (error: any) {
       console.error("Login error:", error);
+      let description = 'An unexpected error occurred. Please try again.';
+      if (error.code) {
+          switch(error.code) {
+              case 'auth/user-not-found':
+              case 'auth/wrong-password':
+              case 'auth/invalid-credential':
+                  description = 'Invalid email or password. Please try again.';
+                  break;
+              default:
+                  description = 'An error occurred during login. Please try again.';
+          }
+      }
       toast({
         variant: 'destructive',
         title: 'Login Failed',
-        description: 'Invalid email or password. Please try again.',
+        description: description,
       });
 
     } finally {
@@ -203,7 +254,7 @@ export default function BusinessLoginPage() {
                             className="absolute inset-y-0 right-0 h-full px-3 text-black/70 hover:bg-transparent"
                             onClick={() => setShowPassword(!showPassword)}
                           >
-                            {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                            {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-s5" />}
                           </Button>
                         </div>
                     </FormControl>
@@ -226,3 +277,5 @@ export default function BusinessLoginPage() {
     </div>
   );
 }
+
+    
