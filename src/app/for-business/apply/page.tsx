@@ -74,8 +74,8 @@ export default function SignUpFormPage() {
         businessName: values.businessName,
         email: values.email,
         createdAt: new Date(),
-        status: 'pending', // Add status field
-        ownerId: user.uid,   // Add ownerId
+        status: 'pending',
+        ownerId: user.uid,
       });
 
       router.push('/for-business/apply/success');
