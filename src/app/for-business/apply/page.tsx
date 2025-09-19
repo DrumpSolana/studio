@@ -20,7 +20,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import Link from 'next/link';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { auth, db } from '@/lib/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { doc, setDoc } from "firebase/firestore";
 import { useToast } from '@/hooks/use-toast';
 
@@ -66,7 +66,10 @@ export default function SignUpFormPage() {
       const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
       const user = userCredential.user;
 
-      // 2. Create the business document in Firestore
+      // 2. Send verification email
+      await sendEmailVerification(user);
+
+      // 3. Create the business document in Firestore
       await setDoc(doc(db, "businesses", user.uid), {
         businessName: values.businessName,
         email: values.email,
