@@ -1,3 +1,0 @@
-The system works like this:
-1.  I analyze your request and formulate a plan.
-2.  To execute that plan, I **must** create a special instruction in my response using a specific XML format: `<changes>...<change>...<file>...</file>...</changes>`

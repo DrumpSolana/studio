@@ -12,8 +12,8 @@ import { logGtagEvent } from '@/lib/gtag';
 
 const DrumpLogo = () => (
     <Link href="/">
-        <Image 
-            src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752616337/join_the_punch_1_i9twgu.png" 
+        <Image
+            src="https://res.cloudinary.com/dwimflmjr/image/upload/v1752616337/join_the_punch_1_i9twgu.png"
             alt="Drump Logo"
             width={120}
             height={40}
@@ -54,17 +54,10 @@ export default function Header() {
                             ))}
                             <ContactModal />
                         </nav>
-                         <Button variant="ghost" size="icon" onClick={toggleAnimation} className="text-white hover:bg-white/10 hover:text-white">
-                            {isAnimating ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
-                            <span className="sr-only">{isAnimating ? 'Pause animation' : 'Play animation'}</span>
-                        </Button>
+
                         <PreOrderModal location="header" />
                     </div>
                     <div className="md:hidden flex items-center gap-2">
-                        <Button variant="ghost" size="icon" onClick={toggleAnimation} className="text-white hover:bg-white/10 hover:text-white">
-                            {isAnimating ? <Pause className="h-6 w-6" /> : <Play className="h-6 w-6" />}
-                            <span className="sr-only">{isAnimating ? 'Pause animation' : 'Play animation'}</span>
-                        </Button>
                         <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)}>
                             {isOpen ? <X className="h-6 w-6 text-white" /> : <Menu className="h-6 w-6 text-white" />}
                             <span className="sr-only">Toggle menu</span>
@@ -80,9 +73,9 @@ export default function Header() {
                                 {link.label}
                             </Link>
                         ))}
-                         <ContactModal />
+                        <ContactModal />
                         <div className="flex items-center gap-4">
-                           <PreOrderModal location="header_mobile" />
+                            <PreOrderModal location="header_mobile" />
                         </div>
                     </nav>
                 </div>

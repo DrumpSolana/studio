@@ -42,3 +42,5 @@ src/lib/firebase-service-account.ts
 
 
 .env
+
+firebase-debug.log
